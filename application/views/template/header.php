@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="<?php echo base_url();?>assets/vendors/fullcalendar/fullcalendar.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/vendors/select2/css/select2.min.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/vendors/sweetalert2/sweetalert2.css">
+        <link href="<?php echo base_url('assets/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
         <!-- App styles -->
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/app.min.css">
 		<script src="<?php echo base_url();?>assets/vendors/jquery/jquery.min.js"></script>

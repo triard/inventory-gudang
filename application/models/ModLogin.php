@@ -10,9 +10,10 @@ class ModLogin extends CI_model {
 			$data_session = array(
 						'id_user' => $cek->id_user,
 						'email' => $cek->email,
-						'nama' => $cek->nama_user,
+						'nama_user' => $cek->nama_user,
+						'level' => $cek->level,
 						'status' => "login" );
 			$this->session->set_userdata($data_session);
 		}
 	}
-}
+} 
