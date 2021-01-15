@@ -1,6 +1,6 @@
 <section class="content">
             <header class="content__title">
-               <h1>User</h1>
+               <h1>Items</h1>
                <div class="actions">
                   <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
                </div>
@@ -12,29 +12,49 @@
                         <thead>
                               <tr>
                                  <th>No</th>
-                                 <th>Kategori</th>
-                                 <th class="disabled-sorting text-right">Actions</th>
+                                 <th>Nama</th>
+								 <th>Jenis</th>
+								 <th>Netto</th>
+								 <th>Merk</th>
+								 <th>Stok</th>
+                                 <th class="disabled-sorting text-center">Actions</th>
                               </tr>
                            </thead>
                            <tfoot>
                               <tr>
                                  <th>No</th>
-                                 <th>Kategori</th>
-                                 <th class="text-right">Actions</th>
+                                 <th>Nama</th>
+								 <th>Jenis</th>
+								 <th>Netto</th>
+								 <th>Merk</th>
+								 <th>Stok</th>
+                                 <th class="text-center">Actions</th>
                               </tr>
                            </tfoot>
                            <tbody>
                               <?php $no=1;
-                                 foreach ($kategori as $k) { ?>
+                                 foreach ($items as $k) { ?>
                               <tr>
                                  <td><?php echo $no;?></td>
-                                 <td><?php echo $k->nama_kategori;?></td>
-                                 <td class="td-actions text-right">
-                                    <button type="button" onclick="ganti(<?php echo $k->id_kategori;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
+                                 <td><?php echo $k->nama_item;?></td>
+								 <td><?php echo $k->jenis;?></td>
+								 <td><?php echo $k->netto;?></td>
+								 <td><?php echo $k->merk;?></td>
+								 <td><?php echo $k->stok;?></td>
+                                 <td class="td-actions text-center">
+                                 	<button type="button" onclick="restock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
+                                       <i class="zmdi zmdi-present-to-all zmdi-hc-fw"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
+                                       <i class="zmdi zmdi-alert-circle zmdi-hc-fw"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" onclick="ganti(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
                                     &nbsp;
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_kategori;?>)">
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                     </button>
                                  </td>
@@ -104,10 +124,14 @@ $(document).ready(function () {
 			b.preventDefault();
 			var a;
 			if (simpan == "tambah") {
-				a = "<?php echo base_url();?>kategori/add"
-			} else {
-				a = "<?php echo base_url();?>kategori/update"
-			}
+				a = "<?php echo base_url();?>user/add"
+			} else if (simpan == "tambah") {
+				a = "<?php echo base_url();?>user/update"
+			} else if (simpan == "restock") {
+				a = "<?php echo base_url();?>user/updateStok"
+			} else if (simpan == "limitstock") {
+				a = "<?php echo base_url();?>user/updateLimitStok"
+			} 
 			$.ajax({
 				url: a,
 				type: "POST",
@@ -134,7 +158,34 @@ function tambah() {
 	simpan = "tambah";
 	$(".form")[0].reset();
 	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>kategori/modal/", function (a) {
+	$("#modalbody").load("<?php echo base_url();?>Items/modal/", function (a) {
+		$("#modalbody").html(a)
+	})
+}
+
+function restock() {
+	simpan = "restock";
+	$(".form")[0].reset();
+	$("#myModal").modal("show");
+	$("#modalbody").load("<?php echo base_url();?>Items/restock/", function (a) {
+		$("#modalbody").html(a)
+	})
+}
+
+function limitstock() {
+	simpan = "limitstock";
+	$(".form")[0].reset();
+	$("#myModal").modal("show");
+	$("#modalbody").load("<?php echo base_url();?>Items/limitstock/", function (a) {
+		$("#modalbody").html(a)
+	})
+}
+
+function tambah() {
+	simpan = "tambah";
+	$(".form")[0].reset();
+	$("#myModal").modal("show");
+	$("#modalbody").load("<?php echo base_url();?>Items/modal/", function (a) {
 		$("#modalbody").html(a)
 	})
 }
@@ -143,7 +194,7 @@ function ganti(a) {
 	simpan = "update";
 	$(".form")[0].reset();
 	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>kategori/edit/" + a, function (b) {
+	$("#modalbody").load("<?php echo base_url();?>Items/edit/" + a, function (b) {
 		$("#modalbody").html(b)
 	})
 }
@@ -161,7 +212,7 @@ function hapus(a) {
 	  cancelButtonText: "Batal"
 	}).then((result) => {
 	  if (result.value == true) {
-		$.get("<?php echo base_url()?>kategori/delete/" + a, function (b) { location.reload(); })
+		$.get("<?php echo base_url()?>Items/delete/" + a, function (b) { location.reload(); })
 	  }
 	})
 };

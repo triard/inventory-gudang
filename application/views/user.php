@@ -14,6 +14,7 @@
                                  <th>No</th>
                                  <th>Nama</th>
 								 <th>Email</th>
+								 <th>Level</th>
                                  <th class="disabled-sorting text-right">Actions</th>
                               </tr>
                            </thead>
@@ -22,6 +23,7 @@
                                  <th>No</th>
                                  <th>Nama</th>
 								 <th>Email</th>
+								 <th>Level</th>
                                  <th class="text-right">Actions</th>
                               </tr>
                            </tfoot>
@@ -30,14 +32,15 @@
                                  foreach ($user as $k) { ?>
                               <tr>
                                  <td><?php echo $no;?></td>
-                                 <td><?php echo $k->nama_admin;?></td>
-								 <td><?php echo $k->email_admin;?></td>
+                                 <td><?php echo $k->nama_user;?></td>
+								 <td><?php echo $k->email;?></td>
+								 <td><?php echo $k->level;?></td>
                                  <td class="td-actions text-right">
-                                    <button type="button" onclick="ganti(<?php echo $k->id_admin;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
+                                    <button type="button" onclick="ganti(<?php echo $k->id_user;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
                                     &nbsp;
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_admin;?>)">
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_user;?>)">
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                     </button>
                                  </td>
