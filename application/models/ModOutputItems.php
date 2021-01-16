@@ -20,7 +20,7 @@ class ModOutputItems extends CI_model {
 		$id_item = $this->input->post('id_item');
 		$qty_output = $this->input->post('qty_output');
 		$tgl_output = $this->input->post('tgl_output');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'id_user' => $id_user);
 		$this->db->insert('output_items', $data);
@@ -43,11 +43,28 @@ class ModOutputItems extends CI_model {
 		$id_item = $this->input->post('id_item');
 		$qty_output = $this->input->post('qty_output');
 		$tgl_output = $this->input->post('tgl_output');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 
 		'tgl_output' => $tgl_output, 'id_user' => $id_user);
 			$this->db->where('id_output', $id_output);
 			$this->db->update('output_items', $data);
 	}
+
+	public function getStok($id_output){
+        $query = $this->db->query("SELECT qty_output from output_items where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->qty_output;
+    }
+    public function getStokByOutput($id_output){
+        $query = $this->db->query("SELECT stok from output_items INNER JOIN items ON output_items.id_item=items.id_item where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->stok;
+    }
+
+    public function getIdItem($id_output){
+        $query = $this->db->query("SELECT id_item from output_items where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->id_item;
+    }
 }

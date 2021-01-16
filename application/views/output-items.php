@@ -1,4 +1,16 @@
 <section class="content">
+    <?php
+      if (!empty($this->session->flashdata('stok'))) {
+    ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+            <?php echo $this->session->flashdata('stok'); ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    <?php
+       } 
+     ?>
     <header class="content__title">
         <h1>Output Items</h1>
         <div class="actions">
@@ -12,26 +24,32 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>items</th>
-                            <th>qty</th>
-                            <th>tgl_input</th>
-                            <th>user</th>
-                            <th class="disabled-sorting text-right">Actions</th>
+                            <th>Items</th>
+                            <th>Quantity</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Admin</th>
+                        <?php 
+                            if($this->session->userdata('level') == 'superadmin'){ ?>
+                            <th class="disabled-sorting text-center">Actions</th>
+                         <?php } ?>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>items</th>
-                            <th>qty</th>
-                            <th>tgl_input</th>
-                            <th>user</th>
-                            <th class="text-right">Actions</th>
+                            <th>Items</th>
+                            <th>Quantity</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Admin</th>
+                        <?php 
+                            if($this->session->userdata('level') == 'superadmin'){ ?>
+                            <th class="disabled-sorting text-center">Actions</th>
+                         <?php } ?>
                         </tr>
                     </tfoot>
                     <tbody>
                         <?php $no=1;
-                                 foreach ($output as $k) { ?>
+                        foreach ($output as $k) { ?>
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_item;?></td>
@@ -41,7 +59,9 @@
 							 echo $d->format("d/m/Y");?>
 							</td>
                             <td><?php echo $k->nama_user;?></td>
-                            <td class="td-actions text-right">
+                            <?php 
+                            if($this->session->userdata('level') == 'superadmin'){ ?>
+                            <td class="td-actions text-center">
                                 <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -52,6 +72,7 @@
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
                             </td>
+                            <?php } ?>
                         </tr>
                         <?php $no++; } ?>
                     </tbody>
@@ -113,13 +134,13 @@ $(document).ready(function () {
 			}
 		})
 		
-		$(".xform").on("submit", (function (b) {
+		$(".xform-lg").on("submit", (function (b) {
 			b.preventDefault();
 			var a;
 			if (simpan == "tambah") {
-				a = "<?php echo base_url();?>output_items/add"
+				a = "<?php echo base_url();?>output/add"
 			} else {
-				a = "<?php echo base_url();?>output_items/update"
+				a = "<?php echo base_url();?>output/update"
 			}
 			$.ajax({
 				url: a,
@@ -130,7 +151,7 @@ $(document).ready(function () {
 				processData: false,
 				success: function (c) {
 					// $("#myModal").modal("hide");
-					swal("Sukses!", "", "success");
+					// swal("Sukses!", "", "success");
 					location.reload();
 				},
 				error: function (c, e, d) {
@@ -146,18 +167,18 @@ $(document).ready(function () {
 function tambah() {
 	simpan = "tambah";
 	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>output_items/modal", function (a) {
-		$("#modalbody").html(a)
+	$("#modal-lg").modal("show");
+	$("#modalbody-lg").load("<?php echo base_url();?>output/modal/", function (a) {
+		$("#modalbody-lg").html(a)
 	})
 }
 
 function ganti(a) {
 	simpan = "update";
 	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>output_items/edit/" + a, function (b) {
-		$("#modalbody").html(b)
+	$("#modal-lg").modal("show");
+	$("#modalbody-lg").load("<?php echo base_url();?>output/edit/" + a, function (b) {
+		$("#modalbody-lg").html(b)
 	})
 }
 
@@ -174,7 +195,7 @@ function hapus(a) {
 	  cancelButtonText: "Batal"
 	}).then((result) => {
 	  if (result.value == true) {
-		$.get("<?php echo base_url()?>output_items/delete/" + a, function (b) { location.reload(); })
+		$.get("<?php echo base_url()?>output/delete/" + a, function (b) { location.reload(); })
 	  }
 	})
 };

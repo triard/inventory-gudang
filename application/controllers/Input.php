@@ -14,9 +14,8 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
-		
+
 		$data['input'] = $this->ModInputItems->selectAll();
-		// $data['stok'] = $this->ModItems->getStok();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('input',$data);
@@ -97,6 +96,7 @@ class Input extends CI_Controller {
 			$this->ModItems->updateStok($total);
 			echo json_encode(array("status" => TRUE));
 		}
+
 	}
 
 	public function edit($id) {
@@ -115,6 +115,13 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
+
+		$qtyLama = $this->ModInputItems->getStok($id);
+		$stok = $this->ModInputItems->getStokByInput($id);
+		$total = $stok - $qtyLama;
+		$id_item = $this->ModInputItems->getIdItem($id);
+		$this->ModItems->updateStokWithId($total, $id_item);
+		$this->session->set_flashdata('cek', $total);
 		$this->ModInputItems->delete($id);
 		echo json_encode(array("status" => TRUE));
 	}
@@ -122,6 +129,21 @@ class Input extends CI_Controller {
 		$q = $this->session->userdata('status');
 		if($q != "login") {
 			exit();
+		}
+
+		$id_item = $this->input->post('id_item');
+		$id_input = $this->input->post('id_input');
+		$qtyBaru = $this->input->post('qty_input');
+		$qtyLama = $this->ModInputItems->getStok($id_input);
+		$stok = $this->ModItems->getStok($id_item);
+
+		$total = $stok - ($qtyLama-$qtyBaru);
+
+		if ($total < 0) {
+			$this->session->set_flashdata('cek', 'Stok tidak mencukupi!');
+		} else {
+			$this->ModInputItems->update();
+			$this->ModItems->updateStok($total);
 		}
 		$this->ModInputItems->update();
 		echo json_encode(array("status" => TRUE));
@@ -142,6 +164,4 @@ class Input extends CI_Controller {
 		$data['items'] = $this->ModItems->edit($id);
 		$this->load->view('modal/set-item', $data);
 	}
-
-
 }

@@ -49,6 +49,15 @@ class ModItems extends CI_model {
 		$this->db->update('items', $data);
 	}
 
+	public function updateStokWithId($stok, $id){
+		$id = $id;
+		$stok = $stok;
+
+		$data = array('stok' => $stok);
+		$this->db->where('id_item', $id);
+		$this->db->update('items', $data);
+	}
+
 	public function updateStokLimit(){
 		$id = $this->input->post('id_item');
 		$stok_limit = $this->input->post('stok_limit');
