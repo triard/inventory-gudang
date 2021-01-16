@@ -165,7 +165,18 @@
                     <h4 class="card-title">Statistik Barang Keluar</h4>
                     <table class="table table-sm table-striped">
                         <thead>
-                            <canvas id="BarChartOutputs" width="90" height="40" style="margin-bottom: -25px;"></canvas>
+                        <?php
+                            // if($inputFilter == null && $mostInput != null){ 
+                                
+                                foreach ($mostOutput as $mo){ 
+
+                                    $name_item[] = $mo->nama_item;
+                                    $jml_qty_output[] = (float) $mo->total_stok;	
+                                
+                                echo "<canvas id='BarChartOutputs' width='90' height='36' 
+                                 style='margin-bottom: -25px;'></canvas>'";
+                                } 
+                                ?>
                         </thead>
                         <tbody>
                         </tbody>
@@ -238,12 +249,12 @@ var ctx = document.getElementById("BarChartOutputs");
 var myLineChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: <?php echo json_encode($name_item);?>,
         datasets: [{
-            label: "Revenue",
+            label: "Total Stok",
             backgroundColor: "rgba(2,117,216,1)",
             borderColor: "rgba(2,117,216,1)",
-            data: [4215, 5312, 6251, 7841, 9821, 14984],
+            data: <?php echo json_encode($jml_qty_output);?>,
         }],
     },
     options: {
@@ -262,7 +273,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 15000,
+                    max: 1000,
                     maxTicksLimit: 5
                 },
                 gridLines: {

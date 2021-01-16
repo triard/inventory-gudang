@@ -13,7 +13,7 @@ class ModOutputItems extends CI_model {
         return $this->db->get('items')->result();
 	}
 	public function listSupplier() {
-		$this->db->order_by('nama_supplier', "asc");
+		$this->db->order_by('nama_supplier', "asc"); 
         return $this->db->get('suppliers')->result();
 	}
 	public function add() {
@@ -66,5 +66,16 @@ class ModOutputItems extends CI_model {
         $query = $this->db->query("SELECT id_item from output_items where id_output= '$id_output'");
         $hasil = $query->row();
         return $hasil->id_item;
-    }
+	}
+	
+	public function GetMostOutput()
+	{
+		$this->db->select('i.nama_item, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$this->db->from('output_items as a');
+		$this->db->join('items as i', 'a.id_item = i.id_item');
+		$this->db->group_by('a.id_item');
+		$this->db->order_by('a.qty_output', "desc");
+		$this->db->limit('7');
+        return $this->db->get()->result();
+	}
 }
