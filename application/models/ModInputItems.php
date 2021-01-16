@@ -91,7 +91,7 @@ class ModInputItems extends CI_model {
 		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
 		$this->db->join('items as i', 'a.id_item = i.id_item');
-		$this->db->group_by('a.id_item');
+		$this->db->group_by('a.id_item'); 
 		$this->db->order_by('a.qty_input', "desc");
 		$this->db->limit('7');
         return $this->db->get()->result();

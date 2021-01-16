@@ -10,7 +10,8 @@ class Home extends CI_Controller {
 		$this->load->model('ModItems');
 		$this->load->model('ModSuppliers');
 		$this->load->model('ModInputItems');
-	}
+		$this->load->model('ModOutputItems');
+	} 
 	
 	public function index()
 	{
@@ -23,6 +24,7 @@ class Home extends CI_Controller {
 		$data['supplier'] = $this->ModSuppliers->getCountSupplier();
 		$data['barang'] = $this->ModItems->getCountBarang();
 		$data['mostInput'] = $this->ModInputItems->GetMostInput();
+		$data['mostOutput'] = $this->ModOutputItems->GetMostOutput();
 		// $data['inputFilter'] = $this->ModInputItems->InputFilter();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
