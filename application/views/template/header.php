@@ -15,6 +15,7 @@
         <!-- App styles -->
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/app.min.css">
 		<script src="<?php echo base_url();?>assets/vendors/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/chart.js/Chart.min.js') ?>"></script>
     </head>
 
     <body data-ma-theme="">

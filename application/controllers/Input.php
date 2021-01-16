@@ -14,6 +14,7 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
+
 		$data['input'] = $this->ModInputItems->selectAll();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
@@ -95,7 +96,7 @@ class Input extends CI_Controller {
 			$this->ModItems->updateStok($total);
 			echo json_encode(array("status" => TRUE));
 		}
-		
+
 	}
 
 	public function edit($id) {
@@ -114,6 +115,7 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
+
 		$qtyLama = $this->ModInputItems->getStok($id);
 		$stok = $this->ModInputItems->getStokByInput($id);
 		$total = $stok - $qtyLama;
@@ -128,6 +130,7 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
+
 		$id_item = $this->input->post('id_item');
 		$id_input = $this->input->post('id_input');
 		$qtyBaru = $this->input->post('qty_input');

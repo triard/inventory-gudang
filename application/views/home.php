@@ -1,10 +1,10 @@
 <section class="content">
-        <div class="card">
-            <div class="card-header" style="background-color: #ecf0f1;">
-                <h1>Dashboard</h1>
-                <small>Selamat Datang</small>
-            </div>
+    <div class="card">
+        <div class="card-header" style="background-color: #ecf0f1;">
+            <h1>Dashboard</h1>
+            <small>Selamat Datang</small>
         </div>
+    </div>
     <?php if($this->session->userdata('level') == 'superadmin') { ?>
     <div class="row">
         <div class="col-md-3">
@@ -13,16 +13,16 @@
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-user  fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total User<h3 class="text-white">10</h3>
+                        <div class="col-8 text-white">Total User<h3 class="text-white"><?php echo $user ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                <a href="#">
-                    <div class="float-left">
-                        <h6>Lihat Detail</h6>
-                    </div>
-                    <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    <a href="#">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
                     </a>
                 </div>
             </div>
@@ -33,16 +33,16 @@
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total Supplier<h3 class="text-white">20</h3>
+                        <div class="col-8 text-white">Total Supplier<h3 class="text-white"><?php echo $supplier ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                  <a href="#">
-                    <div class="float-left">
-                        <h6>Lihat Detail</h6>
-                    </div>
-                    <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    <a href="#">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
                     </a>
                 </div>
             </div>
@@ -53,16 +53,16 @@
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total Barang<h3 class="text-white">40</h3>
+                        <div class="col-8 text-white">Total Barang<h3 class="text-white"><?php echo $barang ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                <a href="#">
-                    <div class="float-left">
-                        <h6>Lihat Detail</h6>
-                    </div>
-                    <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    <a href="#">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
                     </a>
                 </div>
             </div>
@@ -74,21 +74,26 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Stok Barang kurang</h4>
-
                     <table class="table table-sm table-striped">
                         <thead>
                             <tr>
+                                <td width="50">No</td>
                                 <td>Produk</td>
                                 <td width="150">Minimal Stok</td>
                                 <td width="100">Stok</td>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                         $no=1;
+                         foreach ($limit as $l) { ?>
                             <tr>
-                                <td>xxx</td>
-                                <td>100</td>
-                                <td>80</td>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $l->nama_item ?></td>
+                                <td><?php echo $l->stok_limit ?></td>
+                                <td><?php echo $l->stok?></td>
                             </tr>
+                            <?php $no++; } ?>
                         </tbody>
                     </table>
                 </div>
@@ -100,10 +105,53 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Statistik Barang Masuk</h4>
+                    <div class="row">
+                        <!-- <div class="col-4">
+                            <form class="navbar-form navbar-left" role="search"
+                                action="<?php echo site_url('home/');?>" method="post">
+                                <div class="form-group">
+                                    <input type="date" name="start" value="<?php echo $this->input->post('start') ?>">
+                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="date" name="end" value="<?php echo $this->input->post('start') ?>">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                    class="glyphicon glyphicon-search"></i>
+                                    <i class="fas fa-filter"></i> Filter</button>
+                            </form>
+                        </div> -->
+                    </div>
                     <table class="table table-sm table-striped">
                         <thead>
-                            <canvas id="BarChartInputs"></canvas>
+                        <?php
+                            // if($inputFilter == null && $mostInput != null){ 
+                                
+                                foreach ($mostInput as $mi){ 
 
+                                    $name_item[] = $mi->nama_item;
+                                    $jml_qty_input[] = (float) $mi->total_stok;	
+                                
+                                echo "<canvas id='BarChartInputs' width='90' height='36' 
+                                 style='margin-bottom: -25px;'></canvas>'";
+                                } 
+                            //  }else if($inputFilter != null && $mostInput != null){
+                            // foreach ($inputFilter as $mi){ 
+
+                            //     $name_item[] = $mi->nama_item;
+            			    //     $jml_qty_input[] = (float) $mi->total_stok;	
+                            
+                            //     echo "<canvas id='BarChartInputs' width='90' height='36' 
+                            //     style='margin-bottom: -25px;'></canvas>'";
+
+                            // } }else{
+                            //     echo "maaf kosong";
+ 
+
+                            // } ?>
                         </thead>
                         <tbody>
                         </tbody>
@@ -117,7 +165,7 @@
                     <h4 class="card-title">Statistik Barang Keluar</h4>
                     <table class="table table-sm table-striped">
                         <thead>
-                            <canvas id="BarChartOutputs"></canvas>
+                            <canvas id="BarChartOutputs" width="90" height="40" style="margin-bottom: -25px;"></canvas>
                         </thead>
                         <tbody>
                         </tbody>
@@ -141,12 +189,12 @@ var ctx = document.getElementById("BarChartInputs");
 var myLineChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels: <?php echo json_encode($name_item);?>,
         datasets: [{
-            label: "Revenue",
+            label: "Total Stok",
             backgroundColor: "rgba(2,117,216,1)",
             borderColor: "rgba(2,117,216,1)",
-            data: [4215, 5312, 6251, 7841, 9821, 14984],
+            data: <?php echo json_encode($jml_qty_input);?>,
         }],
     },
     options: {
@@ -165,7 +213,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 15000,
+                    max: 1000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
