@@ -22,7 +22,7 @@ class ModInputItems extends CI_model {
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
@@ -32,7 +32,7 @@ class ModInputItems extends CI_model {
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
@@ -42,7 +42,7 @@ class ModInputItems extends CI_model {
 		$id_supplier = $id_supplier;
 		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
@@ -52,7 +52,7 @@ class ModInputItems extends CI_model {
 		$id_supplier = $id_supplier;
 		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
@@ -77,11 +77,28 @@ class ModInputItems extends CI_model {
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
-		$id_user = $this->input->post('id_user');
+		$id_user = $this->session->userdata('id_user');
 		
 		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 
 		'tgl_input' => $tgl_input, 'id_user' => $id_user);
 			$this->db->where('id_input', $id_input);
 			$this->db->update('input_items', $data);
 	}
+
+	public function getStok($id_input){
+        $query = $this->db->query("SELECT qty_input from input_items where id_input= '$id_input'");
+        $hasil = $query->row();
+        return $hasil->qty_input;
+    }
+    public function getStokByInput($id_input){
+        $query = $this->db->query("SELECT stok from input_items INNER JOIN items ON input_items.id_item=items.id_item where id_input= '$id_input'");
+        $hasil = $query->row();
+        return $hasil->stok;
+    }
+
+    public function getIdItem($id_input){
+        $query = $this->db->query("SELECT id_item from input_items where id_input= '$id_input'");
+        $hasil = $query->row();
+        return $hasil->id_item;
+    }
 }

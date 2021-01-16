@@ -1,9 +1,9 @@
 <section class="content">
             <header class="content__title">
                <h1>Items</h1>
-               <div class="actions">
+               <!-- <div class="actions">
                   <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
-               </div>
+               </div> -->
             </header>
             <div class="card">
                <div class="card-body">
@@ -42,21 +42,7 @@
 								 <td><?php echo $k->merk;?></td>
 								 <td><?php echo $k->stok;?></td>
                                  <td class="td-actions text-center">
-                                 	<button type="button" onclick="restock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
-                                       <i class="zmdi zmdi-present-to-all zmdi-hc-fw"></i>
-                                    </button>
-                                    &nbsp;
-                                    <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
-                                       <i class="zmdi zmdi-alert-circle zmdi-hc-fw"></i>
-                                    </button>
-                                    &nbsp;
-                                    <button type="button" onclick="ganti(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
-                                       <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
-                                    </button>
-                                    &nbsp;
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
-                                       <i class="zmdi zmdi-close zmdi-hc-fw"></i>
-                                    </button>
+                                 
                                  </td>
                               </tr>
                               <?php $no++; } ?>

@@ -52,7 +52,7 @@
                         <li><a href="<?php echo base_url('items/');?>"><i class="fas fa-boxes"></i> Barang</a></li>
                         <li><a href="<?php echo base_url('input/');?>"><i class="fas fa-sign-in-alt"></i> Barang
                                 Masuk</a></li>
-                        <li><a href="<?php echo base_url('output_items/');?>"><i class="fas fa-sign-out-alt"></i> Barang
+                        <li><a href="<?php echo base_url('output/');?>"><i class="fas fa-sign-out-alt"></i> Barang
                                 Keluar</a></li>
                     </ul><br>
                 </div>
