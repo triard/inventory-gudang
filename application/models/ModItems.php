@@ -26,22 +26,20 @@ class ModItems extends CI_model {
 		$this->db->delete('items');
 	}
 	public function edit($id){
+		$this->db->select('*');
+		$this->db->from('items');
 		$this->db->where('id_item', $id);
-		return $this->db->get('items')->row();
+		return $this->db->get()->result();
 	}
-	
 	public function update(){
 		$id = $this->input->post('id_item');
-		$nama_item = $this->input->post('nama_item');
-		$jenis = $this->input->post('jenis');
-		$netto = $this->input->post('netto');
-		$merk = $this->input->post('merk');
+		$stok_limit = $this->input->post('stok_limit');
 
-		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk);
+		$data = array('stok_limit' => $stok_limit);
 		$this->db->where('id_item', $id);
 		$this->db->update('items', $data);
 	}
-
+ 
 	public function updateStok($stok){
 		$id = $this->input->post('id_item');
 		$stok = $stok;
@@ -88,5 +86,20 @@ class ModItems extends CI_model {
         $query = $this->db->query("SELECT stok from items where id_item= '$id_item'");
         $hasil = $query->row();
         return $hasil->stok;
-    }
+	}
+	
+	public function getNotifStokLimit()
+	{
+		$this->db->select('nama_item, stok, stok_limit');
+		$this->db->from('items');
+		$this->db->where('stok <= stok_limit');
+        return $this->db->get()->result();
+	}
+
+	public function getCountBarang()
+	{
+		$this->db->select('id_item');
+		$this->db->from('items');
+		return $this->db->count_all_results();
+	}
 }

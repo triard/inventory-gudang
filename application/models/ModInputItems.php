@@ -84,4 +84,43 @@ class ModInputItems extends CI_model {
 			$this->db->where('id_input', $id_input);
 			$this->db->update('input_items', $data);
 	}
+
+	public function GetMostInput()
+	{
+		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->from('input_items as a');
+		$this->db->join('items as i', 'a.id_item = i.id_item');
+		$this->db->group_by('a.id_item');
+		$this->db->order_by('a.qty_input', "desc");
+		$this->db->limit('7');
+        return $this->db->get()->result();
+	}
+
+	public function GetMostInputInMount()
+	{
+		$awal_bulan = date('Y-m-d',strtotime('first day of this month'));
+		$akhir_bulan = date('Y-m-d',strtotime('last day of this month'));
+		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->from('input_items as a');
+		$this->db->join('items as i', 'a.id_item = i.id_item');
+		$this->db->group_by('a.id_item');
+		$this->db->order_by('a.qty_input', "desc");
+		$this->db->where("a.tgl_input BETWEEN '$awal_bulan 'AND' $akhir_bulan'");
+		$this->db->limit('7');
+        return $this->db->get()->result();
+	}
+
+	public function InputFilter()
+	{
+		$start = $this->input->post('start');
+		$end = $this->input->post('end');
+		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->from('input_items as a');
+		$this->db->join('items as i', 'a.id_item = i.id_item');
+		$this->db->group_by('a.id_item');
+		$this->db->order_by('a.qty_input', "desc");
+		$this->db->where("a.tgl_input BETWEEN '$start 'AND' $end'");
+		$this->db->limit('7');
+        return $this->db->get()->result();
+	}
 }

@@ -54,5 +54,12 @@ class ModSuppliers extends CI_model {
         $query = $this->db->query("SELECT id_supplier from suppliers where nama_supplier='$nama_supplier' AND kontak='$kontak'");
         $hasil = $query->row();
         return $hasil->id_supplier;
-    }
+	}
+	
+	public function getCountSupplier()
+	{
+		$this->db->select('id_supplier');
+		$this->db->from('suppliers');
+		return $this->db->count_all_results();
+	}
 }

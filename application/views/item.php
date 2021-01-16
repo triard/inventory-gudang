@@ -42,21 +42,21 @@
 								 <td><?php echo $k->merk;?></td>
 								 <td><?php echo $k->stok;?></td>
                                  <td class="td-actions text-center">
-                                 	<button type="button" onclick="restock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
+                                 	<!-- <button type="button" onclick="restock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-present-to-all zmdi-hc-fw"></i>
                                     </button>
-                                    &nbsp;
-                                    <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
+                                    &nbsp; -->
+                                    <!-- <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-alert-circle zmdi-hc-fw"></i>
                                     </button>
-                                    &nbsp;
+                                    &nbsp; -->
                                     <button type="button" onclick="ganti(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
                                     &nbsp;
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
+                                    <!-- <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
-                                    </button>
+                                    </button> -->
                                  </td>
                               </tr>
                               <?php $no++; } ?>
@@ -124,13 +124,13 @@ $(document).ready(function () {
 			b.preventDefault();
 			var a;
 			if (simpan == "tambah") {
-				a = "<?php echo base_url();?>user/add"
-			} else if (simpan == "tambah") {
-				a = "<?php echo base_url();?>user/update"
+				a = "<?php echo base_url();?>items/add"
+			} else if (simpan == "update") {
+				a = "<?php echo base_url();?>items/update"
 			} else if (simpan == "restock") {
-				a = "<?php echo base_url();?>user/updateStok"
+				a = "<?php echo base_url();?>items/updateStok"
 			} else if (simpan == "limitstock") {
-				a = "<?php echo base_url();?>user/updateLimitStok"
+				a = "<?php echo base_url();?>items/updateLimitStok"
 			} 
 			$.ajax({
 				url: a,

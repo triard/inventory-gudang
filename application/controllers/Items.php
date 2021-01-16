@@ -10,10 +10,10 @@ class Items extends CI_Controller {
 	}
 	public function index()
 	{
-		// $q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	redirect('login','refresh');
-		// }
+		$q = $this->session->userdata('status');
+		if($q != "login") {
+			redirect('login','refresh');
+		}
 		
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
 		$data['items'] = $this->ModItems->selectAll();
@@ -24,74 +24,76 @@ class Items extends CI_Controller {
 	}
 	public function modal() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$data['cek'] = 0;
 		$this->load->view('modal/items', $data);
 	}
 	public function restock() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$data['cek'] = 2;
 		$this->load->view('modal/items', $data);
 	}
 	public function limitstock() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
-		$data['cek'] = 3;
+		if($q != "login") {
+			exit();
+		}
+
+		$data['item'] = $this->ModItems->edit();
 		$this->load->view('modal/items', $data);
 	}
 	public function add() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModItems->add();
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$data['cek'] = 1;
 		$data['items'] = $this->ModItems->edit($id);
 		$this->load->view('modal/items', $data);
 	}
 	public function delete($id) {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModItems->delete($id);
 		echo json_encode(array("status" => TRUE));
 	}
 	public function update() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
-		$this->ModItems->update();
+		if($q != "login") {
+			exit();
+		}
+		// $this->ModItems->update();
+		$this->ModItems->updateStokLimit();
 		echo json_encode(array("status" => TRUE));
-	}
+	} 
 	public function updateStok() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModItems->updateStok();
 		echo json_encode(array("status" => TRUE));
 	}
 	public function updateLimitStok() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModItems->updateStokLimit();
 		echo json_encode(array("status" => TRUE));
 	}

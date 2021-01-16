@@ -49,4 +49,11 @@ class ModUser extends CI_model {
 			$this->db->update('user', $data);
 		}
 	}
+
+	public function getCountUser()
+	{
+		$this->db->select('id_user');
+		$this->db->from('user');
+		return $this->db->count_all_results();
+	}
 }

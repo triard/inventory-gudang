@@ -8,10 +8,10 @@ class User extends CI_Controller {
 	}
 	public function index()
 	{
-		// $q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	redirect('login','refresh');
-		// }
+		$q = $this->session->userdata('status');
+		if($q != "login") {
+			redirect('login','refresh');
+		}
 		
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
 		$data['user'] = $this->ModUser->selectAll();
@@ -22,42 +22,42 @@ class User extends CI_Controller {
 	}
 	public function modal() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$data['cek'] = 0;
 		$this->load->view('modal/user', $data);
 	}
 	public function add() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModUser->add();
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$data['cek'] = 1;
 		$data['user'] = $this->ModUser->edit($id);
 		$this->load->view('modal/user', $data);
 	}
 	public function delete($id) {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModUser->delete($id);
 		echo json_encode(array("status" => TRUE));
 	}
 	public function update() {
 		$q = $this->session->userdata('status');
-		// if($q != "login") {
-		// 	exit();
-		// }
+		if($q != "login") {
+			exit();
+		}
 		$this->ModUser->update();
 		echo json_encode(array("status" => TRUE));
 	}
