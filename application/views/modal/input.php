@@ -7,7 +7,7 @@
                 <option value="0">Item Baru</option>
                 <option disabled>------------</option>
                 <?php foreach ($item as $i): ?>
-                <option value="<?php echo  $i->id_item?>"><?php echo $i->nama_item ?></option>
+                <option value="<?php echo  $i->id_item?>"><?php echo $i->nama_item;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -59,19 +59,17 @@
             <label>Tanggal</label><br>
             <input class="form-control" name="tgl_input" type="date" placeholder="00-00-0000" required>
         </div>
-        <input name="id_user" value="1" type="hidden">
+        <!-- <input name="id_user" value="1" type="hidden"> -->
     </div>
 </div>
 <?php } else { ?>
     <?php foreach ($inputEdit as $inputEdit): ?>
     <input type="hidden" name="id_input" value="<?php echo $inputEdit->id_input;?>">
+    <input name="id_user" type="hidden" value="<?php echo  $inputEdit->id_user?>">
     <div class="form-group">
     <label>Item</label>
     <select name="id_item" class="custom-select form-control" required>
-        <!-- <option selected value="<?php echo  $inputEdit->id_item?>"><?php echo $inputEdit->nama_item ?></option> -->
-        <?php foreach ($item as $i): ?>
-        <option value="<?php echo  $i->id_item?>"><?php echo $i->nama_item ?></option>
-        <?php endforeach; ?>
+        <option selected value="<?php echo  $inputEdit->id_item?>" read><?php echo $inputEdit->nama_item ?></option>
     </select>
 </div>
 <div class="form-group">
@@ -90,10 +88,6 @@
 <div class="form-group">
     <label>Tanggal</label><br>
     <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" required>
-</div>
-<div class="form-group">
-    <label>Id User</label><br>
-    <input class="form-control" name="id_user" type="text" value="<?php echo  $inputEdit->id_user?>" placeholder="sementara input dengan id" required>
 </div>
 <?php endforeach; ?>
 <?php } ?>
