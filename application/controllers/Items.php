@@ -30,23 +30,6 @@ class Items extends CI_Controller {
 		$data['cek'] = 0;
 		$this->load->view('modal/items', $data);
 	}
-	public function restock() {
-		$q = $this->session->userdata('status');
-		if($q != "login") {
-			exit();
-		}
-		$data['cek'] = 2;
-		$this->load->view('modal/items', $data);
-	}
-	public function limitstock() {
-		$q = $this->session->userdata('status');
-		if($q != "login") {
-			exit();
-		}
-
-		$data['item'] = $this->ModItems->edit();
-		$this->load->view('modal/items', $data);
-	}
 	public function add() {
 		$q = $this->session->userdata('status');
 		if($q != "login") {
@@ -89,12 +72,12 @@ class Items extends CI_Controller {
 		$this->ModItems->updateStok();
 		echo json_encode(array("status" => TRUE));
 	}
-	public function updateLimitStok() {
-		$q = $this->session->userdata('status');
-		if($q != "login") {
-			exit();
-		}
-		$this->ModItems->updateStokLimit();
-		echo json_encode(array("status" => TRUE));
-	}
+	// public function updateLimitStok() {
+	// 	$q = $this->session->userdata('status');
+	// 	if($q != "login") {
+	// 		exit();
+	// 	}
+	// 	$this->ModItems->updateStokLimit();
+	// 	echo json_encode(array("status" => TRUE));
+	// }
 }

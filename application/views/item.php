@@ -17,6 +17,7 @@
 								 <th>Netto</th>
 								 <th>Merk</th>
 								 <th>Stok</th>
+								 <th>Stok Limit</th>
                                  <th class="disabled-sorting text-center">Actions</th>
                               </tr>
                            </thead>
@@ -28,6 +29,7 @@
 								 <th>Netto</th>
 								 <th>Merk</th>
 								 <th>Stok</th>
+								 <th>Stok Limit</th>
                                  <th class="text-center">Actions</th>
                               </tr>
                            </tfoot>
@@ -41,6 +43,7 @@
 								 <td><?php echo $k->netto;?></td>
 								 <td><?php echo $k->merk;?></td>
 								 <td><?php echo $k->stok;?></td>
+								 <td><?php echo $k->stok_limit;?></td>
                                  <td class="td-actions text-center">
 
                                  	<!-- <button type="button" onclick="restock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">

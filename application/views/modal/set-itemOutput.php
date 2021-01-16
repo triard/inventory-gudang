@@ -1,4 +1,5 @@
 <?php if(isset($items)) { ?>
+    <?php foreach ($items as $items): ?>
 <div class="form-group">
     <label>Jenis</label><br>
     <input class="form-control" name="jenis" type="text" placeholder="Jenis" value="<?php echo $items->jenis;?>" disabled>
@@ -11,4 +12,5 @@
     <label>Merk</label><br>
     <input class="form-control" name="merk" type="text" placeholder="Merk" value="<?php echo $items->merk;?>" disabled>
 </div>
+<?php endforeach; ?>
 <?php }
