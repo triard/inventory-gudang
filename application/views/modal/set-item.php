@@ -1,5 +1,5 @@
 <?php if(isset($items)) { ?>
-    <?php foreach ($items as $items): ?>
+   
 <div class="form-group">
     <label>Nama Items</label><br>
     <input class="form-control" name="nama_item" type="text" placeholder="Nama Items" value="<?php echo $items->nama_item;?>" required>
@@ -16,7 +16,7 @@
     <label>Merk</label><br>
     <input class="form-control" name="merk" type="text" placeholder="Merk" value="<?php echo $items->merk;?>" required>
 </div>
-<?php endforeach; ?>
+
 <?php } else { ?>
 <div class="form-group">
     <label>Nama Items</label><br>

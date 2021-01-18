@@ -25,7 +25,8 @@ class Home extends CI_Controller {
 		$data['barang'] = $this->ModItems->getCountBarang();
 		$data['mostInput'] = $this->ModInputItems->GetMostInput();
 		$data['mostOutput'] = $this->ModOutputItems->GetMostOutput();
-		// $data['inputFilter'] = $this->ModInputItems->InputFilter();
+		$data['inputFilter'] = $this->ModInputItems->InputFilter();
+		$data['outputFilter'] = $this->ModOutputItems->OutputFilter();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('home', $data);

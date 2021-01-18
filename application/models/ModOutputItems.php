@@ -78,4 +78,18 @@ class ModOutputItems extends CI_model {
 		$this->db->limit('7');
         return $this->db->get()->result();
 	}
+
+	public function OutputFilter()
+	{
+		$startOut = $this->input->post('startOut');
+		$endOut = $this->input->post('endOut');
+		$this->db->select('i.nama_item, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$this->db->from('output_items as a');
+		$this->db->join('items as i', 'a.id_item = i.id_item');
+		$this->db->group_by('a.id_item');
+		$this->db->order_by('a.qty_output', "desc");
+		$this->db->where("a.tgl_output BETWEEN '$startOut 'AND' $endOut'");
+		$this->db->limit('7');
+        return $this->db->get()->result();
+	}
 }

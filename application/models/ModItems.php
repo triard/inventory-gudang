@@ -26,10 +26,8 @@ class ModItems extends CI_model {
 		$this->db->delete('items');
 	}
 	public function edit($id){
-		$this->db->select('*');
-		$this->db->from('items');
 		$this->db->where('id_item', $id);
-		return $this->db->get()->result();
+		return $this->db->get('items')->row();
 	}
 	public function update(){
 		$id = $this->input->post('id_item');
