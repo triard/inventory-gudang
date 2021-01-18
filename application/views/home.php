@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="<?php echo base_url('user/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="<?php echo base_url('input/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="<?php echo base_url('items/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
