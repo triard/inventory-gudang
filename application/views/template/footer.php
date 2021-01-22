@@ -77,6 +77,7 @@
 	  
 	  <script src="<?php echo base_url();?>assets/vendors/chartjs/chart.js" defer></script>
 	  <link rel="stylesheet" href="<?php echo base_url();?>assets/vendors/chartjs/chart.css">
+
 		
     </body>
 </html>

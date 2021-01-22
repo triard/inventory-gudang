@@ -18,6 +18,17 @@
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
         </div>
     </header>
+	<form class="form-inline" action="" method="post">
+					 <div class="form-group mb-4 mr-sm-4">
+                        <input type="date" class="form-control" name="start" value="<?php echo $awal;?>">
+                        <i class="form-group__bar"></i>
+                     </div>
+                     <div class="form-group mb-4 mr-sm-4">
+                        <input type="date" class="form-control" name="end" value="<?php echo $akhir;?>">
+                        <i class="form-group__bar"></i>
+                     </div>
+                     <button type="submit" class="btn btn-primary mb-4">Filter</button>
+				</form>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">

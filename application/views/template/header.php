@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/app.min.css">
 		<script src="<?php echo base_url();?>assets/vendors/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/chart.js/Chart.min.js') ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 
     <body data-ma-theme="">
