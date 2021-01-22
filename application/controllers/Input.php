@@ -5,6 +5,7 @@ class Input extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('ModInputItems');
+		$this->load->model('ModOutputItems');
 		$this->load->model('ModItems');
 		$this->load->model('ModTransaksiItems');
 		$this->load->model('ModSuppliers');
@@ -269,6 +270,15 @@ class Input extends CI_Controller {
 		$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
 		$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
 
+		// cek hapus tanggal
+		$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+		$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+		$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggal);
+		$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggal);
+		if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
+			$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggal);
+		}
+
 		// $this->session->set_flashdata('cek', $total);
 		$this->ModInputItems->delete($id);
 		echo json_encode(array("status" => TRUE));
@@ -283,7 +293,7 @@ class Input extends CI_Controller {
 		$id_input = $this->input->post('id_input');
 
 		$tanggalBaru = $this->input->post('tgl_input');
-		$tanggalLama = $this->ModInputItems->getTanggal($id_item);
+		$tanggalLama = $this->ModInputItems->getTanggal($id_input);
 
 		$qtyBaru = $this->input->post('qty_input');
 		$qtyLama = $this->ModInputItems->getStok($id_input);
@@ -311,10 +321,10 @@ class Input extends CI_Controller {
 				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
 				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
 				$totalKbTi = $kbTi - ($kbLama-$kbBaru);
-				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalBaru);
+				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalBaru);
+				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalBaru);
+				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalBaru);  
 			} else {
 				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggalBaru);
 				if ($cekTanggal == 1) {
@@ -324,10 +334,19 @@ class Input extends CI_Controller {
 					$sisa_kbTi1 = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalLama);
 					$totalStokTi1 = $stokTi1 - $qtyLama;
 					$totalKbTi1 = $kbTi1 - $kbLama;
-					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalLama);
+
+					// cek hapus tanggal
+					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
+					$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
+					$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalLama);
+					$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalLama);
+					if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
+						$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggalLama);
+					}  
 
 					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalBaru);
 					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalBaru);
@@ -335,10 +354,10 @@ class Input extends CI_Controller {
 					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
 					$totalStokTi = $stokTi + $qtyBaru;
 					$totalKbTi = $kbTi + $kbBaru;
-					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalBaru);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalBaru);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalBaru);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalBaru);  
 					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id_item);
@@ -348,10 +367,19 @@ class Input extends CI_Controller {
 					$sisa_kbTi1 = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalLama);
 					$totalStokTi1 = $stokTi1 - $qtyLama;
 					$totalKbTi1 = $kbTi1 - $kbLama;
-					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalLama);  
+
+					// cek hapus tanggal
+					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
+					$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
+					$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalLama);
+					$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalLama);
+					if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
+						$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggalLama);
+					}
 
 					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalBaru);
 					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalBaru);
