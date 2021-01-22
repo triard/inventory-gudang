@@ -25,10 +25,11 @@
                         <tr>
                             <th>No</th>
                             <th>Items</th>
+                            <th>Jenis</th>
+                            <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
-                            <th>Admin</th>
                         <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <th class="disabled-sorting text-center">Actions</th>
@@ -39,10 +40,11 @@
                         <tr>
                             <th>No</th>
                             <th>Items</th>
+                            <th>Jenis</th>
+                            <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
-                            <th>Admin</th>
                         <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <th class="disabled-sorting text-center">Actions</th>
@@ -55,13 +57,14 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_item;?></td>
+                            <td><?php echo $k->jenis;?></td>
+                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->qty_output;?></td>
                             <td><?php echo $k->kb_output;?></td>
                             <td>
 							<?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
 							</td>
-                            <td><?php echo $k->nama_user;?></td>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">

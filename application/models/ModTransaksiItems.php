@@ -35,6 +35,11 @@ class ModTransaksiItems extends CI_model {
 		$this->db->where('id_ti', $id);
 		$this->db->delete('transaksi_items');
 	}
+	public function deleteByTanggal($id, $tanggal){
+		$this->db->where('id_item', $id);
+		$this->db->where('tanggal', $tanggal);
+		$this->db->delete('transaksi_items');
+	}
 	public function edit($id){
 		$this->db->where('id_ti', $id);
 		return $this->db->get('transaksi_items')->row();

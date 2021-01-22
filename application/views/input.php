@@ -26,11 +26,12 @@
                         <tr>
                             <th>No</th>
                             <th>Items</th>
+                            <th>Jenis</th>
+                            <th>Netto</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
                             <th>Koli /Box</th>
                             <th>Tanggal Masuk</th>
-                            <th>ID User</th>
                             <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                     </thead>
@@ -38,11 +39,12 @@
                         <tr>
                             <th>No</th>
                             <th>Items</th>
+                            <th>Jenis</th>
+                            <th>Netto</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
                             <th>Koli /Box</th>
                             <th>Tanggal Masuk</th>
-                            <th>ID User</th>
                             <th class="text-right">Actions</th>
                         </tr>
                     </tfoot>
@@ -52,6 +54,8 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_item;?></td>
+                            <td><?php echo $k->jenis;?></td>
+                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->nama_supplier;?></td>
                             <td><?php echo $k->qty_input;?></td>
                             <td><?php echo $k->kb_input;?></td>
@@ -59,7 +63,6 @@
 							<?php $d = new DateTime($k->tgl_input);
 							 echo $d->format("d/m/Y");?>
 							</td>
-                            <td><?php echo $k->nama_user;?></td>
                             <td class="td-actions text-right">
                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
