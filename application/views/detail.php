@@ -1,6 +1,6 @@
 <section class="content">
             <header class="content__title">
-               <h1>Items</h1>
+               <h1>Detail Items</h1>
                <!-- <div class="actions">
                   <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
                </div> -->
@@ -10,64 +10,73 @@
                   <div class="table-responsive">
                      <table class="table table-bordered" id="datatables">
                         <thead>
+                        	  <tr>
+                                 <th colspan="10">
+                                 	<h4 style="text-transform: capitalize; margin-left: 10px;">
+			                     		Produk - <?php echo $data->nama_item; ?>
+			                     	</h4>
+                                 	<div style="text-transform: capitalize; margin-left: 10px;">
+			                     		Merk <span style="margin-left: 13px"> : &nbsp; <?php echo $data->merk; ?> </span>
+				                     	<br>
+				                     	Jenis <span style="margin-left: 11px"> : &nbsp; <?php echo $data->jenis; ?> </span>
+				                     	<br>
+				                     	Netto <span style="margin-left: 10px"> : &nbsp; <?php echo $data->netto; ?> </span>	
+			                     	</div>
+                                 </th>
+                              </tr>
                               <tr>
-                                 <th>No</th>
-                                 <th>Nama</th>
-								 <th>Jenis</th>
-								 <th>Netto</th>
-								 <th>Merk</th>
-								 <th>Stok</th>
-								 <th>Koli / Box</th>
-								 <th>Stok Limit</th>
-                                 <th class="disabled-sorting text-center">Actions</th>
+                                 <th rowspan="2" class="text-center" style="margin-bottom: 50%;">No</th>
+                                 <th rowspan="2" class="text-center">Tanggal</th>
+                                 <th colspan="2" class="text-center">Masuk</th>
+								 <th colspan="2" class="text-center">Keluar</th>
+								 <th colspan="2" class="text-center">Sisa Stok</th>
+								 <th rowspan="2" class="text-center">Keterangan</th>
+                                 <th class="disabled-sorting text-center" rowspan="2">Actions</th>
+                              </tr>
+                              <tr>
+                                 <!-- <th>No</th> -->
+                                 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
+								 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
+								 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
                               </tr>
                            </thead>
                            <tfoot>
                               <tr>
-                                 <th>No</th>
-                                 <th>Nama</th>
-								 <th>Jenis</th>
-								 <th>Netto</th>
-								 <th>Merk</th>
-								 <th>Stok</th>
-								 <th>Koli / Box</th>
-								 <th>Stok Limit</th>
+                                 <th class="text-center">No</th>
+                                 <th class="text-center">Tanggal</th>
+                                 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
+								 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
+								 <th class="text-center">PCS</th>
+								 <th class="text-center">Koli/Box</th>
+								 <th class="text-center">Keterangan</th>
                                  <th class="text-center">Actions</th>
                               </tr>
                            </tfoot>
                            <tbody>
                               <?php $no=1;
-                                 foreach ($items as $k) { ?>
+                                 foreach ($transaksi as $t) { ?>
                               <tr>
-                                 <td><?php echo $no;?></td>
-                                 <td><?php echo $k->nama_item;?></td>
-								 <td><?php echo $k->jenis;?></td>
-								 <td><?php echo $k->netto;?></td>
-								 <td><?php echo $k->merk;?></td>
-								 <td><?php echo $k->stok;?></td>
-								 <td><?php echo $k->kb;?></td>
-								 <td><?php echo $k->stok_limit;?></td>
+                              	<!-- <div class="set-lap"> -->
+                                 <td class="text-center"><?php echo $no;?></td>
+                                 <td class="text-center"><?php echo $t->tanggal;?></td>
+								 <td class="text-center"><?php echo $t->stok_masuk;?></td>
+								 <td class="text-center"><?php echo $t->kb_masuk;?></td>
+								 <td class="text-center"><?php echo $t->stok_keluar;?></td>
+								 <td class="text-center"><?php echo $t->kb_keluar;?></td>
+								 <td class="text-center"><?php echo $t->sisa_stok;?></td>
+								 <td class="text-center"><?php echo $t->sisa_kb;?></td>
+								 <td class="text-center"><?php echo $t->keterangan;?></td>
                                  <td class="td-actions text-center">
-
-                                 	
-                                    <a href="<?= base_url().'Items/detail/'.$k->id_item; ?>">
-	                                    <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
-	                                       <i class="zmdi zmdi-present-to-all zmdi-hc-fw"></i>
-	                                    </button>
-                                	</a>
-                                    &nbsp;
-                                    <!-- <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
-                                       <i class="zmdi zmdi-alert-circle zmdi-hc-fw"></i>
-                                    </button>
-                                    &nbsp; -->
-                                    <button type="button" onclick="ganti(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
+                                    <button type="button" onclick="ganti(<?php echo $t->id_ti;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
-                                    &nbsp;
-                                    <!-- <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
-                                       <i class="zmdi zmdi-close zmdi-hc-fw"></i>
-                                    </button> -->
                                  </td>
+                                <!-- </div> -->
                               </tr>
                               <?php $no++; } ?>
                            </tbody>
@@ -134,14 +143,10 @@ $(document).ready(function () {
 			b.preventDefault();
 			var a;
 			if (simpan == "tambah") {
-				a = "<?php echo base_url();?>items/add"
+				a = "<?php echo base_url();?>Detail/add"
 			} else if (simpan == "update") {
-				a = "<?php echo base_url();?>items/update"
-			} else if (simpan == "restock") {
-				a = "<?php echo base_url();?>items/updateStok"
-			} else if (simpan == "limitstock") {
-				a = "<?php echo base_url();?>items/updateLimitStok"
-			} 
+				a = "<?php echo base_url();?>detail/update"
+			}
 			$.ajax({
 				url: a,
 				type: "POST",
@@ -173,45 +178,14 @@ function tambah() {
 	})
 }
 
-function restock() {
-	simpan = "restock";
-	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>Items/restock/", function (a) {
-		$("#modalbody").html(a)
-	})
-}
-
-function limitstock() {
-	simpan = "limitstock";
-	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>Items/limitstock/", function (a) {
-		$("#modalbody").html(a)
-	})
-}
-
-function tambah() {
-	simpan = "tambah";
-	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>Items/modal/", function (a) {
-		$("#modalbody").html(a)
-	})
-}
-
 function ganti(a) {
 	simpan = "update";
 	$(".form")[0].reset();
 	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>Items/edit/" + a, function (b) {
+	$("#modalbody").load("<?php echo base_url();?>Detail/edit/" + a, function (b) {
 		$("#modalbody").html(b)
 	})
 }
-
-// function detail(a) {
-// 	$.get("<?php echo base_url()?>Items/detail/" + a, function (b) {})
-// }
 
 
 function hapus(a) {

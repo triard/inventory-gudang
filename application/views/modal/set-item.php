@@ -14,7 +14,7 @@
 </div>
 <div class="form-group">
     <label>Merk</label><br>
-    <input class="form-control" name="merk" type="text" placeholder="Merk" value="<?php echo $items->merk;?>" required>
+    <input class="form-control" name="merk" type="text" placeholder="Merk" value="<?php echo $items->merk;?>">
 </div>
 
 <?php } else { ?>
@@ -32,6 +32,6 @@
 </div>
 <div class="form-group">
     <label>Merk</label><br>
-    <input class="form-control" name="merk" type="text" placeholder="Merk" required>
+    <input class="form-control" name="merk" type="text" placeholder="Merk">
 </div>
 <?php } ?>

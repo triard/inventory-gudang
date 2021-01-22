@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label>Merk</label><br>
-                <input class="form-control" name="merk" type="text" placeholder="Merk" required>
+                <input class="form-control" name="merk" type="text" placeholder="Merk">
             </div>
         </div>
     </div>
@@ -48,12 +48,16 @@
             </div>
             <div class="form-group">
                 <label>Kontak</label><br>
-                <input class="form-control" name="kontak" type="text" placeholder="Kontak" required>
+                <input class="form-control" name="kontak" type="text" placeholder="Kontak">
             </div>
         </div>
         <div class="form-group">
             <label>Quantity</label><br>
             <input class="form-control" name="qty_input" type="number" placeholder="000" required>
+        </div>
+        <div class="form-group">
+            <label>Koli / Box</label><br>
+            <input class="form-control" name="kb_input" type="number" placeholder="000" required>
         </div>
         <div class="form-group">
             <label>Tanggal</label><br>
@@ -84,6 +88,10 @@
 <div class="form-group">
     <label>Quantity</label><br>
     <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
+</div>
+<div class="form-group">
+    <label>Koli / Box</label><br>
+    <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
 </div>
 <div class="form-group">
     <label>Tanggal</label><br>
