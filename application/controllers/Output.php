@@ -60,19 +60,19 @@ class Output extends CI_Controller {
 				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
 				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
 				$totalStokTi = $stokTi + $qty;
-				$totalKbTi = $kbTi + $kb_input;
+				$totalKbTi = $kbTi + $kb_output;
 				$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);   
 			} else {
-				$this->ModTransaksiItems->addTanggalInput($id_item);
+				$this->ModTransaksiItems->addTanggalOutput($id_item);
 				$stokTi = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggal);
 				$kbTi = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggal);
 				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
 				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
 				$totalStokTi = $stokTi + $qty;
-				$totalKbTi = $kbTi + $kb_input;
+				$totalKbTi = $kbTi + $kb_output;
 				$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggal);
