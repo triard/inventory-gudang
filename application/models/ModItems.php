@@ -10,16 +10,11 @@ class ModItems extends CI_model {
 		$netto = $this->input->post('netto');
 		$merk = $this->input->post('merk');
 		$stok = $this->input->post('qty_input');
+		$kb = $this->input->post('kb_input');
 		// $stok_limit = $this->input->post('stok_limit');
 		
-		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'stok' => $stok);
+		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'stok' => $stok, 'kb' => $kb);
 		$this->db->insert('items', $data);
-		// $x = $this->db->insert_id();
-		// foreach ($akses_id as $k => $v) {
-		// 	$data = array('admin_id' => $x, 'akses_id' => $v);
-		// 	$this->db->insert('admin_akses', $data);
-		// 	$this->db->insert_id();
-		// }
 	}
 	public function delete($id){
 		$this->db->where('id_item', $id);
@@ -52,6 +47,24 @@ class ModItems extends CI_model {
 		$stok = $stok;
 
 		$data = array('stok' => $stok);
+		$this->db->where('id_item', $id);
+		$this->db->update('items', $data);
+	}
+
+	public function updateKb($kb){
+		$id = $this->input->post('id_item');
+		$kb = $kb;
+
+		$data = array('kb' => $kb);
+		$this->db->where('id_item', $id);
+		$this->db->update('items', $data);
+	}
+
+	public function updateKbWithId($kb, $id){
+		$id = $id;
+		$kb = $kb;
+
+		$data = array('kb' => $kb);
 		$this->db->where('id_item', $id);
 		$this->db->update('items', $data);
 	}
@@ -94,6 +107,18 @@ class ModItems extends CI_model {
         $hasil = $query->row();
         return $hasil->stok;
 	}
+
+	public function getKb($id_item){
+        $query = $this->db->query("SELECT kb from items where id_item= '$id_item'");
+        $hasil = $query->row();
+        return $hasil->kb;
+	}
+
+	public function getAllById($id_item){
+        $query = $this->db->query("SELECT * from items where id_item= '$id_item'");
+        $hasil = $query->row();
+        return $hasil;
+	}
 	
 	public function getNotifStokLimit()
 	{
@@ -108,5 +133,15 @@ class ModItems extends CI_model {
 		$this->db->select('id_item');
 		$this->db->from('items');
 		return $this->db->count_all_results();
+	}
+
+	public function getTransaksi($id)
+	{
+		$this->db->select('*');
+		$this->db->from('items');
+		$this->db->join('input_items', 'items.id_item = input_items.id_item');
+		$this->db->join('output_items', 'input_items.id_item = output_items.id_item');
+		$this->db->where('items.id_item = $id');
+        return $this->db->get()->result();
 	}
 }

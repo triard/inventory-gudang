@@ -6,6 +6,7 @@ class Input extends CI_Controller {
 		parent::__construct();
 		$this->load->model('ModInputItems');
 		$this->load->model('ModItems');
+		$this->load->model('ModTransaksiItems');
 		$this->load->model('ModSuppliers');
 	}
 	public function index()
@@ -39,6 +40,8 @@ class Input extends CI_Controller {
 		$id_item = $this->input->post('id_item');
 		$id_supplier = $this->input->post('id_supplier');
 		$qty = $this->input->post('qty_input');
+		$kb_input = $this->input->post('kb_input');
+		$tanggal = $this->input->post('tgl_input');
 		if ($id_item=="0" && $id_supplier=="0") {
 			$cek1 = $this->ModItems->cekItem();
 			$cek2 = $this->ModSuppliers->cekSupplier();
@@ -50,6 +53,38 @@ class Input extends CI_Controller {
 				$id2 = $this->ModSuppliers->getId();
 
 				$this->ModInputItems->addTT($id1, $id2);
+				echo json_encode(array("status" => TRUE));
+
+				// transaksi item
+				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id1, $tanggal);
+				if ($cekTanggal == 1) {
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id1, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id1, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id1, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$totalSisaStokTi = $sisa_stokTi + $qty;
+					$totalSisaKbTi = $sisa_kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+				} else {
+					$this->ModTransaksiItems->addTanggalInput($id1);
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id1, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id1, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id1, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$totalSisaStokTi = $sisa_stokTi + $qty;
+					$totalSisaKbTi = $sisa_kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+				}
 				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang & Supplier sudah terdaftar!');
@@ -64,6 +99,38 @@ class Input extends CI_Controller {
 				$id1 = $this->ModItems->getId();
 
 				$this->ModInputItems->addTitem($id1);
+
+				// transaksi item
+				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id1, $tanggal);
+				if ($cekTanggal == 1) {
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id1, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id1, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id1, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$totalSisaStokTi = $sisa_stokTi + $qty;
+					$totalSisaKbTi = $sisa_kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);   
+				} else {
+					$this->ModTransaksiItems->addTanggalInput($id1);
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id1, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id1, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id1, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$totalSisaStokTi = $sisa_stokTi + $qty;
+					$totalSisaKbTi = $sisa_kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+				}
+
 				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang sudah terdaftar!');
@@ -77,23 +144,87 @@ class Input extends CI_Controller {
 
 				$id2 = $this->ModSuppliers->getId();
 
-				$this->ModInputItems->addTsupplier($id2);
-				echo json_encode(array("status" => TRUE));
-
 				$stok = $this->ModItems->getStok($id_item);
 				$total = $stok + $qty;
 				$this->ModItems->updateStok($total);
+
+				$kb = $this->ModItems->getKb($id_item);
+				$totalKb = $kb + $kb_input;
+				$this->ModItems->updateKb($totalKb);
+
+				$this->ModInputItems->addTsupplier($id2, $total);
+
+				// transaksi item
+				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);
+				if ($cekTanggal == 1) {
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);    
+				} else {
+					$this->ModTransaksiItems->addTanggalInput($id_item);
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
+					$totalStokTi = $stokTi + $qty;
+					$totalKbTi = $kbTi + $kb_input;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				}
+
 				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Supplier sudah terdaftar!');
 			}
 		}
 		else if ($id_item!="0" && $id_supplier!="0") {
-			$this->ModInputItems->add();
-
 			$stok = $this->ModItems->getStok($id_item);
 			$total = $stok + $qty;
 			$this->ModItems->updateStok($total);
+
+			$kb = $this->ModItems->getKb($id_item);
+			$totalKb = $kb + $kb_input;
+			$this->ModItems->updateKb($totalKb);
+
+			$this->ModInputItems->add($total);
+
+			// transaksi item
+			$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);
+			if ($cekTanggal == 1) {
+				$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+				$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
+				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
+				$totalStokTi = $stokTi + $qty;
+				$totalKbTi = $kbTi + $kb_input;
+				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				echo json_encode(array("status" => TRUE));  
+			} else {
+				$this->ModTransaksiItems->addTanggalInput($id_item);
+				$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+				$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
+				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
+				$totalStokTi = $stokTi + $qty;
+				$totalKbTi = $kbTi + $kb_input;
+				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				echo json_encode(array("status" => TRUE));
+			}
 			echo json_encode(array("status" => TRUE));
 		}
 
@@ -115,13 +246,30 @@ class Input extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
-
-		$qtyLama = $this->ModInputItems->getStok($id);
-		$stok = $this->ModInputItems->getStokByInput($id);
-		$total = $stok - $qtyLama;
+		$tanggal = $this->ModInputItems->getTanggal($id);
 		$id_item = $this->ModInputItems->getIdItem($id);
+		$qtyLama = $this->ModInputItems->getStok($id);
+		$kbLama = $this->ModInputItems->getKb($id);
+		$stok = $this->ModInputItems->getStokByInput($id);
+		$kb = $this->ModInputItems->getKbByInput($id);
+		$total = $stok - $qtyLama;
+		$totalKb = $kb - $kbLama;
+		
 		$this->ModItems->updateStokWithId($total, $id_item);
-		$this->session->set_flashdata('cek', $total);
+		$this->ModItems->updateKbWithId($totalKb, $id_item);
+
+		$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
+		$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
+		$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggal);
+		$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggal);
+		$totalStokTi = $stokTi - $qtyLama;
+		$totalKbTi = $kbTi - $kbLama;
+		$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+		$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+		$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+		$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+
+		// $this->session->set_flashdata('cek', $total);
 		$this->ModInputItems->delete($id);
 		echo json_encode(array("status" => TRUE));
 	}
@@ -133,20 +281,95 @@ class Input extends CI_Controller {
 
 		$id_item = $this->input->post('id_item');
 		$id_input = $this->input->post('id_input');
+
+		$tanggalBaru = $this->input->post('tgl_input');
+		$tanggalLama = $this->ModInputItems->getTanggal($id_item);
+
 		$qtyBaru = $this->input->post('qty_input');
 		$qtyLama = $this->ModInputItems->getStok($id_input);
 		$stok = $this->ModItems->getStok($id_item);
 
-		$total = $stok - ($qtyLama-$qtyBaru);
+		$kbBaru = $this->input->post('kb_input');
+		$kbLama = $this->ModInputItems->getKb($id_input);
+		$kb = $this->ModItems->getKb($id_item);
 
-		if ($total < 0) {
-			$this->session->set_flashdata('cek', 'Stok tidak mencukupi!');
+		$total = $stok - ($qtyLama-$qtyBaru);
+		$totalKb = $kb - ($kbLama-$kbBaru);
+
+		if ($total < 0 || $totalKb < 0) {
+			$this->session->set_flashdata('cek', 'Stok / Koli tidak mencukupi!');
 		} else {
 			$this->ModInputItems->update();
+			$this->ModInputItems->update_H_Stok($total);
 			$this->ModItems->updateStok($total);
+			$this->ModItems->updateKb($totalKb);
+
+			if ($tanggalLama == $tanggalBaru) {
+				$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalBaru);
+				$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalBaru);
+				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
+				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
+				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
+				$totalKbTi = $kbTi - ($kbLama-$kbBaru);
+				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+			} else {
+				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggalBaru);
+				if ($cekTanggal == 1) {
+					$stokTi1 = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
+					$kbTi1 = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
+					$sisa_stokTi1 = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalLama);
+					$sisa_kbTi1 = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalLama);
+					$totalStokTi1 = $stokTi1 - $qtyLama;
+					$totalKbTi1 = $kbTi1 - $kbLama;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalBaru);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalBaru);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
+					$totalStokTi = $stokTi + $qtyBaru;
+					$totalKbTi = $kbTi + $kbBaru;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					echo json_encode(array("status" => TRUE));  
+				} else {
+					$this->ModTransaksiItems->addTanggalInput($id_item);
+					$stokTi1 = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
+					$kbTi1 = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
+					$sisa_stokTi1 = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalLama);
+					$sisa_kbTi1 = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalLama);
+					$totalStokTi1 = $stokTi1 - $qtyLama;
+					$totalKbTi1 = $kbTi1 - $kbLama;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+
+					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalBaru);
+					$kbTi = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalBaru);
+					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
+					$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
+					$totalStokTi = $stokTi + $qtyBaru;
+					$totalKbTi = $kbTi + $kbBaru;
+					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					echo json_encode(array("status" => TRUE));
+				}
+			}
+		
+			$this->ModInputItems->update();
+			echo json_encode(array("status" => TRUE));
 		}
-		$this->ModInputItems->update();
-		echo json_encode(array("status" => TRUE));
 	}
 	public function set_supplier($id) {
 		$q = $this->session->userdata('status');

@@ -31,6 +31,10 @@
     <input class="form-control" name="qty_output" type="number" placeholder="000" required>
 </div>
 <div class="form-group">
+    <label>Koli / Box</label><br>
+    <input class="form-control" name="kb_output" type="number" placeholder="000" required>
+</div>
+<div class="form-group">
     <label>Tanggal</label><br>
     <input class="form-control" name="tgl_output" type="date" placeholder="00-00-0000" required>
 </div>
@@ -47,6 +51,10 @@
 <div class="form-group">
     <label>Quantity</label><br>
     <input class="form-control" name="qty_output" type="number" value="<?php echo $outputEdit->qty_output?>" placeholder="000" required>
+</div>
+<div class="form-group">
+    <label>Koli / Box</label><br>
+    <input class="form-control" name="kb_output" type="number" value="<?php echo $outputEdit->kb_output?>" placeholder="000" required>
 </div>
 <div class="form-group">
     <label>Tanggal</label><br>

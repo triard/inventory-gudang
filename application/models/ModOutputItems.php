@@ -16,13 +16,15 @@ class ModOutputItems extends CI_model {
 		$this->db->order_by('nama_supplier', "asc"); 
         return $this->db->get('suppliers')->result();
 	}
-	public function add() {
+	public function add($stok) {
 		$id_item = $this->input->post('id_item');
 		$qty_output = $this->input->post('qty_output');
+		$kb_output = $this->input->post('kb_output');
+		$h_stokOutput = $stok;
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'id_user' => $id_user);
 		$this->db->insert('output_items', $data);
 	}
 	public function delete($id){
@@ -42,13 +44,22 @@ class ModOutputItems extends CI_model {
 		$id_output = $this->input->post('id_output');
 		$id_item = $this->input->post('id_item');
 		$qty_output = $this->input->post('qty_output');
+		$kb_output = $this->input->post('kb_output');
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 
+		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 
 		'tgl_output' => $tgl_output, 'id_user' => $id_user);
 			$this->db->where('id_output', $id_output);
 			$this->db->update('output_items', $data);
+	}
+
+	public function update_H_Stok($stok){
+		$id_output = $this->input->post('id_output');
+		$h_stokOutput = $stok;		
+		$data = array('h_stokOutput' => $h_stokOutput);
+		$this->db->where('id_output', $id_output);
+		$this->db->update('output_items', $data);
 	}
 
 	public function getStok($id_output){
@@ -60,6 +71,17 @@ class ModOutputItems extends CI_model {
         $query = $this->db->query("SELECT stok from output_items INNER JOIN items ON output_items.id_item=items.id_item where id_output= '$id_output'");
         $hasil = $query->row();
         return $hasil->stok;
+    }
+
+    public function getKb($id_output){
+        $query = $this->db->query("SELECT kb_output from output_items where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->kb_output;
+    }
+    public function getKbByOutput($id_output){
+        $query = $this->db->query("SELECT kb from output_items INNER JOIN items ON output_items.id_item=items.id_item where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->kb;
     }
 
     public function getIdItem($id_output){
@@ -92,4 +114,10 @@ class ModOutputItems extends CI_model {
 		$this->db->limit('7');
         return $this->db->get()->result();
 	}
+
+	 public function getTanggal($id_output){
+        $query = $this->db->query("SELECT tgl_output from output_items where id_output= '$id_output'");
+        $hasil = $query->row();
+        return $hasil->tgl_output;
+    }
 }
