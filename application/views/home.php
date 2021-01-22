@@ -47,6 +47,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-3">
             <div class="card rounded">
                 <div class="card-header bg-success">
@@ -107,21 +108,23 @@
                     <h4 class="card-title">Statistik Barang Masuk</h4>
                     <div class="row">
                         <div class="col-4">
-                            <form class="navbar-form navbar-left" role="search"
-                                action="<?php echo site_url('home/');?>" method="post">
+                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
+                                method="post">
                                 <div class="form-group">
-                                    <input class="form-control" type="date" name="start" value="<?php echo $this->input->post('start') ?>" required>
+                                    <input class="form-control" type="date" name="start"
+                                        value="<?php echo $this->input->post('start') ?>" required>
                                 </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <input class="form-control" type="date" name="end" value="<?php echo $this->input->post('end') ?>" required >
+                                <input class="form-control" type="date" name="end"
+                                    value="<?php echo $this->input->post('end') ?>" required>
                             </div>
                         </div>
                         <div class="col-3">
                             <button type="submit" class="btn btn-primary btn-sm"><i
                                     class="glyphicon glyphicon-search"></i>
-                                    <i class="fas fa-filter"></i> Filter</button>
+                                <i class="fas fa-filter"></i> Filter</button>
                             </form>
                         </div>
                     </div>
@@ -130,7 +133,7 @@
                     </div> -->
                     <table class="table table-sm table-striped">
                         <thead>
-                        <?php
+                            <?php
                             if($inputFilter == null && $this->input->post('start') != null){ 
                                 
                             }else if($inputFilter != null ){
@@ -164,27 +167,29 @@
                     <h4 class="card-title">Statistik Barang Keluar</h4>
                     <div class="row">
                         <div class="col-4">
-                            <form class="navbar-form navbar-left" role="search"
-                                action="<?php echo site_url('home/');?>" method="post">
+                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
+                                method="post">
                                 <div class="form-group">
-                                    <input class="form-control" type="date" name="startOut" value="<?php echo $this->input->post('startOut') ?>" required>
+                                    <input class="form-control" type="date" name="startOut"
+                                        value="<?php echo $this->input->post('startOut') ?>" required>
                                 </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <input class="form-control" type="date" name="endOut" value="<?php echo $this->input->post('endOut') ?>" required >
+                                <input class="form-control" type="date" name="endOut"
+                                    value="<?php echo $this->input->post('endOut') ?>" required>
                             </div>
                         </div>
                         <div class="col-3">
                             <button type="submit" class="btn btn-primary btn-sm"><i
                                     class="glyphicon glyphicon-search"></i>
-                                    <i class="fas fa-filter"></i> Filter</button>
+                                <i class="fas fa-filter"></i> Filter</button>
                             </form>
                         </div>
                     </div>
                     <table class="table table-sm table-striped">
                         <thead>
-                        <?php
+                            <?php
                             if($outputFilter == null && $this->input->post('startOut') != null){ 
                                 
                             }else if($outputFilter != null ){
@@ -216,6 +221,54 @@
         <p>© <?php echo date("Y");?>.</p>
     </footer>
 </section>
+<?php if($limit !=null){ ?>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+            <h4 class="modal-title text-white">Stok Barang</h4>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>  
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <td width="50">No</td>
+                            <td>Produk</td>
+                            <td width="150">Minimal Stok</td>
+                            <td width="100">Stok</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                         $no=1;
+                         foreach ($limit as $l) { ?>
+                        <tr>
+                            <td><?php echo $no; ?></td>
+                            <td><?php echo $l->nama_item ?></td>
+                            <td><?php echo $l->stok_limit ?></td>
+                            <td><?php echo $l->stok?></td>
+                        </tr>
+                        <?php $no++; } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php }else{} ?>
+</div>
+
+<script type="text/javascript">
+$(window).load(function() {
+    $('#modal').modal('show');
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily =
