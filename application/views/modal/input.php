@@ -79,7 +79,8 @@
 <div class="form-group">
     <label>Supplier</label>
     <select name="id_supplier" class="custom-select form-control" required>
-        <!-- <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option> -->
+        <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
+        <option disabled>--------------------------</option>
         <?php foreach ($supplier as $s): ?>
         <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
         <?php endforeach; ?>
