@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22 Jan 2021 pada 03.47
--- Versi Server: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Waktu pembuatan: 23 Jan 2021 pada 03.09
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -37,16 +39,6 @@ CREATE TABLE `input_items` (
   `id_user` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `input_items`
---
-
-INSERT INTO `input_items` (`id_input`, `id_item`, `id_supplier`, `qty_input`, `kb_input`, `tgl_input`, `h_stokInput`, `id_user`) VALUES
-(38, 16, 14, 100, 10, '2021-01-20', 100, 2),
-(39, 16, 14, 50, 5, '2021-01-20', 150, 2),
-(40, 16, 14, 20, 2, '2021-01-21', 170, 2),
-(41, 17, 15, 200, 20, '2021-01-21', 200, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -64,14 +56,6 @@ CREATE TABLE `items` (
   `stok_limit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `items`
---
-
-INSERT INTO `items` (`id_item`, `nama_item`, `jenis`, `netto`, `merk`, `stok`, `kb`, `stok_limit`) VALUES
-(16, 'day cream', 'cream', '100', 'mellydia', 140, 14, 0),
-(17, 'night cream', 'cream', '100', 'mellydia', 200, 20, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -88,13 +72,6 @@ CREATE TABLE `output_items` (
   `id_user` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `output_items`
---
-
-INSERT INTO `output_items` (`id_output`, `id_item`, `qty_output`, `kb_output`, `tgl_output`, `h_stokOutput`, `id_user`) VALUES
-(12, 16, 30, 3, '2021-01-21', 140, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -106,14 +83,6 @@ CREATE TABLE `suppliers` (
   `nama_supplier` varchar(100) NOT NULL,
   `kontak` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `suppliers`
---
-
-INSERT INTO `suppliers` (`id_supplier`, `nama_supplier`, `kontak`) VALUES
-(14, 'coy', '081'),
-(15, 'rudi', '082');
 
 -- --------------------------------------------------------
 
@@ -133,15 +102,6 @@ CREATE TABLE `transaksi_items` (
   `keterangan` varchar(200) DEFAULT NULL,
   `id_item` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `transaksi_items`
---
-
-INSERT INTO `transaksi_items` (`id_ti`, `tanggal`, `stok_masuk`, `kb_masuk`, `stok_keluar`, `kb_keluar`, `sisa_stok`, `sisa_kb`, `keterangan`, `id_item`) VALUES
-(4, '2021-01-20', 150, 15, NULL, NULL, 150, 15, 'disetujui', 16),
-(5, '2021-01-21', 20, 2, 30, 3, 140, 14, NULL, 16),
-(6, '2021-01-21', 200, 20, NULL, NULL, 200, 20, NULL, 17);
 
 -- --------------------------------------------------------
 
@@ -170,7 +130,7 @@ INSERT INTO `user` (`id_user`, `nama_user`, `email`, `password`, `level`) VALUES
 --
 
 --
--- Indexes for table `input_items`
+-- Indeks untuk tabel `input_items`
 --
 ALTER TABLE `input_items`
   ADD PRIMARY KEY (`id_input`),
@@ -179,13 +139,13 @@ ALTER TABLE `input_items`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `items`
+-- Indeks untuk tabel `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id_item`);
 
 --
--- Indexes for table `output_items`
+-- Indeks untuk tabel `output_items`
 --
 ALTER TABLE `output_items`
   ADD PRIMARY KEY (`id_output`),
@@ -193,57 +153,64 @@ ALTER TABLE `output_items`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `suppliers`
+-- Indeks untuk tabel `suppliers`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indexes for table `transaksi_items`
+-- Indeks untuk tabel `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
   ADD PRIMARY KEY (`id_ti`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `input_items`
+-- AUTO_INCREMENT untuk tabel `input_items`
 --
 ALTER TABLE `input_items`
-  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
 --
--- AUTO_INCREMENT for table `items`
+-- AUTO_INCREMENT untuk tabel `items`
 --
 ALTER TABLE `items`
-  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
--- AUTO_INCREMENT for table `output_items`
+-- AUTO_INCREMENT untuk tabel `output_items`
 --
 ALTER TABLE `output_items`
-  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
--- AUTO_INCREMENT for table `suppliers`
+-- AUTO_INCREMENT untuk tabel `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
--- AUTO_INCREMENT for table `transaksi_items`
+-- AUTO_INCREMENT untuk tabel `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
-  MODIFY `id_ti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_ti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
