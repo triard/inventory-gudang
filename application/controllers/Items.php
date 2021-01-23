@@ -32,8 +32,10 @@ class Items extends CI_Controller {
 		}
 		
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
-		$data['transaksi'] = $this->ModTransaksiItems->selectAllById($id);
+		$data['transaksi'] = $this->ModTransaksiItems->selectAllById($id); 
 		$data['data'] = $this->ModItems->getAllById($id);
+		$data['id'] = $this->ModTransaksiItems->selectId($id); 
+		$data['filter'] = $this->ModTransaksiItems->filter($id);
 		// $data['tanggal'] = $this->ModOutputItems->getTanggal();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');

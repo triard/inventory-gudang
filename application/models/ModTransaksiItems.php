@@ -3,13 +3,26 @@ class ModTransaksiItems extends CI_model {
 	public function selectAll() {
 		// $this->db->order_by('nama_user', "asc");
         return $this->db->get('transaksi_items')->result();
-	}
+	} 
 
 	public function selectAllById($id) {
 		$this->db->where('id_item', $id);
-        return $this->db->get('transaksi_items')->result();
+		return $this->db->get('transaksi_items')->result();
+		
 	}
-
+	public function selectId($id) {
+		$this->db->where('id_item', $id);
+		return $this->db->get('transaksi_items')->row();
+	}
+	public function filter($id) {
+		
+		$start = $this->input->post('start');
+		$end = $this->input->post('end');
+		$this->db->where('id_item', $id);
+		$this->db->where("tanggal BETWEEN '$start 'AND' $end'");
+		return $this->db->get('transaksi_items')->result();
+		
+	}
 	public function cekTanggal($id_item, $tanggal) {
 		$data = array('id_item'=>$id_item, 'tanggal'=>$tanggal);
 		$cek = $this->db->get_where('transaksi_items', $data)->num_rows();

@@ -17,6 +17,7 @@ class Output extends CI_Controller {
 			redirect('login','refresh');
 		}
 		$data['output'] = $this->ModOutputItems->selectAll();
+		$data['filter'] = $this->ModOutputItems->filter();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('output-items',$data);

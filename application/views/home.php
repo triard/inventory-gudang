@@ -150,8 +150,8 @@
                                     foreach ($mostInput as $mi){ 
                                     $input_item[] = $mi->nama_item;
                                     $jml_qty_input[] = (float) $mi->total_stok;	                                
-                                echo "<canvas id='BarChartInputs' width='90' height='36' 
-                                 style='margin-bottom: -25px;'></canvas>'";
+                                    echo "<canvas id='BarChartInputs' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
                                 } 
                                 } ?>
                         </thead>

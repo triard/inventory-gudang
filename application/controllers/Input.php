@@ -18,6 +18,7 @@ class Input extends CI_Controller {
 		}
 
 		$data['input'] = $this->ModInputItems->selectAll();
+		$data['filter'] = $this->ModInputItems->filter();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('input',$data);

@@ -8,6 +8,18 @@ class ModOutputItems extends CI_model {
 		$this->db->order_by('tgl_output', "asc");
         return $this->db->get()->result();
 	}
+
+	public function filter() {
+		$start = $this->input->post('start');
+		$end = $this->input->post('end');
+		$this->db->select('*');
+		$this->db->from('output_items');
+		$this->db->join('items', 'output_items.id_item = items.id_item');
+		$this->db->join('user', 'output_items.id_user = user.id_user');
+		$this->db->order_by('tgl_output', "asc");
+		$this->db->where("output_items.tgl_output BETWEEN '$start 'AND' $end'");
+        return $this->db->get()->result();
+	}
 	public function listItems() { 
 		$this->db->order_by('nama_item', "asc");
         return $this->db->get('items')->result();

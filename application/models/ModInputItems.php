@@ -143,6 +143,19 @@ class ModInputItems extends CI_model {
         return $this->db->get()->result();
 	}
 
+	public function filter() {
+		$start = $this->input->post('start');
+		$end = $this->input->post('end');
+		$this->db->select('*');
+		$this->db->from('input_items');
+		$this->db->join('items', 'input_items.id_item = items.id_item');
+		$this->db->join('suppliers', 'input_items.id_supplier = suppliers.id_supplier');
+		$this->db->join('user', 'input_items.id_user = user.id_user');
+		$this->db->order_by('tgl_input', "asc");
+		$this->db->where("input_items.tgl_input BETWEEN '$start 'AND' $end'");
+        return $this->db->get()->result();
+	}
+
 	public function getStok($id_input){
         $query = $this->db->query("SELECT qty_input from input_items where id_input= '$id_input'");
         $hasil = $query->row();
