@@ -8,9 +8,11 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-4">    
-                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>"
+                <div class="col-4">
+                <?php if($id!=null){ ?>    
+                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>"  
                         method="post">
+                        <?php } ?>
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
                                 value="<?php echo $this->input->post('start') ?>" required>

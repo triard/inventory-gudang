@@ -226,9 +226,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-            <h4 class="modal-title text-white">Stok Barang</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>  
+            <h4 class="modal-title text-white mb-1">Stok Barang</h4>
+                <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</button>  
             </div>
             <div class="modal-body">
                 <table class="table table-sm table-striped">
