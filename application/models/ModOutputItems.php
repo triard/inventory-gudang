@@ -132,4 +132,11 @@ class ModOutputItems extends CI_model {
         $hasil = $query->row();
         return $hasil->tgl_output;
     }
+
+    public function getTotalQtyProduk($id_item){
+        $query = $this->db->query("SELECT SUM(qty_output) AS total FROM output_items WHERE id_item = '$id_item'");
+        $hasil = $query->row();
+        return $hasil->total;
+    }
+
 }
