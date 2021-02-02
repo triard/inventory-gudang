@@ -231,34 +231,36 @@
                 <span aria-hidden="true">&times;</button>  
             </div>
             <div class="modal-body">
-                <table class="table table-sm table-striped">
-                    <thead>
-                        <tr>
-                            <td width="50">No</td>
-                            <td>Produk</td>
-                            <td>Jenis</td>
-                            <td>Netto</td>
-                            <td>Merk</td>
-                            <td width="150">Minimal Stok</td>
-                            <td width="100">Stok</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                         $no=1;
-                         foreach ($limit as $l) { ?>
-                        <tr>
-                            <td><?php echo $no; ?>.</td>
-                            <td><?php echo $l->nama_item ?></td>
-                            <td><?php echo $l->jenis ?></td>
-                            <td><?php echo $l->netto ?></td>
-                            <td><?php echo $l->merk ?></td>
-                            <td><?php echo $l->stok_limit ?></td>
-                            <td><?php echo $l->stok?></td>
-                        </tr>
-                        <?php $no++; } ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <td width="50">No</td>
+                                <td>Produk</td>
+                                <td>Jenis</td>
+                                <td>Netto</td>
+                                <td>Merk</td>
+                                <td width="150">Minimal Stok</td>
+                                <td width="100">Stok</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                             $no=1;
+                             foreach ($limit as $l) { ?>
+                            <tr>
+                                <td><?php echo $no; ?>.</td>
+                                <td><?php echo $l->nama_item ?></td>
+                                <td><?php echo $l->jenis ?></td>
+                                <td><?php echo $l->netto ?></td>
+                                <td><?php echo $l->merk ?></td>
+                                <td><?php echo $l->stok_limit ?></td>
+                                <td><?php echo $l->stok?></td>
+                            </tr>
+                            <?php $no++; } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

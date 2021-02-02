@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-sm table-bordered" id="datatables" style="table-layout: fixed; width: 100%;">
+                <table class="table table-sm table-bordered" id="datatables" style=" width: 100%;">
                     <thead>
                         <tr>
                             <th colspan="10">
