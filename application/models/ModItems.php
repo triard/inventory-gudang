@@ -125,7 +125,7 @@ class ModItems extends CI_model {
 	
 	public function getNotifStokLimit()
 	{
-		$this->db->select('nama_item, stok, stok_limit');
+		$this->db->select('*');
 		$this->db->from('items');
 		$this->db->where('stok <= stok_limit');
         return $this->db->get()->result();

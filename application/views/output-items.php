@@ -51,6 +51,7 @@
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
+                            <th>Keterangan</th>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <th class="disabled-sorting text-center">Actions</th>
@@ -66,6 +67,7 @@
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
+                            <th>Keterangan</th>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <th class="disabled-sorting text-center">Actions</th>
@@ -88,6 +90,7 @@
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
                             </td>
+                            <td></td>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">
@@ -118,6 +121,7 @@
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
                             </td>
+                            <td></td>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">

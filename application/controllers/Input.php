@@ -69,9 +69,8 @@ class Input extends CI_Controller {
 					$totalSisaStokTi = $sisa_stokTi + $qty;
 					$totalSisaKbTi = $sisa_kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id1); 
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id1);
 					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
@@ -83,9 +82,8 @@ class Input extends CI_Controller {
 					$totalSisaStokTi = $sisa_stokTi + $qty;
 					$totalSisaKbTi = $sisa_kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id1); 
 				}
 				echo json_encode(array("status" => TRUE));
 			} else {
@@ -114,9 +112,8 @@ class Input extends CI_Controller {
 					$totalSisaStokTi = $sisa_stokTi + $qty;
 					$totalSisaKbTi = $sisa_kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);   
+					$this->ModTransaksiItems->getSisaAllStokKb($id1);  
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id1);
 					$stokTi = $this->ModTransaksiItems->getStokMasuk($id1, $tanggal);
@@ -128,9 +125,8 @@ class Input extends CI_Controller {
 					$totalSisaStokTi = $sisa_stokTi + $qty;
 					$totalSisaKbTi = $sisa_kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($totalSisaStokTi, $id1, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalSisaKbTi, $id1, $tanggal);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id1); 
 				}
 
 				echo json_encode(array("status" => TRUE));
@@ -166,9 +162,8 @@ class Input extends CI_Controller {
 					$totalStokTi = $stokTi + $qty;
 					$totalKbTi = $kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);    
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id_item);
 					$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
@@ -178,9 +173,8 @@ class Input extends CI_Controller {
 					$totalStokTi = $stokTi + $qty;
 					$totalKbTi = $kbTi + $kb_input;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);  
 				}
 
 				echo json_encode(array("status" => TRUE));
@@ -209,9 +203,8 @@ class Input extends CI_Controller {
 				$totalStokTi = $stokTi + $qty;
 				$totalKbTi = $kbTi + $kb_input;
 				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 				echo json_encode(array("status" => TRUE));  
 			} else {
 				$this->ModTransaksiItems->addTanggalInput($id_item);
@@ -222,9 +215,8 @@ class Input extends CI_Controller {
 				$totalStokTi = $stokTi + $qty;
 				$totalKbTi = $kbTi + $kb_input;
 				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 				echo json_encode(array("status" => TRUE));
 			}
 			echo json_encode(array("status" => TRUE));
@@ -271,9 +263,8 @@ class Input extends CI_Controller {
 			$totalStokTi = $stokTi - $qtyLama;
 			$totalKbTi = $kbTi - $kbLama;
 			$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-			$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 			$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-			$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+			$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 
 			// cek hapus tanggal
 			$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
@@ -332,9 +323,8 @@ class Input extends CI_Controller {
 				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
 				$totalKbTi = $kbTi - ($kbLama-$kbBaru);
 				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalBaru);
-				$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalBaru);
 				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalBaru);
-				$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalBaru);  
+				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 			} else {
 				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggalBaru);
 				if ($cekTanggal == 1) {
@@ -345,9 +335,8 @@ class Input extends CI_Controller {
 					$totalStokTi1 = $stokTi1 - $qtyLama;
 					$totalKbTi1 = $kbTi1 - $kbLama;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalLama);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalLama);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalLama);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalLama);
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 
 					// cek hapus tanggal
 					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
@@ -365,9 +354,8 @@ class Input extends CI_Controller {
 					$totalStokTi = $stokTi + $qtyBaru;
 					$totalKbTi = $kbTi + $kbBaru;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalBaru);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalBaru);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalBaru);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalBaru);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id_item);
@@ -378,9 +366,8 @@ class Input extends CI_Controller {
 					$totalStokTi1 = $stokTi1 - $qtyLama;
 					$totalKbTi1 = $kbTi1 - $kbLama;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggalLama);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggalLama);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggalLama);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggalLama);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 
 					// cek hapus tanggal
 					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
@@ -398,9 +385,8 @@ class Input extends CI_Controller {
 					$totalStokTi = $stokTi + $qtyBaru;
 					$totalKbTi = $kbTi + $kbBaru;
 					$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateStokSisa($total, $id_item, $tanggal);
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
-					$this->ModTransaksiItems->updateKbSisa($totalKb, $id_item, $tanggal);  
+					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 					echo json_encode(array("status" => TRUE));
 				}
 			}

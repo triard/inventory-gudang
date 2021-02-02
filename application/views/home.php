@@ -226,7 +226,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-            <h4 class="modal-title text-white mb-1">Stok Barang</h4>
+            <h4 class="modal-title text-white mb-1">Stok Hampir Habis</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</button>  
             </div>
@@ -236,6 +236,9 @@
                         <tr>
                             <td width="50">No</td>
                             <td>Produk</td>
+                            <td>Jenis</td>
+                            <td>Netto</td>
+                            <td>Merk</td>
                             <td width="150">Minimal Stok</td>
                             <td width="100">Stok</td>
                         </tr>
@@ -245,8 +248,11 @@
                          $no=1;
                          foreach ($limit as $l) { ?>
                         <tr>
-                            <td><?php echo $no; ?></td>
+                            <td><?php echo $no; ?>.</td>
                             <td><?php echo $l->nama_item ?></td>
+                            <td><?php echo $l->jenis ?></td>
+                            <td><?php echo $l->netto ?></td>
+                            <td><?php echo $l->merk ?></td>
                             <td><?php echo $l->stok_limit ?></td>
                             <td><?php echo $l->stok?></td>
                         </tr>

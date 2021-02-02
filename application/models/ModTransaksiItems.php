@@ -1,12 +1,13 @@
 <?php
 class ModTransaksiItems extends CI_model {
 	public function selectAll() {
-		// $this->db->order_by('nama_user', "asc");
+		$this->db->order_by('tanggal', 'desc');
         return $this->db->get('transaksi_items')->result();
 	} 
 
 	public function selectAllById($id) {
 		$this->db->where('id_item', $id);
+		$this->db->order_by('tanggal', 'asc');
 		return $this->db->get('transaksi_items')->result();
 		
 	}
@@ -100,6 +101,72 @@ class ModTransaksiItems extends CI_model {
         $query = $this->db->query("SELECT sisa_kb from transaksi_items where id_item= '$id_item' AND tanggal= '$tanggal'");
         $hasil = $query->row();
         return $hasil->sisa_kb;
+	}
+
+	// public function getIdTanggal($id_item){
+	// 	$this->db->where('id_item', $id_item);
+ //        return $this->db->get('transaksi_items')->result();
+	// }
+
+	public function getSisaAllStokKb($id_item){
+		$query = $this->db->query("SELECT * FROM transaksi_items WHERE id_item= '$id_item'");
+        foreach ($query->result() as $row){
+		    $id_item = $row->id_item;
+		    $tanggal = $row->tanggal;
+
+		    $query1 = $this->db->query("SELECT SUM(stok_masuk) AS stok_masuk FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+	        $hasil1 = $query1->row();
+	        $asm = $hasil1->stok_masuk;
+
+	        $query2 = $this->db->query("SELECT SUM(stok_keluar) AS stok_keluar FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+	        $hasil2 = $query2->row();
+	        $ask = $hasil2->stok_keluar;
+
+	        $query3 = $this->db->query("SELECT SUM(kb_masuk) AS kb_masuk FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+	        $hasil3 = $query3->row();
+	        $akm = $hasil3->kb_masuk;
+
+	        $query4 = $this->db->query("SELECT SUM(kb_keluar) AS kb_keluar FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+	        $hasil4 = $query4->row();
+	        $akk = $hasil4->kb_keluar;
+
+	        $ss = $asm - $ask;
+	        $sk = $akm - $akk;
+
+			$dataStok = array('sisa_stok' => $ss);
+			$this->db->where('id_item', $id_item);
+			$this->db->where('tanggal', $tanggal);
+			$this->db->update('transaksi_items', $dataStok);
+
+			$dataKb = array('sisa_kb' => $sk);
+			$this->db->where('id_item', $id_item);
+			$this->db->where('tanggal', $tanggal);
+			$this->db->update('transaksi_items', $dataKb);
+		}
+	}
+
+	public function getAllStokMasuk($id_item, $tanggal){
+        $query = $this->db->query("SELECT SUM(stok_masuk) AS stok_masuk FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+        $hasil = $query->row();
+        return $hasil->stok_masuk;
+	}
+
+	public function getAllStokKeluar($id_item, $tanggal){
+        $query = $this->db->query("SELECT SUM(stok_keluar) AS stok_keluar FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+        $hasil = $query->row();
+        return $hasil->stok_keluar;
+	}
+
+	public function getAllKbMasuk($id_item, $tanggal){
+        $query = $this->db->query("SELECT SUM(kb_masuk) AS kb_masuk FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+        $hasil = $query->row();
+        return $hasil->kb_masuk;
+	}
+
+	public function getAllKbKeluar($id_item, $tanggal){
+        $query = $this->db->query("SELECT SUM(kb_keluar) AS kb_keluar FROM transaksi_items WHERE id_item= '$id_item' AND tanggal <= '$tanggal'");
+        $hasil = $query->row();
+        return $hasil->kb_keluar;
 	}
  
 	public function updateStokMasuk($stok, $id_item, $tanggal){

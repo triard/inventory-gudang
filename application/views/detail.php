@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="datatables">
+                <table class="table table-sm table-bordered" id="datatables" style="table-layout: fixed; width: 100%;">
                     <thead>
                         <tr>
                             <th colspan="10">
@@ -53,7 +53,7 @@
                             <th colspan="2" class="text-center">Masuk</th>
                             <th colspan="2" class="text-center">Keluar</th>
                             <th colspan="2" class="text-center">Sisa Stok</th>
-                            <th rowspan="2" class="text-center" style="vertical-align: middle;">Keterangan</th>
+                            <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan</th>
                             <th class="disabled-sorting text-center" rowspan="2" style="vertical-align: middle;">Actions
                             </th>
                         </tr>
