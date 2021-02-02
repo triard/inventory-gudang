@@ -223,7 +223,7 @@
 </section>
 <?php if($limit !=null){ ?>
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger">
             <h4 class="modal-title text-white mb-1">Stok Hampir Habis</h4>
