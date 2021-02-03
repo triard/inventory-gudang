@@ -90,7 +90,7 @@
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
                             </td>
-                            <td></td>
+                            <td><?php echo $k->keterangan ?></td>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">
@@ -121,7 +121,7 @@
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
                             </td>
-                            <td></td>
+                            <td><?php echo $k->keterangan ?></td>
                             <?php 
                             if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">

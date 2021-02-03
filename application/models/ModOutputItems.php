@@ -35,8 +35,9 @@ class ModOutputItems extends CI_model {
 		$h_stokOutput = $stok;
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
+		$keterangan = $this->input->post('keterangan');
 		
-		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'id_user' => $id_user, 'keterangan' => $keterangan);
 		$this->db->insert('output_items', $data);
 	}
 	public function delete($id){
@@ -59,9 +60,10 @@ class ModOutputItems extends CI_model {
 		$kb_output = $this->input->post('kb_output');
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
+		$keterangan = $this->input->post('keterangan');
 		
 		$data = array('id_item' => $id_item, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 
-		'tgl_output' => $tgl_output, 'id_user' => $id_user);
+		'tgl_output' => $tgl_output, 'id_user' => $id_user, 'keterangan' => $keterangan);
 			$this->db->where('id_output', $id_output);
 			$this->db->update('output_items', $data);
 	}

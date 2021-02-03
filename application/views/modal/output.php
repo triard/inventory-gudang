@@ -38,6 +38,10 @@
     <label>Tanggal</label><br>
     <input class="form-control" name="tgl_output" type="date" placeholder="00-00-0000" required>
 </div>
+<div class="form-group">
+    <label>Keterangan</label><br>
+    <textarea class="form-control" name="keterangan" cols="30" rows="2"></textarea>
+</div>
 </div>
 <?php } else { ?>
     <?php foreach ($outputEdit as $outputEdit): ?>
@@ -59,6 +63,10 @@
 <div class="form-group">
     <label>Tanggal</label><br>
     <input class="form-control" name="tgl_output" type="date" value="<?php echo $outputEdit->tgl_output?>" placeholder="00-00-0000" required>
+</div>
+<div class="form-group">
+    <label>Keterangan</label><br>
+    <textarea class="form-control" name="keterangan" cols="30" rows="2"><?php echo $outputEdit->keterangan ?></textarea>
 </div>
 <?php endforeach; ?>
 <?php } ?>
