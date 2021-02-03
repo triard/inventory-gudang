@@ -64,9 +64,10 @@
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
                                     &nbsp;
-                                    <!-- <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_item;?>)">
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
-                                    </button> -->
+                                    </button>
+                                    &nbsp;
                                  </td>
                               </tr>
                               <?php $no++; } ?>

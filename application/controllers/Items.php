@@ -7,6 +7,7 @@ class Items extends CI_Controller {
 		$this->load->model('ModUser');
 		$this->load->model('ModItems');
 		$this->load->model('ModTransaksiItems');
+		$this->load->model('ModInputItems');
 		$this->load->model('ModOutputItems');
 		$this->load->model('ModSuppliers');
 	}
@@ -73,6 +74,9 @@ class Items extends CI_Controller {
 			exit();
 		}
 		$this->ModItems->delete($id);
+		$this->ModInputItems->deleteByItem($id);
+		$this->ModOutputItems->deleteByItem($id);
+		$this->ModTransaksiItems->deleteByItem($id);
 		echo json_encode(array("status" => TRUE));
 	}
 	public function update() {
@@ -82,6 +86,8 @@ class Items extends CI_Controller {
 		}
 		// $this->ModItems->update();
 		$this->ModItems->updateStokLimit();
+		$this->ModInputItems->updateItems();
+		$this->ModOutputItems->updateItems();
 		echo json_encode(array("status" => TRUE));
 	} 
 	public function updateStok() {

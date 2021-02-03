@@ -14,13 +14,13 @@
 </div>
 <div class="form-group">
     <label>Merk</label><br>
-    <input class="form-control" value="<?php echo $items->merk;?>" name="merk" type="text" placeholder="Nama" required>
+    <input class="form-control" value="<?php echo $items->merk;?>" name="merk" type="text" placeholder="Merk">
 </div>
 <?php }else{ ?>
     <input class="form-control" value="<?php echo $items->nama_item;?>" name="nama_item" type="hidden" placeholder="Nama"
         required>
     <input class="form-control" value="<?php echo $items->jenis;?>" name="jenis" type="hidden" placeholder="Nama" required>
-    <input class="form-control" value="<?php echo $items->merk;?>" name="merk" type="hidden" placeholder="Nama" required>
+    <input class="form-control" value="<?php echo $items->merk;?>" name="merk" type="hidden" placeholder="Merk">
 <?php } ?>
 <div class="form-group">
     <label>Limit Stok</label><br>

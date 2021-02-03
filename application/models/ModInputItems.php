@@ -3,7 +3,6 @@ class ModInputItems extends CI_model {
 	public function selectAll() {
 		$this->db->select('*');
 		$this->db->from('input_items');
-		$this->db->join('items', 'input_items.id_item = items.id_item');
 		$this->db->join('suppliers', 'input_items.id_supplier = suppliers.id_supplier');
 		$this->db->join('user', 'input_items.id_user = user.id_user');
 		$this->db->order_by('tgl_input', "asc");
@@ -24,9 +23,13 @@ class ModInputItems extends CI_model {
 		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $stok;
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$netto = $this->input->post('netto');
+		$merk = $this->input->post('merk');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
 	}
 	public function addTitem($id_item) {
@@ -36,9 +39,13 @@ class ModInputItems extends CI_model {
 		$kb_input = $this->input->post('kb_input');
 		$h_stokInput = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$netto = $this->input->post('netto');
+		$merk = $this->input->post('merk');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
 	}
 	public function addTsupplier($id_supplier, $stok) {
@@ -48,9 +55,13 @@ class ModInputItems extends CI_model {
 		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $stok;
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$netto = $this->input->post('netto');
+		$merk = $this->input->post('merk');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
 	}
 	public function addTT($id_item, $id_supplier) {
@@ -60,19 +71,28 @@ class ModInputItems extends CI_model {
 		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $this->input->post('qty_input');
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$netto = $this->input->post('netto');
+		$merk = $this->input->post('merk');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'id_user' => $id_user);
 		$this->db->insert('input_items', $data);
 	}
 	public function delete($id){
 		$this->db->where('id_input', $id);
 		$this->db->delete('input_items');
 	}
+
+	public function deleteByItem($id_item){
+		$this->db->where('id_item', $id_item);
+		$this->db->delete('input_items');
+	}
+
 	public function edit($id){
 		$this->db->select('*');
 		$this->db->from('input_items');
-		$this->db->join('items', 'input_items.id_item = items.id_item');
 		$this->db->join('suppliers', 'input_items.id_supplier = suppliers.id_supplier');
 		$this->db->join('user', 'input_items.id_user = user.id_user');
 		$this->db->where('id_input', $id);
@@ -88,9 +108,19 @@ class ModInputItems extends CI_model {
 		$tgl_input = $this->input->post('tgl_input');
 		$id_user = $this->session->userdata('id_user');
 		
-		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 
-		'tgl_input' => $tgl_input, 'id_user' => $id_user);
+		$data = array('id_item' => $id_item,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input,'tgl_input' => $tgl_input, 'id_user' => $id_user);
 			$this->db->where('id_input', $id_input);
+			$this->db->update('input_items', $data);
+	}
+
+	public function updateItems(){
+		$id_item = $this->input->post('id_item');
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$merk = $this->input->post('merk');
+		
+		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'merk' => $merk);
+			$this->db->where('id_item', $id_item);
 			$this->db->update('input_items', $data);
 	}
 
@@ -106,9 +136,8 @@ class ModInputItems extends CI_model {
 	public function GetMostInput()
 	{
 
-		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('a.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
-		$this->db->join('items as i', 'a.id_item = i.id_item');
 		$this->db->group_by('a.id_item'); 
 		$this->db->order_by('a.qty_input', "desc");
 		$this->db->limit('7');
@@ -119,9 +148,8 @@ class ModInputItems extends CI_model {
 	{
 		$awal_bulan = date('Y-m-d',strtotime('first day of this month'));
 		$akhir_bulan = date('Y-m-d',strtotime('last day of this month'));
-		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('a.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
-		$this->db->join('items as i', 'a.id_item = i.id_item');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_input', "desc");
 		$this->db->where("a.tgl_input BETWEEN '$awal_bulan 'AND' $akhir_bulan'");
@@ -133,9 +161,8 @@ class ModInputItems extends CI_model {
 	{
 		$start = $this->input->post('start');
 		$end = $this->input->post('end');
-		$this->db->select('i.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('a.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
-		$this->db->join('items as i', 'a.id_item = i.id_item');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_input', "desc");
 		$this->db->where("a.tgl_input BETWEEN '$start 'AND' $end'");
@@ -148,7 +175,6 @@ class ModInputItems extends CI_model {
 		$end = $this->input->post('end');
 		$this->db->select('*');
 		$this->db->from('input_items');
-		$this->db->join('items', 'input_items.id_item = items.id_item');
 		$this->db->join('suppliers', 'input_items.id_supplier = suppliers.id_supplier');
 		$this->db->join('user', 'input_items.id_user = user.id_user');
 		$this->db->order_by('tgl_input', "asc");

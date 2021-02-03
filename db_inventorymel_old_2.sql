@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 03 Feb 2021 pada 07.37
--- Versi Server: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Waktu pembuatan: 23 Jan 2021 pada 03.09
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,10 +36,6 @@ CREATE TABLE `input_items` (
   `kb_input` int(11) NOT NULL,
   `tgl_input` date NOT NULL,
   `h_stokInput` int(11) NOT NULL,
-  `nama_item` varchar(100) NOT NULL,
-  `jenis` varchar(100) NOT NULL,
-  `netto` varchar(50) NOT NULL,
-  `merk` varchar(50) DEFAULT NULL,
   `id_user` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -71,11 +69,6 @@ CREATE TABLE `output_items` (
   `kb_output` int(11) NOT NULL,
   `tgl_output` date NOT NULL,
   `h_stokOutput` int(11) NOT NULL,
-  `nama_item` varchar(100) NOT NULL,
-  `jenis` varchar(100) NOT NULL,
-  `netto` varchar(50) NOT NULL,
-  `merk` varchar(50) DEFAULT NULL,
-  `keterangan` text NOT NULL,
   `id_user` bigint(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -100,10 +93,10 @@ CREATE TABLE `suppliers` (
 CREATE TABLE `transaksi_items` (
   `id_ti` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `stok_masuk` int(11) NOT NULL,
-  `kb_masuk` int(11) NOT NULL,
-  `stok_keluar` int(11) NOT NULL,
-  `kb_keluar` int(11) NOT NULL,
+  `stok_masuk` int(11) DEFAULT NULL,
+  `kb_masuk` int(11) DEFAULT NULL,
+  `stok_keluar` int(11) DEFAULT NULL,
+  `kb_keluar` int(11) DEFAULT NULL,
   `sisa_stok` int(11) DEFAULT NULL,
   `sisa_kb` int(11) DEFAULT NULL,
   `keterangan` varchar(200) DEFAULT NULL,
@@ -137,7 +130,7 @@ INSERT INTO `user` (`id_user`, `nama_user`, `email`, `password`, `level`) VALUES
 --
 
 --
--- Indexes for table `input_items`
+-- Indeks untuk tabel `input_items`
 --
 ALTER TABLE `input_items`
   ADD PRIMARY KEY (`id_input`),
@@ -146,13 +139,13 @@ ALTER TABLE `input_items`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `items`
+-- Indeks untuk tabel `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id_item`);
 
 --
--- Indexes for table `output_items`
+-- Indeks untuk tabel `output_items`
 --
 ALTER TABLE `output_items`
   ADD PRIMARY KEY (`id_output`),
@@ -160,57 +153,64 @@ ALTER TABLE `output_items`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `suppliers`
+-- Indeks untuk tabel `suppliers`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indexes for table `transaksi_items`
+-- Indeks untuk tabel `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
   ADD PRIMARY KEY (`id_ti`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `input_items`
+-- AUTO_INCREMENT untuk tabel `input_items`
 --
 ALTER TABLE `input_items`
-  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
 --
--- AUTO_INCREMENT for table `items`
+-- AUTO_INCREMENT untuk tabel `items`
 --
 ALTER TABLE `items`
-  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
--- AUTO_INCREMENT for table `output_items`
+-- AUTO_INCREMENT untuk tabel `output_items`
 --
 ALTER TABLE `output_items`
-  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
--- AUTO_INCREMENT for table `suppliers`
+-- AUTO_INCREMENT untuk tabel `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
--- AUTO_INCREMENT for table `transaksi_items`
+-- AUTO_INCREMENT untuk tabel `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
-  MODIFY `id_ti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_ti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

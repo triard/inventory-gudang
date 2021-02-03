@@ -11,17 +11,18 @@
     </select> 
 </div>
 <div class="set-item">
+    <input class="form-control" name="nama_item" type="hidden">
     <div class="form-group">
         <label>Jenis</label><br>
-        <input class="form-control" name="jenis" type="text" placeholder="Jenis" disabled>
+        <input class="form-control" name="jenis" type="text" placeholder="Jenis" readonly>
     </div>
     <div class="form-group">
         <label>Netto</label><br>
-        <input class="form-control" name="netto" type="text" placeholder="Netto" disabled>
+        <input class="form-control" name="netto" type="text" placeholder="Netto" readonly>
     </div>
     <div class="form-group">
         <label>Merk</label><br>
-        <input class="form-control" name="merk" type="text" placeholder="Merk" disabled>
+        <input class="form-control" name="merk" type="text" placeholder="Merk" readonly>
     </div>
 </div>
 </div>

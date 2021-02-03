@@ -49,6 +49,12 @@ class ModTransaksiItems extends CI_model {
 		$this->db->where('id_ti', $id);
 		$this->db->delete('transaksi_items');
 	}
+
+	public function deleteByItem($id_item){
+		$this->db->where('id_item', $id_item);
+		$this->db->delete('transaksi_items');
+	}
+
 	public function deleteByTanggal($id, $tanggal){
 		$this->db->where('id_item', $id);
 		$this->db->where('tanggal', $tanggal);
@@ -142,6 +148,28 @@ class ModTransaksiItems extends CI_model {
 			$this->db->where('id_item', $id_item);
 			$this->db->where('tanggal', $tanggal);
 			$this->db->update('transaksi_items', $dataKb);
+		}
+	}
+
+	public function cekHapusTanggal($id_item){
+		$query = $this->db->query("SELECT * FROM transaksi_items WHERE id_item= '$id_item'");
+        foreach ($query->result() as $row){
+		    $id_item = $row->id_item;
+		    $tanggal = $row->tanggal;
+
+		    $query1 = $this->db->query("SELECT stok_masuk FROM transaksi_items WHERE id_item= '$id_item' AND tanggal = '$tanggal'");
+	        $hasil1 = $query1->row();
+	        $asm = $hasil1->stok_masuk;
+
+	        $query2 = $this->db->query("SELECT stok_keluar FROM transaksi_items WHERE id_item= '$id_item' AND tanggal = '$tanggal'");
+	        $hasil2 = $query2->row();
+	        $ask = $hasil2->stok_keluar;
+
+	        if ($asm <= 0 && $ask <= 0) {
+	        	$this->db->where('id_item', $id_item);
+				$this->db->where('tanggal', $tanggal);
+				$this->db->delete('transaksi_items');
+	        }
 		}
 	}
 

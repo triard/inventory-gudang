@@ -18,7 +18,6 @@ class Output extends CI_Controller {
 		}
 		$data['output'] = $this->ModOutputItems->selectAll();
 		$data['filter'] = $this->ModOutputItems->filter();
-		// $data['id'] = $this->ModTransaksiItems->getIdTanggal("18");
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('output-items',$data);
@@ -124,17 +123,11 @@ class Output extends CI_Controller {
 		$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggal);
 		$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggal);
 
-		// cek hapus tanggal
-		$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
-		$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggal);
-		$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggal);
-		$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggal);
-		if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
-			$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggal);
-		}
-
 		$this->ModOutputItems->delete($id);
 		$this->ModTransaksiItems->getSisaAllStokKb($id_item);
+
+		// cek hapus tanggal
+		$this->ModTransaksiItems->cekHapusTanggal($id_item);
 		echo json_encode(array("status" => TRUE));
 	}
 	public function update() {
@@ -190,15 +183,6 @@ class Output extends CI_Controller {
 					$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggalLama);
 					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
 
-					// cek hapus tanggal
-					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
-					$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
-					$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalLama);
-					$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalLama);
-					if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
-						$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggalLama);
-					} 
-
 					$stokTi = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalBaru);
 					$kbTi = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalBaru);
 					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
@@ -208,6 +192,9 @@ class Output extends CI_Controller {
 					$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggalBaru);
 					$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggalBaru);
 					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
+
+					// cek hapus tanggal
+					$this->ModTransaksiItems->cekHapusTanggal($id_item);
 					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiItems->addTanggalOutput($id_item);
@@ -220,15 +207,6 @@ class Output extends CI_Controller {
 					$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggalLama);
 					$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggalLama);
 
-					// cek hapus tanggal
-					$cekStokMasuk = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
-					$cekKbMasuk = $this->ModTransaksiItems->getKbMasuk($id_item, $tanggalLama);
-					$cekStokKeluar = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalLama);
-					$cekKbKeluar = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalLama);
-					if ($cekStokMasuk == 0 && $cekKbMasuk == 0 && $cekStokKeluar == 0 && $cekKbKeluar == 0) {
-						$this->ModTransaksiItems->deleteByTanggal($id_item, $tanggalLama);
-					}  
-
 					$stokTi = $this->ModTransaksiItems->getStokKeluar($id_item, $tanggalBaru);
 					$kbTi = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalBaru);
 					$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
@@ -238,6 +216,9 @@ class Output extends CI_Controller {
 					$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggalBaru);
 					$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggalBaru);
 					$this->ModTransaksiItems->getSisaAllStokKb($id_item);
+					
+					// cek hapus tanggal
+					$this->ModTransaksiItems->cekHapusTanggal($id_item);
 					echo json_encode(array("status" => TRUE));
 				}
 			}
