@@ -4,7 +4,7 @@
             <h1>Dashboard</h1>
             <small>Selamat Datang</small>
         </div>
-    </div>
+    </div> 
     <?php if($this->session->userdata('level') == 'superadmin') { ?>
     <div class="row">
         <div class="col-md-3">
@@ -33,12 +33,12 @@
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total Supplier<h3 class="text-white"><?php echo $supplier ?></h3>
+                        <div class="col-8 text-white">Total Supplier Bahan Kemas<h3 class="text-white"><?php echo $supplier ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="<?php echo base_url('input/') ?>">
+                    <a href="<?php echo base_url('supplier/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -60,6 +60,26 @@
                 </div>
                 <div class="card-footer">
                     <a href="<?php echo base_url('items/') ?>">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card rounded">
+                <div class="card-header bg-warning">
+                    <div class="row">
+                        <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
+
+                        <div class="col-8 text-white">Total Supplier Bahan Baku<h3 class="text-white"><?php echo $supplierBaku ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo base_url('supplierBaku/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -105,7 +125,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Statistik Barang Masuk</h4>
+                    <h4 class="card-title">Statistik Bahan Kemas Masuk</h4>
                     <div class="row">
                         <div class="col-4">
                             <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
@@ -164,7 +184,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Statistik Barang Keluar</h4>
+                    <h4 class="card-title">Statistik Bahan Kemas Keluar</h4>
                     <div class="row">
                         <div class="col-4">
                             <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
