@@ -45,7 +45,7 @@ class DetailBaku extends CI_Controller {
 			exit();
 		}
 		$data['cek'] = 1;
-		$data['transaksi_Baku'] = $this->ModTransaksiBaku->edit($id);
+		$data['transaksi_baku'] = $this->ModTransaksiBaku->edit($id);
 		$this->load->view('modal/detailbaku', $data);
 	}
 	public function delete($id) {

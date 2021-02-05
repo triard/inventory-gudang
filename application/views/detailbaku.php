@@ -244,7 +244,7 @@ function ganti(a) {
     simpan = "update";
     $(".form")[0].reset();
     $("#myModal").modal("show");
-    $("#modalbody").load("<?php echo base_url();?>Baku/edit/" + a, function(b) {
+    $("#modalbody").load("<?php echo base_url();?>DetailBaku/edit/" + a, function(b) {
         $("#modalbody").html(b)
     })
 }
