@@ -9,8 +9,9 @@ class Home extends CI_Controller {
 		$this->load->model('ModUser');
 		$this->load->model('ModItems');
 		$this->load->model('ModSuppliers');
+		$this->load->model('ModSuppliersBaku');
 		$this->load->model('ModInputItems');
-		$this->load->model('ModOutputItems');
+		$this->load->model('ModOutputItems'); 
 	} 
 	
 	public function index()
@@ -22,6 +23,7 @@ class Home extends CI_Controller {
 		$data['limit'] = $this->ModItems->getNotifStokLimit();
 		$data['user'] = $this->ModUser->getCountUser();
 		$data['supplier'] = $this->ModSuppliers->getCountSupplier();
+		$data['supplierBaku'] = $this->ModSuppliersBaku->getCountSupplier();
 		$data['barang'] = $this->ModItems->getCountBarang();
 		$data['mostInput'] = $this->ModInputItems->GetMostInput();
 		$data['mostOutput'] = $this->ModOutputItems->GetMostOutput();

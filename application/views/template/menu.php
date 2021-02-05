@@ -39,20 +39,34 @@
                 <div class="collapse xmenu" id="xmod1">
                     <ul style="padding-left: 10px;">
                         <li><a href="<?php echo base_url('user/');?>"><i class="fas fa-user"></i> User</a></li>
-                        <!-- <li><a href="<?php echo base_url();?>"><i class="fas fa-people-carry"></i> Supplier</a></li> -->
                     </ul><br>
                 </div>
             </li>
             <?php } ?>
             <li class="navigation__sub">
                 <a data-toggle="collapse" href="#xmod" role="button" aria-expanded="false" aria-controls="xmod"><i class="fas fa-box"></i> Data
-                 Barang<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
+                 Bahan Kemas<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
                 <div class="collapse xmenu" id="xmod">
                     <ul style="padding-left: 10px;">
                         <li><a href="<?php echo base_url('items/');?>"><i class="fas fa-boxes"></i> Barang</a></li>
+                        <li><a href="<?php echo base_url('supplier/');?>"><i class="fas fa-people-carry"></i> Supplier</a></li>
                         <li><a href="<?php echo base_url('input/');?>"><i class="fas fa-sign-in-alt"></i> Barang
                                 Masuk</a></li>
                         <li><a href="<?php echo base_url('output/');?>"><i class="fas fa-sign-out-alt"></i> Barang
+                                Keluar</a></li>
+                    </ul><br>
+                </div>
+            </li>
+            <li class="navigation__sub">
+                <a data-toggle="collapse" href="#xmod2" role="button" aria-expanded="false" aria-controls="xmod2"><i class="fas fa-box"></i> Data
+                 Bahan Baku<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
+                <div class="collapse xmenu" id="xmod2">
+                    <ul style="padding-left: 10px;">
+                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-boxes"></i> Barang</a></li>
+                        <li><a href="<?php echo base_url('supplierBaku/');?>"><i class="fas fa-people-carry"></i> Supplier</a></li>
+                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-sign-in-alt"></i> Barang
+                                Masuk</a></li>
+                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-sign-out-alt"></i> Barang
                                 Keluar</a></li>
                     </ul><br>
                 </div>
