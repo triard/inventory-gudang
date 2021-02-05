@@ -4,8 +4,8 @@
         <div class="form-group">
             <label>Item</label>
             <select name="id_item" class="select2 item" required>
-                <option value="0">Item Baru</option>
-                <option disabled>------------</option>
+                <!-- <option value="0">Item Baru</option> -->
+                <option disabled selected>Pilih Item</option>
                 <?php foreach ($item as $i): ?>
                 <option value="<?php echo  $i->id_item?>"><?php echo $i->nama_item;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
                 <?php endforeach; ?>
@@ -14,19 +14,19 @@
         <div class="set-item">
             <div class="form-group">
                 <label>Nama Items</label><br>
-                <input class="form-control" name="nama_item" type="text" placeholder="Nama Item" required>
+                <input class="form-control" name="nama_item" type="text" placeholder="Nama Item" readonly>
             </div>
             <div class="form-group">
                 <label>Jenis</label><br>
-                <input class="form-control" name="jenis" type="text" placeholder="Jenis" required>
+                <input class="form-control" name="jenis" type="text" placeholder="Jenis" readonly>
             </div>
             <div class="form-group">
                 <label>Netto</label><br>
-                <input class="form-control" name="netto" type="text" placeholder="Netto" required>
+                <input class="form-control" name="netto" type="text" placeholder="Netto" readonly>
             </div>
             <div class="form-group">
                 <label>Merk</label><br>
-                <input class="form-control" name="merk" type="text" placeholder="Merk">
+                <input class="form-control" name="merk" type="text" placeholder="Merk" readonly>
             </div>
         </div>
     </div>
@@ -44,11 +44,11 @@
         <div class="set-supplier">
             <div class="form-group">
                 <label>Nama Supplier</label><br>
-                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" required>
+                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" readonly>
             </div>
             <div class="form-group">
                 <label>Kontak</label><br>
-                <input class="form-control" name="kontak" type="text" placeholder="Kontak">
+                <input class="form-control" name="kontak" type="text" placeholder="Kontak" readonly>
             </div>
         </div>
         <div class="form-group">

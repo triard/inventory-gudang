@@ -16,6 +16,16 @@ class ModItems extends CI_model {
 		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'stok' => $stok, 'kb' => $kb);
 		$this->db->insert('items', $data);
 	}
+	public function addNoStok() {
+		$nama_item = $this->input->post('nama_item');
+		$jenis = $this->input->post('jenis');
+		$netto = $this->input->post('netto');
+		$merk = $this->input->post('merk');
+		$stok_limit = $this->input->post('stok_limit');
+		
+		$data = array('nama_item' => $nama_item,'jenis' => $jenis, 'netto' => $netto, 'merk' => $merk, 'stok_limit' => $stok_limit);
+		$this->db->insert('items', $data);
+	}
 	public function delete($id){
 		$this->db->where('id_item', $id);
 		$this->db->delete('items');

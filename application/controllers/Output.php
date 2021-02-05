@@ -165,8 +165,8 @@ class Output extends CI_Controller {
 				$kbTi = $this->ModTransaksiItems->getKbKeluar($id_item, $tanggalBaru);
 				$sisa_stokTi = $this->ModTransaksiItems->getStokSisa($id_item, $tanggalBaru);
 				$sisa_kbTi = $this->ModTransaksiItems->getKbSisa($id_item, $tanggalBaru);
-				$totalStokTi = $stokTi + ($qtyLama-$qtyBaru);
-				$totalKbTi = $kbTi + ($kbLama-$kbBaru);
+				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
+				$totalKbTi = $kbTi - ($kbLama-$kbBaru);
 				$this->ModTransaksiItems->updateStokKeluar($totalStokTi, $id_item, $tanggalBaru);
 				$this->ModTransaksiItems->updateKbKeluar($totalKbTi, $id_item, $tanggalBaru);
 				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
