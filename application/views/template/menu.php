@@ -62,11 +62,11 @@
                  Bahan Baku<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
                 <div class="collapse xmenu" id="xmod2">
                     <ul style="padding-left: 10px;">
-                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-boxes"></i> Barang</a></li>
+                        <li><a href="<?php echo base_url('Baku');?>"><i class="fas fa-boxes"></i> Barang</a></li>
                         <li><a href="<?php echo base_url('supplierBaku/');?>"><i class="fas fa-people-carry"></i> Supplier</a></li>
-                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-sign-in-alt"></i> Barang
+                        <li><a href="<?php echo base_url('InputBaku');?>"><i class="fas fa-sign-in-alt"></i> Barang
                                 Masuk</a></li>
-                        <li><a href="<?php echo base_url('');?>"><i class="fas fa-sign-out-alt"></i> Barang
+                        <li><a href="<?php echo base_url('OutputBaku');?>"><i class="fas fa-sign-out-alt"></i> Barang
                                 Keluar</a></li>
                     </ul><br>
                 </div>
