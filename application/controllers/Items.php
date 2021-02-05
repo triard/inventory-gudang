@@ -56,7 +56,7 @@ class Items extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
-		$this->ModItems->add();
+		$this->ModItems->addNoStok();
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {

@@ -1,9 +1,9 @@
 <section class="content">
             <header class="content__title">
                <h1>Items</h1>
-               <!-- <div class="actions">
+               <div class="actions">
                   <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
-               </div> -->
+               </div>
             </header>
             <div class="card">
                <div class="card-body">
@@ -188,15 +188,6 @@ function limitstock() {
 	$(".form")[0].reset();
 	$("#myModal").modal("show");
 	$("#modalbody").load("<?php echo base_url();?>Items/limitstock/", function (a) {
-		$("#modalbody").html(a)
-	})
-}
-
-function tambah() {
-	simpan = "tambah";
-	$(".form")[0].reset();
-	$("#myModal").modal("show");
-	$("#modalbody").load("<?php echo base_url();?>Items/modal/", function (a) {
 		$("#modalbody").html(a)
 	})
 }
