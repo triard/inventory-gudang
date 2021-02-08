@@ -164,8 +164,8 @@ class ModInputBaku extends CI_model {
 
 	public function InputFilter()
 	{
-		$start = $this->input->post('start');
-		$end = $this->input->post('end');
+		$start = $this->input->post('startBaku');
+		$end = $this->input->post('endBaku');
 		$this->db->select('a.nama_baku, a.qty_input, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_baku as a');
 		$this->db->group_by('a.id_baku');
@@ -212,7 +212,7 @@ class ModInputBaku extends CI_model {
     public function getIdBaku($id_input){
         $query = $this->db->query("SELECT id_baku from input_baku where id_input= '$id_input'");
         $hasil = $query->row();
-        return $hasil->id_baku;
+        return $hasil->id_baku; 
     }
 
     public function getTanggal($id_input){
@@ -225,6 +225,14 @@ class ModInputBaku extends CI_model {
         $query = $this->db->query("SELECT SUM(qty_input) AS total FROM input_baku WHERE id_baku = '$id_baku'");
         $hasil = $query->row();
         return $hasil->total;
-    }
+	}
+	
+	public function getNotifStokExpired()
+	{
+		$this->db->select('*');
+		$this->db->from('input_baku');
+		$this->db->where('status="hampir expired"');
+        return $this->db->get()->result();
+	}
 
 }

@@ -133,8 +133,8 @@ class ModOutputBaku extends CI_model {
 
 	public function OutputFilter()
 	{
-		$startOut = $this->input->post('startOut');
-		$endOut = $this->input->post('endOut');
+		$startOut = $this->input->post('startOutBaku');
+		$endOut = $this->input->post('endOutBaku');
 		$this->db->select('a.nama_baku, a.qty_output, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_baku as a');
 		$this->db->group_by('a.id_baku');

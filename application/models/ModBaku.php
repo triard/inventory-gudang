@@ -136,7 +136,7 @@ class ModBaku extends CI_model {
         return $this->db->get()->result();
 	}
 
-	public function getCountBarang()
+	public function getCountBaku()
 	{
 		$this->db->select('id_baku');
 		$this->db->from('baku');
