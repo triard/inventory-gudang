@@ -2,7 +2,7 @@
 
     <!-- Login -->
     <div class="login__block active" id="l-login">
-        <div class="login__block__header" style="background-color: #ED4C67;">
+        <div class="login__block__header" style="background-color: #29477F;">
             <i class="zmdi zmdi-account-circle"></i>
             Silahkan Masuk
         </div>
@@ -19,7 +19,7 @@
                     <label>Password</label>
                     <i class="form-group__bar"></i>
                 </div>
-                <button type="submit" class="btn btn--icon login__block__btn" style="background-color: #ED4C67;"><i
+                <button type="submit" class="btn btn--icon login__block__btn" style="background-color: #29477F;"><i
                         class="zmdi zmdi-long-arrow-right"></i></button>
             </div>
         </form>

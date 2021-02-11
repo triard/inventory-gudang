@@ -2,14 +2,14 @@
     <div class="card">
         <div class="card-header" style="background-color: #ecf0f1;">
             <h1>Dashboard</h1>
-            <small>Selamat Datang</small>
+            <strong>Selamat Datang</strong>
         </div>
     </div>
     <div class="row">
         <?php if($this->session->userdata('level') == 'superadmin') { ?>
         <div class="col-md-4">
             <div class="card rounded">
-                <div class="card-header bg-primary">
+                <div class="card-header" style="background-color: #0984e3;">
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-user  fa-3x"></i></div>
 
@@ -28,23 +28,63 @@
             </div>
         </div>
         <?php } 
-        if($this->session->userdata('level') == 'superadmin') { 
-            echo "<div class='col-md-4'>";
-        } else{
-            echo "<div class='col-md-3'>";
-        } ?>
+        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
+        <div class='col-md-4'>
+            <div class="card rounded">
+                <div class="card-header" style="background-color: #f9ca24;">
+                    <div class="row">
+                        <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
+
+                        <div class="col-8 text-white">Total Supplier Bahan Kemas<h3 class="text-white">
+                                <?php echo $supplier ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo base_url('supplier/') ?>">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4'>
+            <div class="card rounded">
+                <div class="card-header" style="background-color: #2ecc71;">
+                    <div class="row">
+                        <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
+
+                        <div class="col-8 text-white">Total Bahan Kemas<h3 class="text-white"><?php echo $kemas ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo base_url('items/') ?>">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php } 
+        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
+        <div class='col-md-4'>
         <div class="card rounded">
-            <div class="card-header bg-warning">
+            <div class="card-header" style="background-color: #e67e22;">
                 <div class="row">
                     <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
 
-                    <div class="col-8 text-white">Total Supplier Bahan Kemas<h3 class="text-white">
-                            <?php echo $supplier ?></h3>
+                    <div class="col-8 text-white">Total Supplier Bahan Baku<h3 class="text-white">
+                            <?php echo $supplierBaku ?></h3>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <a href="<?php echo base_url('supplier/') ?>">
+                <a href="<?php echo base_url('supplierBaku/') ?>">
                     <div class="float-left">
                         <h6>Lihat Detail</h6>
                     </div>
@@ -53,62 +93,9 @@
             </div>
         </div>
     </div>
-    <?php if($this->session->userdata('level') == 'superadmin') { 
-            echo "<div class='col-md-4'>";
-        } else{
-            echo "<div class='col-md-3'>";
-        } ?>
+    <div class='col-md-4'>
     <div class="card rounded">
-        <div class="card-header bg-success">
-            <div class="row">
-                <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
-
-                <div class="col-8 text-white">Total Bahan Kemas<h3 class="text-white"><?php echo $kemas ?></h3>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <a href="<?php echo base_url('items/') ?>">
-                <div class="float-left">
-                    <h6>Lihat Detail</h6>
-                </div>
-                <div class="float-right"><i class="fas fa-chevron-right"></i></div>
-            </a>
-        </div>
-    </div>
-    </div>
-    <?php if($this->session->userdata('level') == 'superadmin') { 
-            echo "<div class='col-md-4'>";
-        } else{
-            echo "<div class='col-md-3'>";
-        } ?>
-    <div class="card rounded">
-        <div class="card-header bg-danger">
-            <div class="row">
-                <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
-
-                <div class="col-8 text-white">Total Supplier Bahan Baku<h3 class="text-white">
-                        <?php echo $supplierBaku ?></h3>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <a href="<?php echo base_url('supplierBaku/') ?>">
-                <div class="float-left">
-                    <h6>Lihat Detail</h6>
-                </div>
-                <div class="float-right"><i class="fas fa-chevron-right"></i></div>
-            </a>
-        </div>
-    </div>
-    </div>
-    <?php if($this->session->userdata('level') == 'superadmin') { 
-            echo "<div class='col-md-4'>";
-        } else{
-            echo "<div class='col-md-3'>";
-        } ?>
-    <div class="card rounded">
-        <div class="card-header bg-info">
+        <div class="card-header" style="background-color: #9b59b6;">
             <div class="row">
                 <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
 
@@ -126,10 +113,12 @@
         </div>
     </div>
     </div>
+    <?php } ?>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+    <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Stok Bahan Kemas Hampir Habis</h4>
@@ -158,6 +147,8 @@
                 </div>
             </div>
         </div>
+        <?php } 
+        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -167,7 +158,7 @@
                             <tr>
                                 <td width="50">No</td>
                                 <td>Produk</td>
-                                <td width="100">Minimal Stok</td>
+                                <td width="150">Minimal Stok</td>
                                 <td width="50">Stok</td>
                             </tr>
                         </thead>
@@ -187,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Status Expired Bahan Baku</h4>
@@ -216,8 +207,10 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
     <div class="row">
+    <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -255,7 +248,7 @@
                             }else if($inputFilter != null ){
                                 foreach ($inputFilter as $mi){ 
     
-                                    $input_item[] = $mi->nama_item;
+                                    $input_item[] = [$mi->nama_item,"jenis: $mi->jenis","merk: $mi->merk","netto: $mi->netto"];
                                     $jml_qty_input[] = (float) $mi->total_stok;	
                                 
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
@@ -264,7 +257,7 @@
                                 } } 
                             else{
                                     foreach ($mostInput as $mi){ 
-                                    $input_item[] = $mi->nama_item;
+                                        $input_item[] = [$mi->nama_item,"jenis: $mi->jenis","merk: $mi->merk","netto: $mi->netto"];
                                     $jml_qty_input[] = (float) $mi->total_stok;	                                
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -311,7 +304,7 @@
                             }else if($outputFilter != null ){
                                 foreach ($outputFilter as $mo){ 
     
-                                    $output_item[] = $mo->nama_item;
+                                    $output_item[] = [$mo->nama_item,"jenis:$mo->jenis","merk: $mo->merk","netto: $mo->netto"];
                                     $jml_qty_output[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputs' width='90' height='36' 
@@ -319,7 +312,7 @@
     
                                 } }else{
                                 foreach ($mostOutput as $mo){ 
-                                    $output_item[] = $mo->nama_item;
+                                    $output_item[] = [$mo->nama_item,"jenis:$mo->jenis","merk: $mo->merk","netto: $mo->netto"];
                                     $jml_qty_output[] = (float) $mo->total_stok;	
                                 echo "<canvas id='BarChartOutputs' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
@@ -332,6 +325,8 @@
                 </div>
             </div>
         </div>
+        <?php } 
+        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -368,17 +363,15 @@
                                 
                             }else if($inputFilterBaku != null ){
                                 foreach ($inputFilterBaku as $mi){ 
-    
-                                    $input_baku[] = $mi->nama_baku;
+                                    $input_baku[] = [$mi->nama_baku,"merk: $mi->merk","netto: $mi->netto"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	
-                                
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
     
                                 } } 
                             else{
                                     foreach ($mostInputBaku as $mi){ 
-                                    $input_baku[] = $mi->nama_baku;
+                                    $input_baku[] = [$mi->nama_baku,"merk: $mi->merk","netto: $mi->netto"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -425,7 +418,7 @@
                             }else if($outputFilterBaku != null ){
                                 foreach ($outputFilterBaku as $mo){ 
     
-                                    $output_baku[] = $mo->nama_baku;
+                                    $output_baku[] = [$mo->nama_baku,"merk: $mo->merk","netto: $mo->netto"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
@@ -433,7 +426,7 @@
     
                                 } }else{
                                 foreach ($mostOutputBaku as $mo){ 
-                                    $output_baku[] = $mo->nama_baku;
+                                    $output_baku[] = [$mo->nama_baku,"merk: $mo->merk","netto: $mo->netto"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;	
                                 echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
@@ -446,16 +439,18 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
     <footer class="footer hidden-xs-down">
         <p>© <?php echo date("Y");?>.</p>
     </footer>
 </section>
+<?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
 <?php if($limitKemas !=null){ ?>
 <div id="modalKemas" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-danger">
+            <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Stok Bahan Kemas Hampir Habis</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
@@ -498,12 +493,13 @@
         </div>
     </div>
 </div>
-<?php }else{} ?>
+<?php } } ?>
+<?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
 <?php if($limitBaku!=null){ ?>
 <div id="modalBaku" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-danger">
+            <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Stok Bahan Baku Hampir Habis</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
@@ -544,12 +540,12 @@
         </div>
     </div>
 </div>
-<?php }else{} ?>
+<?php } ?>
 <?php if($expiredBaku!=null){ ?>
 <div id="modalExpired" class="modal fade" tabindex="-2" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-danger">
+            <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Status Expired Bahan Baku</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
@@ -573,7 +569,7 @@
                              foreach ($expiredBaku as $l) { ?>
                             <tr>
                                 <td><?php echo $no; ?>.</td>
-                                <td><?php echo $l->nama_baku ?></td>
+                                <td><?php echo $l->nama_baku ?></td> 
                                 <td><?php echo $l->netto ?></td>
                                 <td><?php echo $l->merk ?></td>
                                 <td><?php echo $l->expired ?></td>
@@ -590,7 +586,7 @@
         </div>
     </div>
 </div>
-<?php }else{} ?>
+<?php } }?>
 </div>
 
 <script type="text/javascript">

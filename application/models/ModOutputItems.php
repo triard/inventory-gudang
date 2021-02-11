@@ -125,7 +125,7 @@ class ModOutputItems extends CI_model {
 	
 	public function GetMostOutput()
 	{
-		$this->db->select('a.nama_item, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_items as a');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_output', "desc");
@@ -137,7 +137,7 @@ class ModOutputItems extends CI_model {
 	{
 		$startOut = $this->input->post('startOut');
 		$endOut = $this->input->post('endOut');
-		$this->db->select('a.nama_item, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_items as a');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_output', "desc");
