@@ -117,7 +117,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="<?php echo base_url('items/') ?>">
+            <a href="<?php echo base_url('baku/') ?>">
                 <div class="float-left">
                     <h6>Lihat Detail</h6>
                 </div>
@@ -261,7 +261,7 @@
                             }else if($inputFilter != null ){
                                 foreach ($inputFilter as $mi){ 
     
-                                    $input_item[] = [$mi->nama_item,"jenis: $mi->jenis","merk: $mi->merk","netto: $mi->netto"];
+                                    $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
                                     $jml_qty_input[] = (float) $mi->total_stok;	
                                 
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
@@ -270,7 +270,7 @@
                                 } } 
                             else{
                                     foreach ($mostInput as $mi){ 
-                                        $input_item[] = [$mi->nama_item,"jenis: $mi->jenis","merk: $mi->merk","netto: $mi->netto"];
+                                        $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
                                     $jml_qty_input[] = (float) $mi->total_stok;	                                
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -317,7 +317,7 @@
                             }else if($outputFilter != null ){
                                 foreach ($outputFilter as $mo){ 
     
-                                    $output_item[] = [$mo->nama_item,"jenis:$mo->jenis","merk: $mo->merk","netto: $mo->netto"];
+                                    $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
                                     $jml_qty_output[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputs' width='90' height='36' 
@@ -325,7 +325,7 @@
     
                                 } }else{
                                 foreach ($mostOutput as $mo){ 
-                                    $output_item[] = [$mo->nama_item,"jenis:$mo->jenis","merk: $mo->merk","netto: $mo->netto"];
+                                    $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
                                     $jml_qty_output[] = (float) $mo->total_stok;	
                                 echo "<canvas id='BarChartOutputs' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
@@ -376,7 +376,7 @@
                                 
                             }else if($inputFilterBaku != null ){
                                 foreach ($inputFilterBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"merk: $mi->merk","netto: $mi->netto"];
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -384,7 +384,7 @@
                                 } } 
                             else{
                                     foreach ($mostInputBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"merk: $mi->merk","netto: $mi->netto"];
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -431,7 +431,7 @@
                             }else if($outputFilterBaku != null ){
                                 foreach ($outputFilterBaku as $mo){ 
     
-                                    $output_baku[] = [$mo->nama_baku,"merk: $mo->merk","netto: $mo->netto"];
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
@@ -439,7 +439,7 @@
     
                                 } }else{
                                 foreach ($mostOutputBaku as $mo){ 
-                                    $output_baku[] = [$mo->nama_baku,"merk: $mo->merk","netto: $mo->netto"];
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;	
                                 echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
@@ -524,8 +524,7 @@
                             <tr>
                                 <td width="50">No</td>
                                 <td>Produk</td>
-                                <td>Netto</td>
-                                <td>Merk</td>
+                                <td>Produsen</td>
                                 <td width="150">Minimal Stok</td>
                                 <td width="100">Stok</td>
                             </tr>
@@ -537,8 +536,7 @@
                             <tr>
                                 <td><?php echo $no; ?>.</td>
                                 <td><?php echo $l->nama_baku ?></td>
-                                <td><?php echo $l->netto ?></td>
-                                <td><?php echo $l->merk ?></td>
+                                <td><?php echo $l->produsen ?></td>
                                 <td><?php echo $l->stok_limit ?></td>
                                 <td><?php echo $l->stok?></td>
                             </tr>
@@ -570,8 +568,7 @@
                             <tr>
                                 <td width="50">No</td>
                                 <td>Produk</td>
-                                <td>Netto</td>
-                                <td>Merk</td>
+                                <td>Produsen</td>
                                 <td width="150">Expired</td>
                                 <td width="150">Status</td>
                             </tr>
@@ -583,8 +580,7 @@
                             <tr>
                                 <td><?php echo $no; ?>.</td>
                                 <td><?php echo $l->nama_baku ?></td> 
-                                <td><?php echo $l->netto ?></td>
-                                <td><?php echo $l->merk ?></td>
+                                <td><?php echo $l->produsen ?></td>
                                 <td><?php echo $l->expired ?></td>
                                 <td><?php echo $l->status?></td>
                             </tr>

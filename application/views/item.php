@@ -48,8 +48,6 @@
                             <td><?php echo $k->kb;?></td>
                             <td><?php echo $k->stok_limit;?></td>
                             <td class="td-actions text-center">
-
-                                <?php if($this->session->userdata('level') == 'superadmin') { ?>
                                 <a href="<?= base_url().'Items/detail/'.$k->id_item; ?>">
                                     <button type="button" rel="tooltip" class="btn btn-primary btn-round"
                                         data-original-title="" title="">
@@ -57,6 +55,7 @@
                                     </button>
                                 </a>
                                 &nbsp;
+                                <?php if($this->session->userdata('level') == 'superadmin') { ?>
                                 <!-- <button type="button" onclick="limitstock(<?php echo $k->id_item;?>)" rel="tooltip" class="btn btn-warning btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-alert-circle zmdi-hc-fw"></i>
                                     </button>
@@ -123,7 +122,7 @@ $(document).ready(function() {
             initComplete: function(a, b) {
                 $(this).closest(".dataTables_wrapper").find(".dataTables__top").prepend(
                     '<div class="dataTables_buttons hidden-sm-down actions"><div class="dropdown actions__item"><i data-toggle="dropdown" class="zmdi zmdi-download" /><ul class="dropdown-menu dropdown-menu-right"><a href="" class="dropdown-item" data-table-action="excel">Excel (.xlsx)</a></ul></div></div>'
-                    )
+                )
             }
         }), $(".dataTables_filter input[type=search]").focus(function() {
             $(this).closest(".dataTables_filter").addClass("dataTables_filter--toggled")
