@@ -5,13 +5,8 @@
         required>
 </div>
 <div class="form-group">
-    <label>Netto</label><br>
-    <input class="form-control" name="netto" type="text" placeholder="Netto"
-        required>
-</div>
-<div class="form-group">
-    <label>Merk</label><br>
-    <input class="form-control" name="merk" type="text" placeholder="Merk">
+    <label>Produsen</label><br>
+    <input class="form-control" name="produsen" type="text" placeholder="Produsen">
 </div>
 <div class="form-group">
     <label>Limit Stok</label><br>
@@ -21,18 +16,18 @@
 <input type="hidden" name="id_baku" value="<?php echo $baku->id_baku;?>">
 <?php if($this->session->userdata('level')=="superadmin"){ ?>
 <div class="form-group">
-    <label>Nama baku</label><br>
+    <label>Nama Bahan baku</label><br>
     <input class="form-control" value="<?php echo $baku->nama_baku;?>" name="nama_baku" type="text" placeholder="Nama"
         required>
 </div>
 <div class="form-group">
-    <label>Merk</label><br>
-    <input class="form-control" value="<?php echo $baku->merk;?>" name="merk" type="text" placeholder="Merk">
+    <label>Produsen</label><br>
+    <input class="form-control" value="<?php echo $baku->produsen;?>" name="produsen" type="text" placeholder="Merk">
 </div>
 <?php } else { ?>
     <input class="form-control" value="<?php echo $baku->nama_baku;?>" name="nama_baku" type="hidden" placeholder="Nama"
         required>
-    <input class="form-control" value="<?php echo $baku->merk;?>" name="merk" type="hidden" placeholder="Merk">
+    <input class="form-control" value="<?php echo $baku->produsen;?>" name="produsen" type="hidden" placeholder="Produsen">
 <?php } ?>
 <div class="form-group">
     <label>Limit Stok</label><br>

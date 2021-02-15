@@ -34,8 +34,9 @@
         <div class="form-group">
             <label>Supplier</label>
             <select name="id_supplier" class="select2 supp" required>
-                <!-- <option value="0">Supplier Baru</option> -->
-                <option disabled selected>Pilih Supplier</option>
+                <option value="0">Supplier Baru</option>
+                <!-- <option disabled selected>Pilih Supplier</option> -->
+                <option disabled>--------------------------</option>
                 <?php foreach ($supplier as $s): ?>
                 <option value="<?php echo $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
                 <?php endforeach; ?>
@@ -44,11 +45,11 @@
         <div class="set-supplier">
             <div class="form-group">
                 <label>Nama Supplier</label><br>
-                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" readonly>
+                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" required>
             </div>
             <div class="form-group">
                 <label>Kontak</label><br>
-                <input class="form-control" name="kontak" type="text" placeholder="Kontak" readonly>
+                <input class="form-control" name="kontak" type="text" placeholder="Kontak" required>
             </div>
         </div>
         <div class="form-group">

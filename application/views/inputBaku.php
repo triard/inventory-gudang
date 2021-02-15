@@ -50,13 +50,14 @@
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
-                            <th>Netto</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Koli /Box</th>
+                            <th>Pack</th>
                             <th>Tanggal Masuk</th>
                             <th>No. Batch</th>
                             <th>Expired</th>
+                            <th>Keterangan</th>
+                            <th>Status</th>
                             <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                     </thead>
@@ -64,13 +65,14 @@
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
-                            <th>Netto</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Koli /Box</th>
+                            <th>Pack</th>
                             <th>Tanggal Masuk</th>
                             <th>No. Batch</th>
                             <th>Expired</th>
+                            <th>Keterangan</th>
+                            <th>Status</th>
                             <th class="text-right">Actions</th>
                         </tr>
                     </tfoot>
@@ -83,7 +85,6 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->nama_supplier;?></td>
                             <td><?php echo $k->qty_input;?></td>
                             <td><?php echo $k->kb_input;?></td>
@@ -92,7 +93,12 @@
 							 echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->batch;?></td>
-                            <td><?php echo $k->expired;?></td>
+                            <td>
+                                <?php $dt = new DateTime($k->expired);
+                                 echo $dt->format("d/m/Y");?>
+                            </td>
+                            <td><?php echo $k->keterangan;?></td>
+                            <td><?php echo $k->status;?></td>
                             <td class="td-actions text-right">
                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
@@ -112,16 +118,20 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->nama_supplier;?></td>
                             <td><?php echo $k->qty_input;?></td>
                             <td><?php echo $k->kb_input;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_input);
-							 echo $d->format("d/m/Y");?>
+							     echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->batch;?></td>
-                            <td><?php echo $k->expired;?></td>
+                            <td>
+                                <?php $dt = new DateTime($k->expired);
+                                 echo $dt->format("d/m/Y");?>
+                            </td>
+                            <td><?php echo $k->keterangan;?></td>
+                            <td><?php echo $k->status;?></td>
                             <td class="td-actions text-right">
                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
