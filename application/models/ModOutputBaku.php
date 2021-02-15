@@ -122,7 +122,7 @@ class ModOutputBaku extends CI_model {
 	
 	public function GetMostOutput()
 	{
-		$this->db->select('a.nama_baku, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_baku as a');
 		$this->db->group_by('a.id_baku');
 		$this->db->order_by('a.qty_output', "desc");
@@ -132,9 +132,9 @@ class ModOutputBaku extends CI_model {
 
 	public function OutputFilter()
 	{
-		$startOut = $this->input->post('startOut');
-		$endOut = $this->input->post('endOut');
-		$this->db->select('a.nama_baku, a.qty_output, SUM(a.qty_output) AS total_stok');
+		$startOut = $this->input->post('startOutBaku');
+		$endOut = $this->input->post('endOutBaku');
+		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_baku as a');
 		$this->db->group_by('a.id_baku');
 		$this->db->order_by('a.qty_output', "desc");

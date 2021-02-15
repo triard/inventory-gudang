@@ -78,7 +78,7 @@ class ModInputBaku extends CI_model {
 	public function addTsupplier($id_supplier, $stok) {
 		$id_baku = $this->input->post('id_baku');
 		$id_supplier = $id_supplier;
-		$qty_input = $this->input->post('qty_input');
+		$qty_input = $this->input->post('qty_input'); 
 		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $stok;
@@ -207,7 +207,7 @@ class ModInputBaku extends CI_model {
 	public function GetMostInput()
 	{
 
-		$this->db->select('a.nama_baku, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('*, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_baku as a');
 		$this->db->group_by('a.id_baku'); 
 		$this->db->order_by('a.qty_input', "desc");
@@ -230,9 +230,9 @@ class ModInputBaku extends CI_model {
 
 	public function InputFilter()
 	{
-		$start = $this->input->post('start');
-		$end = $this->input->post('end');
-		$this->db->select('a.nama_baku, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$start = $this->input->post('startBaku');
+		$end = $this->input->post('endBaku');
+		$this->db->select('*, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_baku as a');
 		$this->db->group_by('a.id_baku');
 		$this->db->order_by('a.qty_input', "desc");
@@ -291,7 +291,7 @@ class ModInputBaku extends CI_model {
     public function getIdBaku($id_input){
         $query = $this->db->query("SELECT id_baku from input_baku where id_input= '$id_input'");
         $hasil = $query->row();
-        return $hasil->id_baku;
+        return $hasil->id_baku; 
     }
 
     public function getTanggal($id_input){
@@ -310,7 +310,16 @@ class ModInputBaku extends CI_model {
         $query = $this->db->query("SELECT SUM(qty_input) AS total FROM input_baku WHERE id_baku = '$id_baku'");
         $hasil = $query->row();
         return $hasil->total;
-    }
+	}
+	
+	public function getNotifStokExpired()
+	{
+		$this->db->select('*');
+		$this->db->from('input_baku');
+		$this->db->where('status="hampir expired"');
+		$this->db->or_where('status="expired"');
+        return $this->db->get()->result();
+	}
 
     public function getHampirExpired(){
     	$query = $this->db->query("SELECT nama_baku, SUM(fifo) AS fifo FROM input_baku WHERE status != 'expired' AND status = 'hampir expired' GROUP BY id_baku");

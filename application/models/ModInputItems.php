@@ -136,7 +136,7 @@ class ModInputItems extends CI_model {
 	public function GetMostInput()
 	{
 
-		$this->db->select('a.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('*, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
 		$this->db->group_by('a.id_item'); 
 		$this->db->order_by('a.qty_input', "desc");
@@ -161,7 +161,7 @@ class ModInputItems extends CI_model {
 	{
 		$start = $this->input->post('start');
 		$end = $this->input->post('end');
-		$this->db->select('a.nama_item, a.qty_input, SUM(a.qty_input) AS total_stok');
+		$this->db->select('*, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_input', "desc");

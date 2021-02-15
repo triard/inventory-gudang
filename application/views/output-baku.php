@@ -104,8 +104,7 @@
 							 echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
+                            <?php if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">
                                 <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
@@ -116,8 +115,8 @@
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
+                                <?php } ?>
                             </td>
-                            <?php } ?>
                         </tr>
                         <?php $no++; }
 						} else{ ?>
@@ -133,9 +132,8 @@
 							 echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">
+                            <?php if($this->session->userdata('level') == 'superadmin'){ ?>
                                 <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -145,8 +143,8 @@
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
+                                <?php } ?>
                             </td>
-                            <?php } ?>
                         </tr>
                         <?php $no++; } } ?>
                     </tbody>

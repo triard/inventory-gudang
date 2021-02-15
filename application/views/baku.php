@@ -42,8 +42,7 @@
 								 <td><?php echo $k->kb;?></td>
 								 <td><?php echo $k->stok_limit;?></td>
                                  <td class="td-actions text-center">
-
-                                 	
+								 <?php if($this->session->userdata('level')=="superadmin"){ ?>
                                     <a href="<?= base_url().'baku/detail/'.$k->id_baku; ?>">
 	                                    <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="">
 	                                       <i class="zmdi zmdi-present-to-all zmdi-hc-fw"></i>
@@ -62,6 +61,7 @@
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                     </button>
                                     &nbsp;
+									<?php } ?>
                                  </td>
                               </tr>
                               <?php $no++; } ?>
