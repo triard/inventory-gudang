@@ -16,6 +16,7 @@ class OutputBaku extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
+		$data['notif'] = $this->ModInputBaku->getHampirExpired();
 		$data['output'] = $this->ModOutputBaku->selectAll();
 		$data['filter'] = $this->ModOutputBaku->filter();
 		$this->load->view('template/header');
@@ -46,13 +47,79 @@ class OutputBaku extends CI_Controller {
 		$tanggal = $this->input->post('tgl_output');
 
 		if ($qty > $stok || $kb_output > $kb) {
-			$this->session->set_flashdata('stok', 'Stok / Koli tidak mencukupi!');
+			$this->session->set_flashdata('stok', 'Stok / Pack tidak mencukupi!');
 		} else {
 			$total = $stok - $qty;
 			$totalKb = $kb - $kb_output;
 			$this->ModBaku->updateStok($total);
 			$this->ModBaku->updateKb($totalKb);
 			$this->ModOutputBaku->add($total);
+
+			// fifo logic
+			$quantity = $qty;
+			$getInput = $this->ModInputBaku->getByStatusAsc($id_baku);
+	        foreach ($getInput as $row){
+			    $id_input = $row->id_input;
+			    $fifo = $row->fifo;
+			    $status = $row->status;
+
+			    if ($quantity > $fifo) {
+			    	$quantity = $quantity - $fifo;
+			    	$this->ModInputBaku->updateStatusOut($id_input);
+			    	$this->ModInputBaku->updateFifo($id_input, 0);
+			    }
+				else {
+					$fifo = $fifo - $quantity;
+			    	$this->ModInputBaku->updateFifo($id_input, $fifo);
+			    	$quantity = 0;
+			    }
+			}
+
+			// set status Add
+			$setStatus = $this->ModInputBaku->selectAll();
+	        foreach ($setStatus as $row){
+			    $id_input = $row->id_input;
+			    $id_baku = $row->id_baku;
+			    $expired = $row->expired;
+			    $status = $row->status;
+			    $tgl_input = $row->tgl_input;
+			    $qty_input = $row->qty_input;
+			    $kb_input = $row->kb_input;
+			    $fifo = $row->fifo;
+			    $today = date('Y-m-d');
+			    $today_time = strtotime($today);
+				$expired_time = strtotime($expired);
+				$stok = $this->ModBaku->getStok($id_baku);
+				$kb = $this->ModBaku->getKb($id_baku);
+
+			    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+			    	$this->ModInputBaku->updateStatusExpired($id_input);
+			    	$total = $stok - $qty_input;
+					$totalKb = $kb - $kb_input;
+					$this->ModBaku->updateStokWithId($total, $id_baku);
+					$this->ModBaku->updateKbWithId($totalKb, $id_baku);
+					$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+					// transaksi
+					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+					$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tgl_input);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+					$sisa_kbTi = $this->ModTransaksiBaku->getKbSisa($id_baku, $tgl_input);
+					$totalStokTi = $stokTi - $qty_input;
+					$totalKbTi = $kbTi - $kb_input;
+					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->updateKbMasuk($totalKbTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			    }
+				else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+					if ($fifo <= 0) {
+						$this->ModInputBaku->updateStatusOut($id_input);
+					} else {
+						$this->ModInputBaku->updateStatusHampir($id_input);
+					}
+			    }
+			}
+
 
 			// transaksi baku
 			$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);
@@ -123,6 +190,73 @@ class OutputBaku extends CI_Controller {
 		$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggal);
 		$this->ModTransaksiBaku->updateKbKeluar($totalKbTi, $id_baku, $tanggal);
 
+		// fifo logic
+		$quantity = $qtyLama;
+		$getInput = $this->ModInputBaku->getByStatusDesc($id_baku);
+        foreach ($getInput as $row){
+		    $id_input = $row->id_input;
+		    $qty_input = $row->qty_input;
+		    $fifo = $row->fifo;
+		    $selisih = $qty_input-$fifo;
+
+		    if ($quantity > $selisih) {
+		    	$quantity = $quantity - $selisih;
+		    	$this->ModInputBaku->updateStatusTersedia($id_input);
+		    	$this->ModInputBaku->updateFifo($id_input, $qty_input);
+		    }
+			else {
+				$fifo = $fifo + $quantity;
+				$this->ModInputBaku->updateStatusTersedia($id_input);
+		    	$this->ModInputBaku->updateFifo($id_input, $fifo);
+		    	$quantity = 0;
+		    }
+		}
+
+		// set status
+		$setStatus = $this->ModInputBaku->selectAll();
+        foreach ($setStatus as $row){
+		    $id_input = $row->id_input;
+		    $id_baku = $row->id_baku;
+		    $expired = $row->expired;
+		    $status = $row->status;
+		    $tgl_input = $row->tgl_input;
+		    $qty_input = $row->qty_input;
+		    $kb_input = $row->kb_input;
+		    $fifo = $row->fifo;
+		    $today = date('Y-m-d');
+		    $today_time = strtotime($today);
+			$expired_time = strtotime($expired);
+			$stok = $this->ModBaku->getStok($id_baku);
+			$kb = $this->ModBaku->getKb($id_baku);
+
+		    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+		    	$this->ModInputBaku->updateStatusExpired($id_input);
+		    	$total = $stok - $qty_input;
+				$totalKb = $kb - $kb_input;
+				$this->ModBaku->updateStokWithId($total, $id_baku);
+				$this->ModBaku->updateKbWithId($totalKb, $id_baku);
+				$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+				// transaksi
+				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+				$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tgl_input);
+				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+				$sisa_kbTi = $this->ModTransaksiBaku->getKbSisa($id_baku, $tgl_input);
+				$totalStokTi = $stokTi - $qty_input;
+				$totalKbTi = $kbTi - $kb_input;
+				$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+				$this->ModTransaksiBaku->updateKbMasuk($totalKbTi, $id_baku, $tgl_input);
+				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+		    }
+			else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+				if ($fifo <= 0) {
+					$this->ModInputBaku->updateStatusOut($id_input);
+				} else {
+					$this->ModInputBaku->updateStatusHampir($id_input);
+				}
+		    }
+		}
+
 		$this->ModOutputBaku->delete($id);
 		$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
 
@@ -153,13 +287,146 @@ class OutputBaku extends CI_Controller {
 		$totalKb = $kb + ($kbLama-$kbBaru);
 
 		if ($total < 0 || $totalKb < 0) {
-			$this->session->set_flashdata('stok', 'Stok / Koli tidak mencukupi!');
+			$this->session->set_flashdata('stok', 'Stok / Pack tidak mencukupi!');
 		} else {
 			$this->ModOutputBaku->update();
 			$this->ModOutputBaku->update_H_Stok($total);
 			$this->ModBaku->updateStok($total);
 			$this->ModBaku->updateKb($totalKb);
 
+			// fifo logic Dell
+			$quantity = $qtyLama;
+			$getInput = $this->ModInputBaku->getByStatusDesc($id_baku);
+	        foreach ($getInput as $row){
+			    $id_input = $row->id_input;
+			    $qty_input = $row->qty_input;
+			    $fifo = $row->fifo;
+			    $selisih = $qty_input-$fifo;
+
+			    if ($quantity > $selisih) {
+			    	$quantity = $quantity - $selisih;
+			    	$this->ModInputBaku->updateStatusTersedia($id_input);
+			    	$this->ModInputBaku->updateFifo($id_input, $qty_input);
+			    }
+				else {
+					$fifo = $fifo + $quantity;
+					$this->ModInputBaku->updateStatusTersedia($id_input);
+			    	$this->ModInputBaku->updateFifo($id_input, $fifo);
+			    	$quantity = 0;
+			    }
+			}
+
+			// set status Dell
+			$setStatus = $this->ModInputBaku->selectAll();
+	        foreach ($setStatus as $row){
+			    $id_input = $row->id_input;
+			    $id_baku = $row->id_baku;
+			    $expired = $row->expired;
+			    $status = $row->status;
+			    $tgl_input = $row->tgl_input;
+			    $qty_input = $row->qty_input;
+			    $kb_input = $row->kb_input;
+			    $fifo = $row->fifo;
+			    $today = date('Y-m-d');
+			    $today_time = strtotime($today);
+				$expired_time = strtotime($expired);
+				$stok = $this->ModBaku->getStok($id_baku);
+				$kb = $this->ModBaku->getKb($id_baku);
+
+			    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+			    	$this->ModInputBaku->updateStatusExpired($id_input);
+			    	$total = $stok - $qty_input;
+					$totalKb = $kb - $kb_input;
+					$this->ModBaku->updateStokWithId($total, $id_baku);
+					$this->ModBaku->updateKbWithId($totalKb, $id_baku);
+					$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+					// transaksi
+					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+					$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tgl_input);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+					$sisa_kbTi = $this->ModTransaksiBaku->getKbSisa($id_baku, $tgl_input);
+					$totalStokTi = $stokTi - $qty_input;
+					$totalKbTi = $kbTi - $kb_input;
+					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->updateKbMasuk($totalKbTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			    }
+				else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+					if ($fifo <= 0) {
+						$this->ModInputBaku->updateStatusOut($id_input);
+					} else {
+						$this->ModInputBaku->updateStatusHampir($id_input);
+					}
+			    }
+			}
+
+			// fifo logic Add
+			$quantity = $qtyBaru;
+			$getInput = $this->ModInputBaku->getByStatusAsc($id_baku);
+	        foreach ($getInput as $row){
+			    $id_input = $row->id_input;
+			    $fifo = $row->fifo;
+			    $status = $row->status;
+
+			    if ($quantity > $fifo) {
+			    	$quantity = $quantity - $fifo;
+			    	$this->ModInputBaku->updateStatusOut($id_input);
+			    	$this->ModInputBaku->updateFifo($id_input, 0);
+			    }
+				else {
+					$fifo = $fifo - $quantity;
+			    	$this->ModInputBaku->updateFifo($id_input, $fifo);
+			    	$quantity = 0;
+			    }
+			}
+
+			// set status Add
+			$setStatus = $this->ModInputBaku->selectAll();
+	        foreach ($setStatus as $row){
+			    $id_input = $row->id_input;
+			    $id_baku = $row->id_baku;
+			    $expired = $row->expired;
+			    $status = $row->status;
+			    $tgl_input = $row->tgl_input;
+			    $qty_input = $row->qty_input;
+			    $kb_input = $row->kb_input;
+			    $fifo = $row->fifo;
+			    $today = date('Y-m-d');
+			    $today_time = strtotime($today);
+				$expired_time = strtotime($expired);
+				$stok = $this->ModBaku->getStok($id_baku);
+				$kb = $this->ModBaku->getKb($id_baku);
+
+			    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+			    	$this->ModInputBaku->updateStatusExpired($id_input);
+			    	$total = $stok - $qty_input;
+					$totalKb = $kb - $kb_input;
+					$this->ModBaku->updateStokWithId($total, $id_baku);
+					$this->ModBaku->updateKbWithId($totalKb, $id_baku);
+					$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+					// transaksi
+					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+					$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tgl_input);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+					$sisa_kbTi = $this->ModTransaksiBaku->getKbSisa($id_baku, $tgl_input);
+					$totalStokTi = $stokTi - $qty_input;
+					$totalKbTi = $kbTi - $kb_input;
+					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->updateKbMasuk($totalKbTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			    }
+				else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+					if ($fifo <= 0) {
+						$this->ModInputBaku->updateStatusOut($id_input);
+					} else {
+						$this->ModInputBaku->updateStatusHampir($id_input);
+					}
+			    }
+			}
+
+			// transaksi items
 			if ($tanggalLama == $tanggalBaru) {
 				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
 				$kbTi = $this->ModTransaksiBaku->getKbKeluar($id_baku, $tanggalBaru);

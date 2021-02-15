@@ -13,10 +13,9 @@
                               <tr>
                                  <th>No</th>
                                  <th>Nama</th>
-								 <th>Netto</th>
-								 <th>Merk</th>
+								 <th>Produsen</th>
 								 <th>Stok</th>
-								 <th>Koli / Box</th>
+								 <th>Pack</th>
 								 <th>Stok Limit</th>
                                  <th class="disabled-sorting text-center">Actions</th>
                               </tr>
@@ -25,10 +24,9 @@
                               <tr>
                                  <th>No</th>
                                  <th>Nama</th>
-								 <th>Netto</th>
-								 <th>Merk</th>
+								 <th>Produsen</th>
 								 <th>Stok</th>
-								 <th>Koli / Box</th>
+								 <th>Pack</th>
 								 <th>Stok Limit</th>
                                  <th class="text-center">Actions</th>
                               </tr>
@@ -39,8 +37,7 @@
                               <tr>
                                  <td><?php echo $no;?></td>
                                  <td><?php echo $k->nama_baku;?></td>
-								 <td><?php echo $k->netto;?></td>
-								 <td><?php echo $k->merk;?></td>
+								 <td><?php echo $k->produsen;?></td>
 								 <td><?php echo $k->stok;?></td>
 								 <td><?php echo $k->kb;?></td>
 								 <td><?php echo $k->stok_limit;?></td>

@@ -13,10 +13,10 @@
        } 
      ?>
     <header class="content__title">
-        <h1>Input Bahan Baku</h1>
-        <div class="actions">
+        <h1>Bahan Baku Expired</h1>
+        <!-- <div class="actions">
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
-        </div>
+        </div> -->
     </header>
 
     <div class="card">
@@ -24,7 +24,7 @@
             <div>
                 <div class="row">
                     <div class="col-4">
-                        <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('InputBaku/');?>"
+                        <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('InputExpired/');?>"
                             method="post">
                             <div class="form-group">
                                 <input class="form-control" type="date" name="start"
@@ -100,17 +100,15 @@
                             <td><?php echo $k->keterangan;?></td>
                             <td><?php echo $k->status;?></td>
                             <td class="td-actions text-right">
-                            <?php if($this->session->userdata('level')=="superadmin"){ ?>
-                                <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
+<!--                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                 </button>
-                                &nbsp;
+                                &nbsp; -->
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-round"
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
-                            <?php } ?>
                             </td>
                         </tr>
                         <?php $no++; }
@@ -135,17 +133,15 @@
                             <td><?php echo $k->keterangan;?></td>
                             <td><?php echo $k->status;?></td>
                             <td class="td-actions text-right">
-                            <?php if($this->session->userdata('level')=="superadmin"){ ?>
-                                <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
+<!--                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                 </button>
-                                &nbsp;
+                                &nbsp; -->
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-round"
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
-                                <?php } ?>
                             </td>
                         </tr>
                         <?php $no++; }
@@ -223,9 +219,9 @@ $(document).ready(function() {
             b.preventDefault();
             var a;
             if (simpan == "tambah") {
-                a = "<?php echo base_url();?>InputBaku/add";
+                a = "<?php echo base_url();?>InputExpired/add";
             } else {
-                a = "<?php echo base_url();?>InputBaku/update";
+                a = "<?php echo base_url();?>InputExpired/update";
             }
             $.ajax({
                 url: a,
@@ -253,7 +249,7 @@ function tambah() {
     simpan = "tambah";
     $(".form")[0].reset();
     $("#modal-lg").modal("show");
-    $("#modalbody-lg").load("<?php echo base_url();?>InputBaku/modal/", function(a) {
+    $("#modalbody-lg").load("<?php echo base_url();?>InputExpired/modal/", function(a) {
         $("#modalbody-lg").html(a)
     })
 }
@@ -262,7 +258,7 @@ function ganti(a) {
     simpan = "update";
     $(".form")[0].reset();
     $("#modal-lg").modal("show");
-    $("#modalbody-lg").load("<?php echo base_url();?>InputBaku/edit/" + a, function(b) {
+    $("#modalbody-lg").load("<?php echo base_url();?>InputExpired/edit/" + a, function(b) {
         $("#modalbody-lg").html(b)
     })
 }
@@ -280,7 +276,7 @@ function hapus(a) {
         cancelButtonText: "Batal"
     }).then((result) => {
         if (result.value == true) {
-            $.get("<?php echo base_url()?>InputBaku/delete/" + a, function(b) {
+            $.get("<?php echo base_url()?>InputExpired/delete/" + a, function(b) {
                 location.reload();
             })
         }

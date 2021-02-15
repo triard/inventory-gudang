@@ -39,9 +39,7 @@
                                     Produk - <?php echo $data->nama_baku; ?>
                                 </h4>
                                 <div style="text-transform: capitalize; margin-left: 10px;">
-                                    Merk <span style="margin-left: 13px"> : &nbsp; <?php echo $data->merk; ?> </span>
-                                    <br>
-                                    Netto <span style="margin-left: 10px"> : &nbsp; <?php echo $data->netto; ?> </span>
+                                    Produsen <span style="margin-left: 13px"> : &nbsp; <?php echo $data->produsen; ?> </span>
                                 </div>
                             </th>
                         </tr>
@@ -58,11 +56,11 @@
                         <tr class="bg-danger text-white">
                             <!-- <th>No</th> -->
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -70,11 +68,11 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Tanggal</th>
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                             <th class="text-center">PCS</th>
-                            <th class="text-center">Koli/Box</th>
+                            <th class="text-center">Pack</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center">Actions</th>
                         </tr>

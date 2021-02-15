@@ -64,9 +64,11 @@
             <?php } 
             if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
             <li class="navigation__sub">
-                <a data-toggle="collapse" href="#xmod2" role="button" aria-expanded="false" aria-controls="xmod2"><i
+<!--                 <a data-toggle="collapse" href="#xmod2" role="button" aria-expanded="false" aria-controls="xmod2"><i
                         class="fas fa-box"></i> Data
-                    Bahan Baku<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
+                    Bahan Baku<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a> -->
+                <a data-toggle="collapse" href="#xmod2" role="button" aria-expanded="false" aria-controls="xmod2"><i class="fas fa-archive"></i> Data
+                 Bahan Baku<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
                 <div class="collapse xmenu" id="xmod2">
                     <ul style="padding-left: 10px;">
                         <li><a href="<?php echo base_url('Baku');?>"><i class="fas fa-boxes"></i> Barang</a></li>
@@ -76,6 +78,8 @@
                                 Masuk</a></li>
                         <li><a href="<?php echo base_url('OutputBaku');?>"><i class="fas fa-sign-out-alt"></i> Barang
                                 Keluar</a></li>
+                        <li><a href="<?php echo base_url('InputExpired');?>"><i class="fas fa fa-exclamation-triangle"></i> Barang
+                                Expired</a></li>
                     </ul><br>
                 </div>
             </li>

@@ -73,6 +73,30 @@ class ModTransaksiBaku extends CI_model {
 		$this->db->update('transaksi_baku', $data);
 	}
 
+	public function updateKeteranganNoId($id_baku, $tgl_input){
+		$query1 = $this->db->query("SELECT SUM(qty_input) AS qty FROM input_baku WHERE id_baku= '$id_baku' AND tgl_input = '$tgl_input' AND status = 'expired'");
+        $hasil1 = $query1->row();
+        $total = $hasil1->qty;
+        if ($total > 0) {
+        	$keterangan = 'Terdapat '.$total.' item yang sudah expired.';
+        }
+        else {
+        	$keterangan = '';	
+        }
+		$data = array('keterangan' => $keterangan);
+		$this->db->where('tanggal', $tgl_input);
+		$this->db->where('id_baku', $id_baku);
+		$this->db->update('transaksi_baku', $data);
+	}
+
+	// public function updateKeteranganNoValue($id_baku, $tgl_input){
+ //        $keterangan = '';
+	// 	$data = array('keterangan' => $keterangan);
+	// 	$this->db->where('tanggal', $tgl_input);
+	// 	$this->db->where('id_baku', $id_baku);
+	// 	$this->db->update('transaksi_baku', $data);
+	// }
+
 	public function getStokMasuk($id_baku, $tanggal){
         $query = $this->db->query("SELECT stok_masuk from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
         $hasil = $query->row();

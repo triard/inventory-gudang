@@ -1,4 +1,17 @@
 <section class="content">
+    <!-- Alert -->
+    <?php
+      if (!empty($this->session->flashdata('cek'))) {
+    ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+        <?php echo $this->session->flashdata('cek'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+       } 
+     ?>
     <div class="card">
         <div class="card-header" style="background-color: #ecf0f1;">
             <h1>Dashboard</h1>

@@ -11,6 +11,25 @@
     <?php
        } 
      ?>
+    <?php
+      if (!empty($notif)) {
+    ?>
+     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+        Anda memiliki beberapa produk yang hampir expired :
+        <br>
+        <?php $no=1;
+            foreach ($notif as $notif) { 
+            echo "- ","&nbsp;",$notif->nama_baku," sebanyak ",$notif->fifo," items";
+            echo "<br>";
+            }
+        ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <?php
+       } 
+     ?>
     <header class="content__title">
         <h1>Output Bahan Baku</h1>
         <div class="actions">
@@ -46,7 +65,6 @@
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
-                            <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
@@ -61,7 +79,6 @@
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
-                            <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
@@ -80,7 +97,6 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->qty_output;?></td>
                             <td><?php echo $k->kb_output;?></td>
                             <td>
@@ -109,7 +125,6 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->qty_output;?></td>
                             <td><?php echo $k->kb_output;?></td>
                             <td>
