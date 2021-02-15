@@ -7,7 +7,7 @@
                 <!-- <option value="0">baku Baru</option> -->
                 <option disabled selected>Pilih Bahan Baku</option>
                 <?php foreach ($baku as $i): ?>
-                <option value="<?php echo  $i->id_baku?>"><?php echo $i->nama_baku;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
+                <option value="<?php echo  $i->id_baku?>"><?php echo $i->nama_baku;?> - <?php echo $i->produsen;?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -17,12 +17,8 @@
                 <input class="form-control" name="nama_baku" type="text" placeholder="Nama baku" readonly>
             </div>
             <div class="form-group">
-                <label>Netto</label><br>
-                <input class="form-control" name="netto" type="text" placeholder="Netto" readonly>
-            </div>
-            <div class="form-group">
-                <label>Merk</label><br>
-                <input class="form-control" name="merk" type="text" placeholder="Merk" readonly>
+                <label>Produsen</label><br>
+                <input class="form-control" name="produsen" type="text" placeholder="Merk" readonly>
             </div>
         </div>
         <div class="form-group">
@@ -33,13 +29,17 @@
             <label>Expired</label><br>
             <input class="form-control" name="expired" type="date" placeholder="00-00-0000" required>
         </div>
+        <div class="form-group">
+            <label>Keterangan</label><br>
+            <textarea class="form-control" name="keterangan" cols="30" rows="2"></textarea>
+        </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
             <label>Supplier</label>
             <select name="id_supplier" class="select2 supp" required>
                 <option value="0">Supplier Baru</option>
-                <option disabled>------------</option>
+                <option disabled>--------------------------</option>
                 <?php foreach ($supplier as $s): ?>
                 <option value="<?php echo $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
                 <?php endforeach; ?>
@@ -48,11 +48,11 @@
         <div class="set-supplier">
             <div class="form-group">
                 <label>Nama Supplier</label><br>
-                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" readonly>
+                <input class="form-control" name="nama_supplier" type="text" placeholder="Nama Supplier" required>
             </div>
             <div class="form-group">
                 <label>Kontak</label><br>
-                <input class="form-control" name="kontak" type="text" placeholder="Kontak" readonly>
+                <input class="form-control" name="kontak" type="text" placeholder="Kontak" required>
             </div>
         </div>
         <div class="form-group">
@@ -60,7 +60,7 @@
             <input class="form-control" name="qty_input" type="number" placeholder="000" required>
         </div>
         <div class="form-group">
-            <label>Koli / Box</label><br>
+            <label>Pack</label><br>
             <input class="form-control" name="kb_input" type="number" placeholder="000" required>
         </div>
         <div class="form-group">
@@ -72,44 +72,118 @@
 </div>
 <?php } else { ?>
     <?php foreach ($inputEdit as $inputEdit): ?>
-    <input type="hidden" name="id_input" value="<?php echo $inputEdit->id_input;?>">
-    <input name="id_user" type="hidden" value="<?php echo  $inputEdit->id_user?>">
-    <div class="form-group">
-    <label>Bahan Baku</label>
-    <select name="id_baku" class="custom-select form-control" required>
-        <option selected value="<?php echo  $inputEdit->id_baku?>" read><?php echo $inputEdit->nama_baku ?></option>
-    </select>
-</div>
-<div class="form-group">
-    <label>Supplier</label>
-    <select name="id_supplier" class="custom-select form-control" required>
-        <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
-        <option disabled>--------------------------</option>
-        <?php foreach ($supplier as $s): ?>
-        <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
-        <?php endforeach; ?>
-    </select>
-</div>
-<div class="form-group">
-    <label>Quantity</label><br>
-    <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Koli / Box</label><br>
-    <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Tanggal</label><br>
-    <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" required>
-</div>
-<div class="form-group">
-    <label>Expired</label><br>
-    <input class="form-control" name="expired" value="<?php echo  $inputEdit->expired?>" type="date" placeholder="00-00-0000" required>
-</div>
-<div class="form-group">
-    <label>No. Batch</label><br>
-    <input class="form-control" name="batch" value="<?php echo  $inputEdit->batch?>" type="text" placeholder="No. Batch" required>
-</div>
+    <?php if ($inputEdit->status == 'out' || $inputEdit->status == 'expired') { ?>
+        <?php
+          if ($inputEdit->status == 'out') {
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+            Barang telah keluar!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php
+           } 
+         ?>
+         <?php
+          if ($inputEdit->status == 'expired') {
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+            Barang telah Expired!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php
+           } 
+         ?>
+        <input type="hidden" name="id_input" value="<?php echo $inputEdit->id_input;?>">
+        <input name="id_user" type="hidden" value="<?php echo  $inputEdit->id_user?>">
+        <div class="form-group">
+            <label>Bahan Baku</label>
+            <select name="id_baku" class="custom-select form-control" required>
+                <option selected value="<?php echo  $inputEdit->id_baku?>" read><?php echo $inputEdit->nama_baku ?></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Supplier</label>
+            <select name="id_supplier" class="custom-select form-control" required>
+                <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
+                <option disabled>--------------------------</option>
+                <?php foreach ($supplier as $s): ?>
+                <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Quantity</label><br>
+            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" readonly>
+        </div>
+        <div class="form-group">
+            <label>Pack</label><br>
+            <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" readonly>
+        </div>
+        <div class="form-group">
+            <label>Tanggal</label><br>
+            <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" readonly>
+        </div>
+        <div class="form-group">
+            <label>Expired</label><br>
+            <input class="form-control" name="expired" value="<?php echo  $inputEdit->expired?>" type="date" placeholder="00-00-0000" readonly>
+        </div>
+        <div class="form-group">
+            <label>No. Batch</label><br>
+            <input class="form-control" name="batch" value="<?php echo  $inputEdit->batch?>" type="text" placeholder="No. Batch" readonly>
+        </div>
+        <div class="form-group">
+            <label>Keterangan</label><br>
+            <textarea class="form-control" name="keterangan" cols="30" rows="2"><?php echo $inputEdit->keterangan?></textarea>
+        </div>
+    <?php } else { ?>
+        <input type="hidden" name="id_input" value="<?php echo $inputEdit->id_input;?>">
+        <input name="id_user" type="hidden" value="<?php echo  $inputEdit->id_user?>">
+        <div class="form-group">
+            <label>Bahan Baku</label>
+            <select name="id_baku" class="custom-select form-control" required>
+                <option selected value="<?php echo  $inputEdit->id_baku?>" read><?php echo $inputEdit->nama_baku ?></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Supplier</label>
+            <select name="id_supplier" class="custom-select form-control" required>
+                <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
+                <option disabled>--------------------------</option>
+                <?php foreach ($supplier as $s): ?>
+                <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Quantity</label><br>
+            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
+        </div>
+        <div class="form-group">
+            <label>Koli / Box</label><br>
+            <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
+        </div>
+        <div class="form-group">
+            <label>Tanggal</label><br>
+            <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" required>
+        </div>
+        <div class="form-group">
+            <label>Expired</label><br>
+            <input class="form-control" name="expired" value="<?php echo  $inputEdit->expired?>" type="date" placeholder="00-00-0000" required>
+        </div>
+        <div class="form-group">
+            <label>No. Batch</label><br>
+            <input class="form-control" name="batch" value="<?php echo  $inputEdit->batch?>" type="text" placeholder="No. Batch" required>
+        </div>
+        <div class="form-group">
+            <label>Keterangan</label><br>
+            <textarea class="form-control" name="keterangan" cols="30" rows="2"><?php echo $inputEdit->keterangan?></textarea>
+        </div>
+    <?php } ?>
+    
 <?php endforeach; ?>
 <?php } ?>
 <script>

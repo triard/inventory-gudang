@@ -6,19 +6,15 @@
     <select name="id_baku" class="select2" id="baku" required>
         <option disabled selected>Pilih Bahan Baku</option>
         <?php foreach ($baku as $i): ?>
-        <option value="<?php echo  $i->id_baku?>"><?php echo $i->nama_baku;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
+        <option value="<?php echo  $i->id_baku?>"><?php echo $i->nama_baku;?> - <?php echo $i->produsen;?></option>
         <?php endforeach; ?>
     </select> 
 </div>
 <div class="set-baku">
     <input class="form-control" name="nama_baku" type="hidden">
     <div class="form-group">
-        <label>Netto</label><br>
-        <input class="form-control" name="netto" type="text" placeholder="Netto" readonly>
-    </div>
-    <div class="form-group">
-        <label>Merk</label><br>
-        <input class="form-control" name="merk" type="text" placeholder="Merk" readonly>
+        <label>Produsen</label><br>
+        <input class="form-control" name="produsen" type="text" placeholder="Produsen" readonly>
     </div>
 </div>
 </div>
@@ -28,7 +24,7 @@
     <input class="form-control" name="qty_output" type="number" placeholder="000" required>
 </div>
 <div class="form-group">
-    <label>Koli / Box</label><br>
+    <label>Pack</label><br>
     <input class="form-control" name="kb_output" type="number" placeholder="000" required>
 </div>
 <div class="form-group">
@@ -54,7 +50,7 @@
     <input class="form-control" name="qty_output" type="number" value="<?php echo $outputEdit->qty_output?>" placeholder="000" required>
 </div>
 <div class="form-group">
-    <label>Koli / Box</label><br>
+    <label>Pack</label><br>
     <input class="form-control" name="kb_output" type="number" value="<?php echo $outputEdit->kb_output?>" placeholder="000" required>
 </div>
 <div class="form-group">

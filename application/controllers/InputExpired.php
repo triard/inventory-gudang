@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class InputBaku extends CI_Controller {
+class InputExpired extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('ModInputBaku');
@@ -16,11 +16,12 @@ class InputBaku extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
-		$data['input'] = $this->ModInputBaku->selectAll();
-		$data['filter'] = $this->ModInputBaku->filter();
+
+		$data['input'] = $this->ModInputBaku->listExpired();
+		$data['filter'] = $this->ModInputBaku->filterExpired();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
-		$this->load->view('inputBaku',$data);
+		$this->load->view('inputExpired',$data);
 		$this->load->view('template/footer');
 	}
 	public function modal() {
@@ -301,6 +302,7 @@ class InputBaku extends CI_Controller {
 				$this->ModBaku->updateStokWithId($total, $id_baku);
 				$this->ModBaku->updateKbWithId($totalKb, $id_baku);
 
+
 				// transaksi
 				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
 				$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tanggal);
@@ -359,7 +361,7 @@ class InputBaku extends CI_Controller {
 		$totalKb = $kb - ($kbLama-$kbBaru);
 
 		if ($total < 0 || $totalKb < 0) {
-			$this->session->set_flashdata('cek', 'Stok / Pack tidak mencukupi!');
+			$this->session->set_flashdata('cek', 'Stok / Koli tidak mencukupi!');
 		} else {
 			$this->ModInputBaku->update();
 			$this->ModInputBaku->update_H_Stok($total);

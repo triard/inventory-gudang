@@ -1,28 +1,10 @@
 <section class="content">
+    <!-- Alert -->
     <?php
-      if (!empty($this->session->flashdata('stok'))) {
+      if (!empty($this->session->flashdata('cek'))) {
     ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
-        <?php echo $this->session->flashdata('stok'); ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <?php
-       } 
-     ?>
-    <?php
-      if (!empty($notif)) {
-    ?>
-     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
-        Anda memiliki beberapa produk yang hampir expired :
-        <br>
-        <?php $no=1;
-            foreach ($notif as $notif) { 
-            echo "- ","&nbsp;",$notif->nama_baku," sebanyak ",$notif->fifo," items";
-            echo "<br>";
-            }
-        ?>
+        <?php echo $this->session->flashdata('cek'); ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -31,32 +13,35 @@
        } 
      ?>
     <header class="content__title">
-        <h1>Output Bahan Baku</h1>
-        <div class="actions">
+        <h1>Bahan Baku Expired</h1>
+        <!-- <div class="actions">
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
-        </div>
+        </div> -->
     </header>
+
     <div class="card">
         <div class="card-body">
-            <div class="row">
-                <div class="col-4">
-                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('OutputBaku/');?>"
-                        method="post">
-                        <div class="form-group">
-                            <input class="form-control" type="date" name="start"
-                                value="<?php echo $this->input->post('start') ?>" required>
-                        </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <input class="form-control" type="date" name="end"
-                            value="<?php echo $this->input->post('end') ?>" required>
+            <div>
+                <div class="row">
+                    <div class="col-4">
+                        <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('InputExpired/');?>"
+                            method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="date" name="start"
+                                    value="<?php echo $this->input->post('start') ?>" required>
+                            </div>
                     </div>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
-                        <i class="fas fa-filter"></i> Filter</button>
-                    </form>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input class="form-control" type="date" name="end"
+                                value="<?php echo $this->input->post('end') ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
+                            <i class="fas fa-filter"></i> Filter</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="table-responsive">
@@ -65,90 +50,103 @@
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
+                            <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Koli / Box</th>
-                            <th>Tanggal Keluar</th>
+                            <th>Pack</th>
+                            <th>Tanggal Masuk</th>
+                            <th>No. Batch</th>
+                            <th>Expired</th>
                             <th>Keterangan</th>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
-                            <th class="disabled-sorting text-center">Actions</th>
-                            <?php } ?>
+                            <th>Status</th>
+                            <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No</th>
                             <th>Bahan Baku</th>
+                            <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Koli / Box</th>
-                            <th>Tanggal Keluar</th>
+                            <th>Pack</th>
+                            <th>Tanggal Masuk</th>
+                            <th>No. Batch</th>
+                            <th>Expired</th>
                             <th>Keterangan</th>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
-                            <th class="disabled-sorting text-center">Actions</th>
-                            <?php } ?>
+                            <th>Status</th>
+                            <th class="text-right">Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <?php if($filter == null && $this->input->post('start') != null){
+
 						}else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $k) { ?>
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->qty_output;?></td>
-                            <td><?php echo $k->kb_output;?></td>
+                            <td><?php echo $k->nama_supplier;?></td>
+                            <td><?php echo $k->qty_input;?></td>
+                            <td><?php echo $k->kb_input;?></td>
                             <td>
-                                <?php $d = new DateTime($k->tgl_output);
+                                <?php $d = new DateTime($k->tgl_input);
 							 echo $d->format("d/m/Y");?>
                             </td>
-                            <td><?php echo $k->keterangan ?></td>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
-                            <td class="td-actions text-center">
-                                <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
+                            <td><?php echo $k->batch;?></td>
+                            <td>
+                                <?php $dt = new DateTime($k->expired);
+                                 echo $dt->format("d/m/Y");?>
+                            </td>
+                            <td><?php echo $k->keterangan;?></td>
+                            <td><?php echo $k->status;?></td>
+                            <td class="td-actions text-right">
+<!--                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                 </button>
-                                &nbsp;
+                                &nbsp; -->
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-round"
-                                    data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
+                                    data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
                             </td>
-                            <?php } ?>
                         </tr>
                         <?php $no++; }
-						} else{ ?>
+						}else{ ?>
                         <?php $no=1;
-                        foreach ($output as $k) { ?>
+                        foreach ($input as $k) { ?>
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->qty_output;?></td>
-                            <td><?php echo $k->kb_output;?></td>
+                            <td><?php echo $k->nama_supplier;?></td>
+                            <td><?php echo $k->qty_input;?></td>
+                            <td><?php echo $k->kb_input;?></td>
                             <td>
-                                <?php $d = new DateTime($k->tgl_output);
-							 echo $d->format("d/m/Y");?>
+                                <?php $d = new DateTime($k->tgl_input);
+							     echo $d->format("d/m/Y");?>
                             </td>
-                            <td><?php echo $k->keterangan ?></td>
-                            <?php 
-                            if($this->session->userdata('level') == 'superadmin'){ ?>
-                            <td class="td-actions text-center">
-                                <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
+                            <td><?php echo $k->batch;?></td>
+                            <td>
+                                <?php $dt = new DateTime($k->expired);
+                                 echo $dt->format("d/m/Y");?>
+                            </td>
+                            <td><?php echo $k->keterangan;?></td>
+                            <td><?php echo $k->status;?></td>
+                            <td class="td-actions text-right">
+<!--                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                 </button>
-                                &nbsp;
+                                &nbsp; -->
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-round"
-                                    data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
+                                    data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
                             </td>
-                            <?php } ?>
                         </tr>
-                        <?php $no++; } } ?>
+                        <?php $no++; }
+						} ?>
+
                     </tbody>
                 </table>
             </div>
@@ -221,9 +219,9 @@ $(document).ready(function() {
             b.preventDefault();
             var a;
             if (simpan == "tambah") {
-                a = "<?php echo base_url();?>OutputBaku/add"
+                a = "<?php echo base_url();?>InputExpired/add";
             } else {
-                a = "<?php echo base_url();?>OutputBaku/update"
+                a = "<?php echo base_url();?>InputExpired/update";
             }
             $.ajax({
                 url: a,
@@ -233,7 +231,7 @@ $(document).ready(function() {
                 cache: false,
                 processData: false,
                 success: function(c) {
-                    // $("#myModal").modal("hide");
+                    $("#modal-lg").modal("hide");
                     // swal("Sukses!", "", "success");
                     location.reload();
                 },
@@ -251,7 +249,7 @@ function tambah() {
     simpan = "tambah";
     $(".form")[0].reset();
     $("#modal-lg").modal("show");
-    $("#modalbody-lg").load("<?php echo base_url();?>OutputBaku/modal/", function(a) {
+    $("#modalbody-lg").load("<?php echo base_url();?>InputExpired/modal/", function(a) {
         $("#modalbody-lg").html(a)
     })
 }
@@ -260,7 +258,7 @@ function ganti(a) {
     simpan = "update";
     $(".form")[0].reset();
     $("#modal-lg").modal("show");
-    $("#modalbody-lg").load("<?php echo base_url();?>OutputBaku/edit/" + a, function(b) {
+    $("#modalbody-lg").load("<?php echo base_url();?>InputExpired/edit/" + a, function(b) {
         $("#modalbody-lg").html(b)
     })
 }
@@ -278,7 +276,7 @@ function hapus(a) {
         cancelButtonText: "Batal"
     }).then((result) => {
         if (result.value == true) {
-            $.get("<?php echo base_url()?>OutputBaku/delete/" + a, function(b) {
+            $.get("<?php echo base_url()?>InputExpired/delete/" + a, function(b) {
                 location.reload();
             })
         }

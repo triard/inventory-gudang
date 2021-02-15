@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03 Feb 2021 pada 07.37
+-- Generation Time: 05 Feb 2021 pada 10.24
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -19,6 +19,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_inventorymel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `baku`
+--
+
+CREATE TABLE `baku` (
+  `id_baku` bigint(20) NOT NULL,
+  `nama_baku` varchar(100) NOT NULL,
+  `netto` varchar(50) NOT NULL,
+  `merk` varchar(50) DEFAULT NULL,
+  `stok` int(11) NOT NULL,
+  `kb` int(11) NOT NULL,
+  `stok_limit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `input_baku`
+--
+
+CREATE TABLE `input_baku` (
+  `id_input` bigint(20) NOT NULL,
+  `id_baku` bigint(20) NOT NULL,
+  `id_supplier` bigint(20) NOT NULL,
+  `qty_input` int(11) NOT NULL,
+  `kb_input` int(11) NOT NULL,
+  `tgl_input` date NOT NULL,
+  `h_stokInput` int(11) NOT NULL,
+  `nama_baku` varchar(100) NOT NULL,
+  `netto` varchar(50) NOT NULL,
+  `merk` varchar(50) DEFAULT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `batch` varchar(50) NOT NULL,
+  `expired` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,6 +99,27 @@ CREATE TABLE `items` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `output_baku`
+--
+
+CREATE TABLE `output_baku` (
+  `id_output` bigint(20) NOT NULL,
+  `id_baku` bigint(20) NOT NULL,
+  `qty_output` int(11) NOT NULL,
+  `kb_output` int(11) NOT NULL,
+  `tgl_output` date NOT NULL,
+  `h_stokOutput` int(11) NOT NULL,
+  `nama_baku` varchar(100) NOT NULL,
+  `netto` varchar(50) NOT NULL,
+  `merk` varchar(50) DEFAULT NULL,
+  `keterangan` text NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `id_user` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `output_items`
 --
 
@@ -94,11 +153,42 @@ CREATE TABLE `suppliers` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `suppliers_baku`
+--
+
+CREATE TABLE `suppliers_baku` (
+  `id_supplier` bigint(20) NOT NULL,
+  `nama_supplier` varchar(100) NOT NULL,
+  `kontak` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_baku`
+--
+
+CREATE TABLE `transaksi_baku` (
+  `id_tb` bigint(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `stok_masuk` int(11) NOT NULL,
+  `kb_masuk` int(11) NOT NULL,
+  `stok_keluar` int(11) NOT NULL,
+  `kb_keluar` int(11) NOT NULL,
+  `sisa_stok` int(11) NOT NULL,
+  `sisa_kb` int(11) NOT NULL,
+  `keterangan` varchar(200) NOT NULL,
+  `id_baku` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `transaksi_items`
 --
 
 CREATE TABLE `transaksi_items` (
-  `id_ti` int(11) NOT NULL,
+  `id_ti` bigint(11) NOT NULL,
   `tanggal` date NOT NULL,
   `stok_masuk` int(11) NOT NULL,
   `kb_masuk` int(11) NOT NULL,
@@ -107,7 +197,7 @@ CREATE TABLE `transaksi_items` (
   `sisa_stok` int(11) DEFAULT NULL,
   `sisa_kb` int(11) DEFAULT NULL,
   `keterangan` varchar(200) DEFAULT NULL,
-  `id_item` int(11) NOT NULL
+  `id_item` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -137,6 +227,18 @@ INSERT INTO `user` (`id_user`, `nama_user`, `email`, `password`, `level`) VALUES
 --
 
 --
+-- Indexes for table `baku`
+--
+ALTER TABLE `baku`
+  ADD PRIMARY KEY (`id_baku`);
+
+--
+-- Indexes for table `input_baku`
+--
+ALTER TABLE `input_baku`
+  ADD PRIMARY KEY (`id_input`);
+
+--
 -- Indexes for table `input_items`
 --
 ALTER TABLE `input_items`
@@ -152,6 +254,12 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`id_item`);
 
 --
+-- Indexes for table `output_baku`
+--
+ALTER TABLE `output_baku`
+  ADD PRIMARY KEY (`id_output`);
+
+--
 -- Indexes for table `output_items`
 --
 ALTER TABLE `output_items`
@@ -164,6 +272,18 @@ ALTER TABLE `output_items`
 --
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id_supplier`);
+
+--
+-- Indexes for table `suppliers_baku`
+--
+ALTER TABLE `suppliers_baku`
+  ADD PRIMARY KEY (`id_supplier`);
+
+--
+-- Indexes for table `transaksi_baku`
+--
+ALTER TABLE `transaksi_baku`
+  ADD PRIMARY KEY (`id_tb`);
 
 --
 -- Indexes for table `transaksi_items`
@@ -182,30 +302,55 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `baku`
+--
+ALTER TABLE `baku`
+  MODIFY `id_baku` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `input_baku`
+--
+ALTER TABLE `input_baku`
+  MODIFY `id_input` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `input_items`
 --
 ALTER TABLE `input_items`
-  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `output_baku`
+--
+ALTER TABLE `output_baku`
+  MODIFY `id_output` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `output_items`
 --
 ALTER TABLE `output_items`
-  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_output` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `suppliers_baku`
+--
+ALTER TABLE `suppliers_baku`
+  MODIFY `id_supplier` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `transaksi_baku`
+--
+ALTER TABLE `transaksi_baku`
+  MODIFY `id_tb` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
-  MODIFY `id_ti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_ti` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --

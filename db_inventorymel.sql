@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 05 Feb 2021 pada 10.24
+-- Generation Time: 15 Feb 2021 pada 04.02
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -29,8 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `baku` (
   `id_baku` bigint(20) NOT NULL,
   `nama_baku` varchar(100) NOT NULL,
-  `netto` varchar(50) NOT NULL,
-  `merk` varchar(50) DEFAULT NULL,
+  `produsen` varchar(50) DEFAULT NULL,
   `stok` int(11) NOT NULL,
   `kb` int(11) NOT NULL,
   `stok_limit` int(11) NOT NULL
@@ -51,11 +50,13 @@ CREATE TABLE `input_baku` (
   `tgl_input` date NOT NULL,
   `h_stokInput` int(11) NOT NULL,
   `nama_baku` varchar(100) NOT NULL,
-  `netto` varchar(50) NOT NULL,
-  `merk` varchar(50) DEFAULT NULL,
+  `produsen` varchar(50) DEFAULT NULL,
   `id_user` bigint(20) NOT NULL,
   `batch` varchar(50) NOT NULL,
-  `expired` date NOT NULL
+  `expired` date NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `keterangan` varchar(100) NOT NULL,
+  `fifo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -110,10 +111,8 @@ CREATE TABLE `output_baku` (
   `tgl_output` date NOT NULL,
   `h_stokOutput` int(11) NOT NULL,
   `nama_baku` varchar(100) NOT NULL,
-  `netto` varchar(50) NOT NULL,
-  `merk` varchar(50) DEFAULT NULL,
+  `produsen` varchar(50) DEFAULT NULL,
   `keterangan` text NOT NULL,
-  `status` varchar(50) NOT NULL,
   `id_user` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -305,22 +304,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `baku`
 --
 ALTER TABLE `baku`
-  MODIFY `id_baku` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_baku` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `input_baku`
 --
 ALTER TABLE `input_baku`
-  MODIFY `id_input` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_input` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `input_items`
 --
 ALTER TABLE `input_items`
-  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_input` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_item` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `output_baku`
 --
@@ -335,22 +334,22 @@ ALTER TABLE `output_items`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_supplier` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `suppliers_baku`
 --
 ALTER TABLE `suppliers_baku`
-  MODIFY `id_supplier` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_supplier` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `transaksi_baku`
 --
 ALTER TABLE `transaksi_baku`
-  MODIFY `id_tb` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_tb` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `transaksi_items`
 --
 ALTER TABLE `transaksi_items`
-  MODIFY `id_ti` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ti` bigint(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
