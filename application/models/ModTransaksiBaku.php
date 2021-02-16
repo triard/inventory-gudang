@@ -18,9 +18,22 @@ class ModTransaksiBaku extends CI_model {
 	public function filter($id) {
 		
 		$start = $this->input->post('start');
-		$end = $this->input->post('end');
+		$end = $this->input->post('end'); 
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->where('id_baku', $id);
-		$this->db->where("tanggal BETWEEN '$start 'AND' $end'");
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("tanggal BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("tanggal BETWEEN '$start 'AND' $end'");
+		}
 		return $this->db->get('transaksi_baku')->result();
 		
 	}

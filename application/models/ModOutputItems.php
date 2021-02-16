@@ -11,11 +11,24 @@ class ModOutputItems extends CI_model {
 	public function filter() {
 		$start = $this->input->post('start');
 		$end = $this->input->post('end');
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->select('*');
 		$this->db->from('output_items');
 		$this->db->join('user', 'output_items.id_user = user.id_user');
 		$this->db->order_by('tgl_output', "asc");
-		$this->db->where("output_items.tgl_output BETWEEN '$start 'AND' $end'");
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("output_items.tgl_output BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("output_items.tgl_output BETWEEN '$start 'AND' $end'");
+		}
         return $this->db->get()->result();
 	}
 	public function listItems() { 
@@ -135,14 +148,27 @@ class ModOutputItems extends CI_model {
 
 	public function OutputFilter()
 	{
-		$startOut = $this->input->post('startOut');
-		$endOut = $this->input->post('endOut');
+		$start = $this->input->post('startOut');
+		$end = $this->input->post('endOut');
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_items as a');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_output', "desc");
-		$this->db->where("a.tgl_output BETWEEN '$startOut 'AND' $endOut'");
-		$this->db->limit('7');
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("a.tgl_output BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("a.tgl_output BETWEEN '$start 'AND' $end'");
+		}
+		$this->db->limit('5');
         return $this->db->get()->result();
 	}
 

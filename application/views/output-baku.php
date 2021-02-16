@@ -14,7 +14,7 @@
     <?php
       if (!empty($notif)) {
     ?>
-     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 2%;">
         Anda memiliki beberapa produk yang hampir expired :
         <br>
         <?php $no=1;
@@ -39,24 +39,26 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('OutputBaku/');?>"
                         method="post">
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
-                                value="<?php echo $this->input->post('start') ?>" required>
+                                value="<?php echo $this->session->userdata('startSession') ?>" required>
                         </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <input class="form-control" type="date" name="end"
-                            value="<?php echo $this->input->post('end') ?>" required>
+                            value="<?php echo $this->session->userdata('endSession') ?>" required>
                     </div>
                 </div>
                 <div class="col-3">
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
+                    <a href="<?php echo site_url('OutputBaku/v_index');?>" class="btn btn-success btn-sm"><i
+                                class="fas fa-sync-alt"></i> Reset</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -91,6 +93,34 @@
                     </tfoot>
                     <tbody>
                         <?php if($filter == null && $this->input->post('start') != null){
+                        }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){ ?>
+                            <?php $no=1;
+                            foreach ($filter as $k) { ?>
+                            <tr>
+                                <td><?php echo $no;?></td>
+                                <td><?php echo $k->nama_baku;?></td>
+                                <td><?php echo $k->qty_output;?></td>
+                                <td><?php echo $k->kb_output;?></td>
+                                <td>
+                                    <?php $d = new DateTime($k->tgl_output);
+                                 echo $d->format("d/m/Y");?>
+                                </td>
+                                <td><?php echo $k->keterangan ?></td>
+                                <?php if($this->session->userdata('level') == 'superadmin'){ ?>
+                                <td class="td-actions text-center">
+                                    <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
+                                        class="btn btn-success btn-round" data-original-title="" title="">
+                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round"
+                                        data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
+                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
+                                    </button>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <?php $no++; }
 						}else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $k) { ?>
@@ -133,7 +163,7 @@
                             </td>
                             <td><?php echo $k->keterangan ?></td>
                             <td class="td-actions text-center">
-                            <?php if($this->session->userdata('level') == 'superadmin'){ ?>
+                                <?php if($this->session->userdata('level') == 'superadmin'){ ?>
                                 <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>

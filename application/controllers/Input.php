@@ -24,6 +24,21 @@ class Input extends CI_Controller {
 		$this->load->view('input',$data);
 		$this->load->view('template/footer');
 	}
+	public function v_index()
+	{
+		$q = $this->session->userdata('status');
+		if($q != "login") {
+			redirect('login','refresh');
+		}
+		$this->session->unset_userdata('startSession');
+		$this->session->unset_userdata('endSession');
+		$data['input'] = $this->ModInputItems->selectAll();
+		$data['filter'] = $this->ModInputItems->filter();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('input',$data);
+		$this->load->view('template/footer');
+	}
 	public function modal() {
 		$q = $this->session->userdata('status');
 		if($q != "login") {

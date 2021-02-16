@@ -8,26 +8,28 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-4">
-                <?php if($id!=null){ ?>    
-                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('baku/detail/'.$id->id_baku);?>"  
-                        method="post">
+                <div class="col-3">
+                    <?php if($id!=null){ ?>
+                    <form class="navbar-form navbar-left" role="search"
+                        action="<?php echo site_url('baku/detail/'.$id->id_baku);?>" method="post">
                         <?php } ?>
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
-                                value="<?php echo $this->input->post('start') ?>" required>
+                                value="<?php echo $this->session->userdata('startSession') ?>" required>
                         </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <input class="form-control" type="date" name="end"
-                            value="<?php echo $this->input->post('end') ?>" required>
+                            value="<?php echo $this->session->userdata('endSession') ?>" required>
                     </div>
                 </div>
                 <div class="col-3">
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
+                    <a href="<?php echo site_url('baku/v_detail/'.$id->id_baku);?>" class="btn btn-success btn-sm"><i
+                            class="fas fa-sync-alt"></i> Reset</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -39,7 +41,8 @@
                                     Produk - <?php echo $data->nama_baku; ?>
                                 </h4>
                                 <div style="text-transform: capitalize; margin-left: 10px;">
-                                    Produsen <span style="margin-left: 13px"> : &nbsp; <?php echo $data->produsen; ?> </span>
+                                    Produsen <span style="margin-left: 13px"> : &nbsp; <?php echo $data->produsen; ?>
+                                    </span>
                                 </div>
                             </th>
                         </tr>
@@ -49,7 +52,8 @@
                             <th colspan="2" class="text-center">Masuk</th>
                             <th colspan="2" class="text-center">Keluar</th>
                             <th colspan="2" class="text-center">Sisa Stok</th>
-                            <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan</th>
+                            <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan
+                            </th>
                             <th class="disabled-sorting text-center" rowspan="2" style="vertical-align: middle;">Actions
                             </th>
                         </tr>
@@ -78,7 +82,31 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                    <?php if($filter == null && $this->input->post('start') != null){
+                        <?php if($filter == null && $this->input->post('start') != null){
+                        }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){ ?>
+                            <?php $no=1;
+                            foreach ($filter as $t) { ?>
+                            <tr>
+                                <td class="text-center"><?php echo $no;?></td>
+                                <td class="text-center">
+                                    <?php $d = new DateTime($t->tanggal);
+                                 echo $d->format("d/m/Y");?>
+                                </td>
+                                <td class="text-center"><?php echo $t->stok_masuk;?></td>
+                                <td class="text-center"><?php echo $t->kb_masuk;?></td>
+                                <td class="text-center"><?php echo $t->stok_keluar;?></td>
+                                <td class="text-center"><?php echo $t->kb_keluar;?></td>
+                                <td class="text-center"><?php echo $t->sisa_stok;?></td>
+                                <td class="text-center"><?php echo $t->sisa_kb;?></td>
+                                <td class="text-center"><?php echo $t->keterangan;?></td>
+                                <td class="td-actions text-center">
+                                    <button type="button" onclick="ganti(<?php echo $t->id_tb;?>)" rel="tooltip"
+                                        class="btn btn-success btn-round" data-original-title="" title="">
+                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php $no++; } 
                     }else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $t) { ?>

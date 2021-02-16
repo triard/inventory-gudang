@@ -11,11 +11,24 @@ class ModOutputBaku extends CI_model {
 	public function filter() {
 		$start = $this->input->post('start');
 		$end = $this->input->post('end');
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->select('*');
 		$this->db->from('output_baku');
 		$this->db->join('user', 'output_baku.id_user = user.id_user');
 		$this->db->order_by('tgl_output', "asc");
-		$this->db->where("output_baku.tgl_output BETWEEN '$start 'AND' $end'");
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("output_baku.tgl_output BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("output_baku.tgl_output BETWEEN '$start 'AND' $end'");
+		}
         return $this->db->get()->result();
 	}
 	public function listBaku() { 
@@ -132,13 +145,26 @@ class ModOutputBaku extends CI_model {
 
 	public function OutputFilter()
 	{
-		$startOut = $this->input->post('startOutBaku');
-		$endOut = $this->input->post('endOutBaku');
+		$start = $this->input->post('startOutBaku');
+		$end = $this->input->post('endOutBaku');
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->select('*, SUM(a.qty_output) AS total_stok');
 		$this->db->from('output_baku as a');
 		$this->db->group_by('a.id_baku');
 		$this->db->order_by('a.qty_output', "desc");
-		$this->db->where("a.tgl_output BETWEEN '$startOut 'AND' $endOut'");
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("a.tgl_output BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("a.tgl_output BETWEEN '$start 'AND' $end'");
+		}
 		$this->db->limit('7');
         return $this->db->get()->result();
 	}

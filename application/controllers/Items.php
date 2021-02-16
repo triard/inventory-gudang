@@ -43,6 +43,25 @@ class Items extends CI_Controller {
 		$this->load->view('detail',$data);
 		$this->load->view('template/footer');
 	}
+	public function v_detail($id)
+	{
+		$q = $this->session->userdata('status');
+		if($q != "login") {
+			redirect('login','refresh');
+		}
+		$this->session->unset_userdata('startSession');
+		$this->session->unset_userdata('endSession');
+		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
+		$data['transaksi'] = $this->ModTransaksiItems->selectAllById($id); 
+		$data['data'] = $this->ModItems->getAllById($id);
+		$data['id'] = $this->ModTransaksiItems->selectId($id); 
+		$data['filter'] = $this->ModTransaksiItems->filter($id);
+		// $data['tanggal'] = $this->ModOutputItems->getTanggal();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('detail',$data);
+		$this->load->view('template/footer');
+	}
 	public function modal() {
 		$q = $this->session->userdata('status');
 		if($q != "login") {

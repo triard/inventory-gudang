@@ -40,21 +40,31 @@
                 </div>
             </div>
         </div>
-        <?php } 
-        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
+    </div>
+    <?php } ?>
+
+    <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="background-color: #29477F;">
+                    <h4 class="text-white">Bahan Baku</h4>
+                </div>
+            </div>
+        </div>
         <div class='col-md-4'>
             <div class="card rounded">
-                <div class="card-header" style="background-color: #f9ca24;">
+                <div class="card-header" style="background-color: #e67e22;">
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total Supplier Bahan Kemas<h3 class="text-white">
-                                <?php echo $supplier ?></h3>
+                        <div class="col-8 text-white">Total Supplier Bahan Baku<h3 class="text-white">
+                                <?php echo $supplierBaku ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="<?php echo base_url('supplier/') ?>">
+                    <a href="<?php echo base_url('supplierBaku/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -65,16 +75,16 @@
         </div>
         <div class='col-md-4'>
             <div class="card rounded">
-                <div class="card-header" style="background-color: #2ecc71;">
+                <div class="card-header" style="background-color: #9b59b6;">
                     <div class="row">
                         <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
 
-                        <div class="col-8 text-white">Total Bahan Kemas<h3 class="text-white"><?php echo $kemas ?></h3>
+                        <div class="col-8 text-white">Total Bahan Baku<h3 class="text-white"><?php echo $baku ?></h3>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="<?php echo base_url('items/') ?>">
+                    <a href="<?php echo base_url('baku/') ?>">
                         <div class="float-left">
                             <h6>Lihat Detail</h6>
                         </div>
@@ -83,85 +93,6 @@
                 </div>
             </div>
         </div>
-        <?php } 
-        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
-        <div class='col-md-4'>
-        <div class="card rounded">
-            <div class="card-header" style="background-color: #e67e22;">
-                <div class="row">
-                    <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
-
-                    <div class="col-8 text-white">Total Supplier Bahan Baku<h3 class="text-white">
-                            <?php echo $supplierBaku ?></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <a href="<?php echo base_url('supplierBaku/') ?>">
-                    <div class="float-left">
-                        <h6>Lihat Detail</h6>
-                    </div>
-                    <div class="float-right"><i class="fas fa-chevron-right"></i></div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class='col-md-4'>
-    <div class="card rounded">
-        <div class="card-header" style="background-color: #9b59b6;">
-            <div class="row">
-                <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
-
-                <div class="col-8 text-white">Total Bahan Baku<h3 class="text-white"><?php echo $baku ?></h3>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <a href="<?php echo base_url('baku/') ?>">
-                <div class="float-left">
-                    <h6>Lihat Detail</h6>
-                </div>
-                <div class="float-right"><i class="fas fa-chevron-right"></i></div>
-            </a>
-        </div>
-    </div>
-    </div>
-    <?php } ?>
-    </div>
-
-    <div class="row">
-    <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Stok Bahan Kemas Hampir Habis</h4>
-                    <table class="table table-sm table-striped">
-                        <thead>
-                            <tr>
-                                <td width="50">No</td>
-                                <td>Produk</td>
-                                <td width="100">Minimal Stok</td>
-                                <td width="50">Stok</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                         $no=1;
-                         foreach ($limitKemas as $l) { ?>
-                            <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $l->nama_item ?></td>
-                                <td><?php echo $l->stok_limit ?></td>
-                                <td><?php echo $l->stok?></td>
-                            </tr>
-                            <?php $no++; } ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <?php } 
-        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -220,10 +151,224 @@
                 </div>
             </div>
         </div>
-        <?php } ?>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistik Bahan Baku Masuk</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
+                                method="post">
+                                <div class="form-group">
+                                    <input class="form-control" type="date" name="startBaku"
+                                        value="<?php echo $this->session->userdata('startSession') ?>" required>
+                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control" type="date" name="endBaku"
+                                    value="<?php echo $this->session->userdata('endSession') ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                    class="glyphicon glyphicon-search"></i>
+                                <i class="fas fa-filter"></i></button>
+                            </form>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i
+                                    class="fas fa-sync-alt"></i></a>
+                        </div>
+                    </div>
+                    <!-- <div>
+                    <a href="<?php echo site_url('home/');?>" class="btn btn-success">Bulan</a>
+                    </div> -->
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <?php
+                            if($inputFilterBaku == null && $this->input->post('startBaku') != null){ 
+                            }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
+                                foreach ($inputFilterBaku as $mi){ 
+    
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	
+                                    echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                }
+                            }else if($inputFilterBaku != null ){
+                                foreach ($inputFilterBaku as $mi){ 
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	
+                                    echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                } } 
+                            else{
+                                    foreach ($mostInputBaku as $mi){ 
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
+                                    echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+                                } 
+                                } ?>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Statistik Bahan Baku Keluar</h4>
+                    <div class="row">
+                        <div class="col-4">
+                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
+                                method="post">
+                                <div class="form-group">
+                                    <input class="form-control" type="date" name="startOutBaku"
+                                        value="<?php echo $this->session->userdata('startSession') ?>" required>
+                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control" type="date" name="endOutBaku"
+                                    value="<?php echo $this->session->userdata('endSession') ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                    class="glyphicon glyphicon-search"></i>
+                                <i class="fas fa-filter"></i></button>
+                            </form>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i
+                                    class="fas fa-sync-alt"></i></a>
+                        </div>
+                    </div>
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <?php 
+                            if($outputFilterBaku == null && $this->input->post('startOutBaku') != null){ 
+                            }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
+                                foreach ($outputFilterBaku as $mo){ 
+    
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;		
+                                
+                                    echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                } 
+                            }else if($outputFilterBaku != null ){
+                                foreach ($outputFilterBaku as $mo){ 
+    
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;		
+                                
+                                    echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                } }else{
+                                foreach ($mostOutputBaku as $mo){ 
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;	
+                                echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
+                                 style='margin-bottom: -25px;'></canvas>'";
+                                } 
+                                } ?>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row">
+    <?php } ?>
     <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="background-color: #29477F;">
+                    <h4 class="text-white">Bahan Kemas</h4>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4'>
+            <div class="card rounded">
+                <div class="card-header" style="background-color: #f9ca24;">
+                    <div class="row">
+                        <div class="col-4 p-3 text-center text-white"><i class="fas fa-people-carry fa-3x"></i></div>
+
+                        <div class="col-8 text-white">Total Supplier Bahan Kemas<h3 class="text-white">
+                                <?php echo $supplier ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo base_url('supplier/') ?>">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4'>
+            <div class="card rounded">
+                <div class="card-header" style="background-color: #2ecc71;">
+                    <div class="row">
+                        <div class="col-4 p-3 text-center text-white"><i class="fas fa-boxes fa-3x"></i></div>
+
+                        <div class="col-8 text-white">Total Bahan Kemas<h3 class="text-white"><?php echo $kemas ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo base_url('items/') ?>">
+                        <div class="float-left">
+                            <h6>Lihat Detail</h6>
+                        </div>
+                        <div class="float-right"><i class="fas fa-chevron-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Stok Bahan Kemas Hampir Habis</h4>
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <td width="50">No</td>
+                                <td>Produk</td>
+                                <td width="150">Minimal Stok</td>
+                                <td width="50">Stok</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                         $no=1;
+                         foreach ($limitKemas as $l) { ?>
+                            <tr>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $l->nama_item ?></td>
+                                <td><?php echo $l->stok_limit ?></td>
+                                <td><?php echo $l->stok?></td>
+                            </tr>
+                            <?php $no++; } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -249,9 +394,10 @@
                                 <i class="fas fa-filter"></i></button>
                             </form>
                         </div>
-                       <div class="col-sm-1">
-                       <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i></a>
-                       </div>
+                        <div class="col-sm-1">
+                            <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i
+                                    class="fas fa-sync-alt"></i></a>
+                        </div>
                     </div>
                     <!-- <div>
                    
@@ -306,27 +452,41 @@
                                 method="post">
                                 <div class="form-group">
                                     <input class="form-control" type="date" name="startOut"
-                                        value="<?php echo $this->input->post('startOut') ?>" required>
+                                        value="<?php echo $this->session->userdata('startSession') ?>" required>
                                 </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <input class="form-control" type="date" name="endOut"
-                                    value="<?php echo $this->input->post('endOut') ?>" required>
+                                    value="<?php echo $this->session->userdata('endSession') ?>" required>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                             <button type="submit" class="btn btn-primary btn-sm"><i
                                     class="glyphicon glyphicon-search"></i>
-                                <i class="fas fa-filter"></i> Filter</button>
+                                <i class="fas fa-filter"></i></button>
                             </form>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i
+                                    class="fas fa-sync-alt"></i></a>
                         </div>
                     </div>
                     <table class="table table-sm table-striped">
                         <thead>
                             <?php
                             if($outputFilter == null && $this->input->post('startOut') != null){ 
+                            
+                            }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
+                                foreach ($outputFilter as $mo){ 
+    
+                                    $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
+                                    $jml_qty_output[] = (float) $mo->total_stok;		
                                 
+                                    echo "<canvas id='BarChartOutputs' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                }
                             }else if($outputFilter != null ){
                                 foreach ($outputFilter as $mo){ 
     
@@ -351,122 +511,8 @@
                 </div>
             </div>
         </div>
-        <?php } 
-        if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Statistik Bahan Baku Masuk</h4>
-                    <div class="row">
-                        <div class="col-4">
-                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
-                                method="post">
-                                <div class="form-group">
-                                    <input class="form-control" type="date" name="startBaku"
-                                        value="<?php echo $this->input->post('startBaku') ?>" required>
-                                </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <input class="form-control" type="date" name="endBaku"
-                                    value="<?php echo $this->input->post('endBaku') ?>" required>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <button type="submit" class="btn btn-primary btn-sm"><i
-                                    class="glyphicon glyphicon-search"></i>
-                                <i class="fas fa-filter"></i> Filter</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- <div>
-                    <a href="<?php echo site_url('home/');?>" class="btn btn-success">Bulan</a>
-                    </div> -->
-                    <table class="table table-sm table-striped">
-                        <thead>
-                            <?php
-                            if($inputFilterBaku == null && $this->input->post('startBaku') != null){ 
-                                
-                            }else if($inputFilterBaku != null ){
-                                foreach ($inputFilterBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
-                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	
-                                    echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
-                                    style='margin-bottom: -25px;'></canvas>'";
-    
-                                } } 
-                            else{
-                                    foreach ($mostInputBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
-                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
-                                    echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
-                                    style='margin-bottom: -25px;'></canvas>'";
-                                } 
-                                } ?>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Statistik Bahan Baku Keluar</h4>
-                    <div class="row">
-                        <div class="col-4">
-                            <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('home/');?>"
-                                method="post">
-                                <div class="form-group">
-                                    <input class="form-control" type="date" name="startOutBaku"
-                                        value="<?php echo $this->input->post('startOutBaku') ?>" required>
-                                </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <input class="form-control" type="date" name="endOutBaku"
-                                    value="<?php echo $this->input->post('endOutBaku') ?>" required>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <button type="submit" class="btn btn-primary btn-sm"><i
-                                    class="glyphicon glyphicon-search"></i>
-                                <i class="fas fa-filter"></i> Filter</button>
-                            </form>
-                        </div>
-                    </div>
-                    <table class="table table-sm table-striped">
-                        <thead>
-                            <?php
-                            if($outputFilterBaku == null && $this->input->post('startOutBaku') != null){ 
-                                
-                            }else if($outputFilterBaku != null ){
-                                foreach ($outputFilterBaku as $mo){ 
-    
-                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
-                                    $jml_qty_output_baku[] = (float) $mo->total_stok;		
-                                
-                                    echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
-                                    style='margin-bottom: -25px;'></canvas>'";
-    
-                                } }else{
-                                foreach ($mostOutputBaku as $mo){ 
-                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
-                                    $jml_qty_output_baku[] = (float) $mo->total_stok;	
-                                echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
-                                 style='margin-bottom: -25px;'></canvas>'";
-                                } 
-                                } ?>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
     </div>
+    <?php } ?>
     <footer class="footer hidden-xs-down">
         <p>© <?php echo date("Y");?>.</p>
     </footer>
@@ -592,7 +638,7 @@
                              foreach ($expiredBaku as $l) { ?>
                             <tr>
                                 <td><?php echo $no; ?>.</td>
-                                <td><?php echo $l->nama_baku ?></td> 
+                                <td><?php echo $l->nama_baku ?></td>
                                 <td><?php echo $l->produsen ?></td>
                                 <td><?php echo $l->expired ?></td>
                                 <td><?php echo $l->status?></td>
