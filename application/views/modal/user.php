@@ -14,7 +14,8 @@
 <div class="form-group">
 	<label>Level</label><br>
 	<select name="level" id="level" class="custom-select form-control">
-	  <option value="admin">Admin</option>
+	  <option value="adminkemas">Admin Bahan Kemas</option>
+	  <option value="adminbaku">Admin Bahan Baku</option>	  
 	  <option value="superadmin">Super Admin</option>
 	</select>
 </div>
@@ -31,7 +32,8 @@
 <div class="form-group">
 	<label>Level</label><br>
 	<select name="level" id="level" class="form-control" value="<?php echo $user->level;?>">
-	  <option value="admin">Admin</option>
+	  <option value="adminkemas">Admin Bahan Kemas</option>
+	  <option value="adminbaku">Admin Bahan Baku</option>	  
 	  <option value="superadmin">Super Admin</option>
 	</select>
 </div>

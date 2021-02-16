@@ -1,6 +1,6 @@
 <section class="content">
     <header class="content__title">
-        <h1>Items</h1>
+        <h1>Bahan Kemas</h1>
         <div class="actions">
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
         </div>

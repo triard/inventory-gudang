@@ -14,6 +14,7 @@
                                  <th>No</th>
                                  <th>Nama</th>
 								 <th>Kontak</th>
+								 <th>Transaksi Terakhir</th>
                                  <th class="disabled-sorting text-right">Actions</th>
                               </tr>
                            </thead>
@@ -22,6 +23,7 @@
                                  <th>No</th>
                                  <th>Nama</th>
 								 <th>Kontak</th>
+								 <th>Transaksi Terakhir</th>
                                  <th class="text-right">Actions</th>
                               </tr>
                            </tfoot>
@@ -32,6 +34,7 @@
                                  <td><?php echo $no;?></td>
                                  <td><?php echo $k->nama_supplier;?></td>
 								 <td><?php echo $k->kontak;?></td>
+								 <td><?php echo $k->transaksi_terakhir;?></td>
                                  <td class="td-actions text-right">
 								 <?php if($this->session->userdata('level')=="superadmin"){ ?>
                                     <button type="button" onclick="ganti(<?php echo $k->id_supplier;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">

@@ -5,7 +5,7 @@
 </div>
 <div class="form-group">
     <label>Kontak</label><br>
-    <input class="form-control" name="kontak" type="text" placeholder="Kontak" value="<?php echo $supplier->kontak;?>" required>
+    <input class="form-control" name="kontak" type="text" placeholder="Kontak" value="<?php echo $supplier->kontak;?>">
 </div>
 <?php } else { ?>
 <div class="form-group">
@@ -14,6 +14,6 @@
 </div>
 <div class="form-group">
     <label>Kontak</label><br>
-    <input class="form-control" name="kontak" type="text" placeholder="Kontak" required>
+    <input class="form-control" name="kontak" type="text" placeholder="Kontak">
 </div>
 <?php } ?>

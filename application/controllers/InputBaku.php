@@ -56,6 +56,9 @@ class InputBaku extends CI_Controller {
 				$this->ModInputBaku->addTT($id1, $id2);
 				echo json_encode(array("status" => TRUE));
 
+				// Last transaksi
+				$this->ModSuppliersBaku->updateTerakhirTransaksi($id2);
+
 				// transaksi baku
 				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id1, $tanggal);
 				if ($cekTanggal == 1) {
@@ -98,6 +101,9 @@ class InputBaku extends CI_Controller {
 				$id1 = $this->ModBaku->getId();
 
 				$this->ModInputBaku->addTbaku($id1);
+
+				// Last transaksi
+				$this->ModSuppliersBaku->updateTerakhirTransaksi($id_supplier);
 
 				// transaksi baku
 				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id1, $tanggal);
@@ -151,6 +157,9 @@ class InputBaku extends CI_Controller {
 
 				$this->ModInputBaku->addTsupplier($id2, $total);
 
+				// Last transaksi
+				$this->ModSuppliersBaku->updateTerakhirTransaksi($id2);
+
 				// transaksi baku
 				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);
 				if ($cekTanggal == 1) {
@@ -191,6 +200,9 @@ class InputBaku extends CI_Controller {
 			$this->ModBaku->updateKb($totalKb);
 
 			$this->ModInputBaku->add($total);
+
+			// Last transaksi
+			$this->ModSuppliersBaku->updateTerakhirTransaksi($id_supplier);
 
 			// transaksi baku
 			$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);

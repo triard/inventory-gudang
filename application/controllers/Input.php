@@ -57,6 +57,9 @@ class Input extends CI_Controller {
 				$this->ModInputItems->addTT($id1, $id2);
 				echo json_encode(array("status" => TRUE));
 
+				// Last transaksi
+				$this->ModSuppliers->updateTerakhirTransaksi($id2);
+
 				// transaksi item
 				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id1, $tanggal);
 				if ($cekTanggal == 1) {
@@ -99,6 +102,9 @@ class Input extends CI_Controller {
 				$id1 = $this->ModItems->getId();
 
 				$this->ModInputItems->addTitem($id1);
+
+				// Last transaksi
+				$this->ModSuppliers->updateTerakhirTransaksi($id_supplier);
 
 				// transaksi item
 				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id1, $tanggal);
@@ -152,6 +158,9 @@ class Input extends CI_Controller {
 
 				$this->ModInputItems->addTsupplier($id2, $total);
 
+				// Last transaksi
+				$this->ModSuppliers->updateTerakhirTransaksi($id2);
+
 				// transaksi item
 				$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);
 				if ($cekTanggal == 1) {
@@ -192,6 +201,9 @@ class Input extends CI_Controller {
 			$this->ModItems->updateKb($totalKb);
 
 			$this->ModInputItems->add($total);
+
+			// Last transaksi
+			$this->ModSuppliers->updateTerakhirTransaksi($id_supplier);
 
 			// transaksi item
 			$cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);

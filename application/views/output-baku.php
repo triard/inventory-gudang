@@ -31,7 +31,7 @@
        } 
      ?>
     <header class="content__title">
-        <h1>Output Bahan Baku</h1>
+        <h1>Barang Keluar - Bahan Baku</h1>
         <div class="actions">
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
         </div>

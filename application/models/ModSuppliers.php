@@ -29,6 +29,13 @@ class ModSuppliers extends CI_model {
 		$this->db->update('suppliers', $data);
 	}
 
+	public function updateTerakhirTransaksi($id){
+		$transaksi_terakhir = date("Y-m-d");
+		$data = array('transaksi_terakhir' => $transaksi_terakhir);
+		$this->db->where('id_supplier', $id);
+		$this->db->update('suppliers', $data);
+	}
+
 	public function cekSupplier(){
 		$nama_supplier = $this->input->post('nama_supplier');
 		$kontak = $this->input->post('kontak');

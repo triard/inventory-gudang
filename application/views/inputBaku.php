@@ -13,7 +13,7 @@
        } 
      ?>
     <header class="content__title">
-        <h1>Input Bahan Baku</h1>
+        <h1>Barang Masuk - Bahan Baku</h1>
         <div class="actions">
             <button class="btn btn-primary font-btn" onclick="tambah()">Tambah</button>
         </div>
