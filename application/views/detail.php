@@ -47,7 +47,7 @@
                                 </div>
                             </th>
                         </tr>
-                        <tr class="bg-danger text-white">
+                        <tr class="bg-primary text-white">
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">No</th>
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">Tanggal</th>
                             <th colspan="2" class="text-center">Masuk</th>
@@ -57,7 +57,7 @@
                             <th class="disabled-sorting text-center" rowspan="2" style="vertical-align: middle;">Actions
                             </th>
                         </tr>
-                        <tr class="bg-danger text-white">
+                        <tr class="bg-primary text-white">
                             <!-- <th>No</th> -->
                             <th class="text-center">PCS</th>
                             <th class="text-center">Koli/Box</th>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tfoot>
-                        <tr class="bg-danger text-white">
+                        <tr class="bg-primary text-white">
                             <th class="text-center">No</th>
                             <th class="text-center">Tanggal</th>
                             <th class="text-center">PCS</th>

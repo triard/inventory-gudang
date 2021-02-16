@@ -317,7 +317,6 @@ class ModInputBaku extends CI_model {
 		$this->db->select('*');
 		$this->db->from('input_baku');
 		$this->db->where('status="hampir expired"');
-		$this->db->or_where('status="expired"');
         return $this->db->get()->result();
 	}
 
