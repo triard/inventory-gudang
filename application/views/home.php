@@ -234,30 +234,43 @@
                                 method="post">
                                 <div class="form-group">
                                     <input class="form-control" type="date" name="start"
-                                        value="<?php echo $this->input->post('start') ?>" required>
+                                        value="<?php echo $this->session->userdata('startSession') ?>" required>
                                 </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <input class="form-control" type="date" name="end"
-                                    value="<?php echo $this->input->post('end') ?>" required>
+                                    value="<?php echo $this->session->userdata('endSession') ?>" required>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                             <button type="submit" class="btn btn-primary btn-sm"><i
                                     class="glyphicon glyphicon-search"></i>
-                                <i class="fas fa-filter"></i> Filter</button>
+                                <i class="fas fa-filter"></i></button>
                             </form>
                         </div>
+                       <div class="col-sm-1">
+                       <a href="<?php echo site_url('home/v_index');?>" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i></a>
+                       </div>
                     </div>
                     <!-- <div>
-                    <a href="<?php echo site_url('home/');?>" class="btn btn-success">Bulan</a>
+                   
                     </div> -->
                     <table class="table table-sm table-striped">
                         <thead>
                             <?php
                             if($inputFilter == null && $this->input->post('start') != null){ 
                                 
+                            }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
+                                foreach ($inputFilter as $mi){ 
+    
+                                    $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
+                                    $jml_qty_input[] = (float) $mi->total_stok;	
+                                
+                                    echo "<canvas id='BarChartInputs' width='90' height='36' 
+                                    style='margin-bottom: -25px;'></canvas>'";
+    
+                                }
                             }else if($inputFilter != null ){
                                 foreach ($inputFilter as $mi){ 
     

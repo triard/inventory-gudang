@@ -161,11 +161,24 @@ class ModInputItems extends CI_model {
 	{
 		$start = $this->input->post('start');
 		$end = $this->input->post('end');
+		if($this->session->userdata('startSession')==null && $this->session->userdata('endSession')==null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession')!=null && $start!=null && $end!=null){
+			$this->session->set_userdata('startSession', $start);
+			$this->session->set_userdata('endSession', $end);
+		}
+		$stSession = $this->session->userdata('startSession');
+		$enSession =  $this->session->userdata('endSession');
 		$this->db->select('*, SUM(a.qty_input) AS total_stok');
 		$this->db->from('input_items as a');
 		$this->db->group_by('a.id_item');
 		$this->db->order_by('a.qty_input', "desc");
-		$this->db->where("a.tgl_input BETWEEN '$start 'AND' $end'");
+		if($this->session->userdata('startSession') != null && $this->session->userdata('endSession') != null){
+			$this->db->where("a.tgl_input BETWEEN ' $stSession 'AND' $enSession'");
+		}else{
+			$this->db->where("a.tgl_input BETWEEN '$start 'AND' $end'");
+		}
 		$this->db->limit('7');
         return $this->db->get()->result();
 	}
