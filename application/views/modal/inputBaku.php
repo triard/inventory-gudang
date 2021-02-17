@@ -183,7 +183,6 @@
             <textarea class="form-control" name="keterangan" cols="30" rows="2"><?php echo $inputEdit->keterangan?></textarea>
         </div>
     <?php } ?>
-    
 <?php endforeach; ?>
 <?php } ?>
 <script>
@@ -194,13 +193,13 @@ $("select.select2").select2({
 })
 $(".supp").on("change keydown paste input", function() {
     var a = $(".supp").val();
-    $.get("<?php echo base_url();?>inputbaku/set_supplierBaku/" + a, function (b) {
+    $.get("<?php echo base_url();?>InputBaku/set_supplier/" + a, function (b) {
         $(".set-supplier").html(b);
     })
 })
 $(".baku").on("change keydown paste input", function() {
     var a = $(".baku").val();
-    $.get("<?php echo base_url();?>inputbaku/set_baku/" + a, function (b) {
+    $.get("<?php echo base_url();?>InputBaku/set_baku/" + a, function (b) {
         $(".set-baku").html(b);
     })
 })

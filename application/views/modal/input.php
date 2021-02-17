@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group">
-            <label>Item</label>
+            <label>Bahan Kemas</label>
             <select name="id_item" class="select2 item" required>
                 <!-- <option value="0">Item Baru</option> -->
                 <option disabled selected>Pilih Item</option>
@@ -72,33 +72,33 @@
     <input type="hidden" name="id_input" value="<?php echo $inputEdit->id_input;?>">
     <input name="id_user" type="hidden" value="<?php echo  $inputEdit->id_user?>">
     <div class="form-group">
-    <label>Item</label>
-    <select name="id_item" class="custom-select form-control" required>
-        <option selected value="<?php echo  $inputEdit->id_item?>" read><?php echo $inputEdit->nama_item ?></option>
-    </select>
-</div>
-<div class="form-group">
-    <label>Supplier</label>
-    <select name="id_supplier" class="custom-select form-control" required>
-        <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
-        <option disabled>--------------------------</option>
-        <?php foreach ($supplier as $s): ?>
-        <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
-        <?php endforeach; ?>
-    </select>
-</div>
-<div class="form-group">
-    <label>Quantity</label><br>
-    <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Koli / Box</label><br>
-    <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Tanggal</label><br>
-    <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" required>
-</div>
+        <label>Item</label>
+        <select name="id_item" class="custom-select form-control" required>
+            <option selected value="<?php echo  $inputEdit->id_item?>" read><?php echo $inputEdit->nama_item ?></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Supplier</label>
+        <select name="id_supplier" class="custom-select form-control" required>
+            <option selected value="<?php echo  $inputEdit->id_supplier?>"><?php echo $inputEdit->nama_supplier ?></option>
+            <option disabled>--------------------------</option>
+            <?php foreach ($supplier as $s): ?>
+            <option value="<?php echo  $s->id_supplier?>"><?php echo $s->nama_supplier ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Quantity</label><br>
+        <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
+    </div>
+    <div class="form-group">
+        <label>Koli / Box</label><br>
+        <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
+    </div>
+    <div class="form-group">
+        <label>Tanggal</label><br>
+        <input class="form-control" name="tgl_input" type="date" value="<?php echo  $inputEdit->tgl_input?>" placeholder="00-00-0000" required>
+    </div>
 <?php endforeach; ?>
 <?php } ?>
 <script>
@@ -109,13 +109,13 @@ $("select.select2").select2({
 })
 $(".supp").on("change keydown paste input", function() {
     var a = $(".supp").val();
-    $.get("<?php echo base_url();?>input/set_supplier/" + a, function (b) {
+    $.get("<?php echo base_url();?>Input/set_supplier/" + a, function (b) {
         $(".set-supplier").html(b);
     })
 })
 $(".item").on("change keydown paste input", function() {
     var a = $(".item").val();
-    $.get("<?php echo base_url();?>input/set_item/" + a, function (b) {
+    $.get("<?php echo base_url();?>Input/set_item/" + a, function (b) {
         $(".set-item").html(b);
     })
 })

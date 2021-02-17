@@ -51,12 +51,12 @@
                     Bahan Kemas<i class="zmdi zmdi-chevron-down zmdi-hc-fw"></i></a>
                 <div class="collapse xmenu" id="xmod">
                     <ul style="padding-left: 10px;">
-                        <li><a href="<?php echo base_url('items/');?>"><i class="fas fa-boxes"></i> Barang</a></li>
-                        <li><a href="<?php echo base_url('supplier/');?>"><i class="fas fa-people-carry"></i>
+                        <li><a href="<?php echo base_url('Items/');?>"><i class="fas fa-boxes"></i> Barang</a></li>
+                        <li><a href="<?php echo base_url('Supplier/');?>"><i class="fas fa-people-carry"></i>
                                 Supplier</a></li>
-                        <li><a href="<?php echo base_url('input/');?>"><i class="fas fa-sign-in-alt"></i> Barang
+                        <li><a href="<?php echo base_url('Input/');?>"><i class="fas fa-sign-in-alt"></i> Barang
                                 Masuk</a></li>
-                        <li><a href="<?php echo base_url('output/');?>"><i class="fas fa-sign-out-alt"></i> Barang
+                        <li><a href="<?php echo base_url('Output/');?>"><i class="fas fa-sign-out-alt"></i> Barang
                                 Keluar</a></li>
                     </ul><br>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="collapse xmenu" id="xmod2">
                     <ul style="padding-left: 10px;">
                         <li><a href="<?php echo base_url('Baku');?>"><i class="fas fa-boxes"></i> Barang</a></li>
-                        <li><a href="<?php echo base_url('supplierBaku/');?>"><i class="fas fa-people-carry"></i>
+                        <li><a href="<?php echo base_url('SupplierBaku/');?>"><i class="fas fa-people-carry"></i>
                                 Supplier</a></li>
                         <li><a href="<?php echo base_url('InputBaku');?>"><i class="fas fa-sign-in-alt"></i> Barang
                                 Masuk</a></li>

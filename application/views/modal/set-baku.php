@@ -1,5 +1,5 @@
 <?php if(isset($baku)) { ?>
-   
+
 <div class="form-group">
     <label>Nama Bahan Baku</label><br>
     <input class="form-control" name="nama_baku" type="text" placeholder="Nama Bahan Baku" value="<?php echo $baku->nama_baku;?>" readonly>

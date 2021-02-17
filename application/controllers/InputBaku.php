@@ -461,7 +461,7 @@ class InputBaku extends CI_Controller {
 			echo json_encode(array("status" => TRUE));
 		}
 	}
-	public function set_supplierBaku($id) {
+	public function set_supplier($id) {
 		$q = $this->session->userdata('status');
 		if($q != "login") {
 			exit();
