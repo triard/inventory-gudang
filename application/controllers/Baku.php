@@ -43,6 +43,25 @@ class Baku extends CI_Controller {
 		$this->load->view('detailbaku',$data);
 		$this->load->view('template/footer');
 	}
+	public function v_detail($id)
+	{
+		$q = $this->session->userdata('status');
+		if($q != "login") {
+			redirect('login','refresh');
+		}
+		$this->session->unset_userdata('startSession');
+		$this->session->unset_userdata('endSession');
+		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
+		$data['transaksi'] = $this->ModTransaksiBaku->selectAllById($id); 
+		$data['data'] = $this->ModBaku->getAllById($id);
+		$data['id'] = $this->ModTransaksiBaku->selectId($id); 
+		$data['filter'] = $this->ModTransaksiBaku->filter($id);
+		// $data['tanggal'] = $this->ModOutputBaku->getTanggal();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('detailbaku',$data);
+		$this->load->view('template/footer');
+	}
 	public function modal() {
 		$q = $this->session->userdata('status');
 		if($q != "login") {

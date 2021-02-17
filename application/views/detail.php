@@ -8,27 +8,30 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                 <?php if($id!=null){ ?>    
                     <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>"  
                         method="post">
                         <?php } ?>
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
-                                value="<?php echo $this->input->post('start') ?>" required>
+                                value="<?php echo $this->session->userdata('startSession')?>" required>
                         </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <input class="form-control" type="date" name="end"
-                            value="<?php echo $this->input->post('end') ?>" required>
+                            value="<?php echo $this->session->userdata('endSession') ?>" required>
                     </div>
                 </div>
                 <div class="col-3">
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
+                    <a href="<?php echo site_url('items/v_detail/'.$id->id_item);?>" class="btn btn-success btn-sm"><i
+                                    class="fas fa-sync-alt"></i> Reset</a>
                 </div>
+
             </div>
             <div class="table-responsive">
                 <table class="table table-sm table-bordered" id="datatables" style=" width: 100%;">
@@ -83,6 +86,32 @@
                     </tfoot>
                     <tbody>
                     <?php if($filter == null && $this->input->post('start') != null){
+                     }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){ ?>
+                        <?php $no=1;
+                        foreach ($filter as $t) { ?>
+                        <tr>
+                            <!-- <div class="set-lap"> -->
+                            <td class="text-center"><?php echo $no;?></td>
+                            <td class="text-center">
+                                <?php $d = new DateTime($t->tanggal);
+							 echo $d->format("d/m/Y");?>
+                            </td>
+                            <td class="text-center"><?php echo $t->stok_masuk;?></td>
+                            <td class="text-center"><?php echo $t->kb_masuk;?></td>
+                            <td class="text-center"><?php echo $t->stok_keluar;?></td>
+                            <td class="text-center"><?php echo $t->kb_keluar;?></td>
+                            <td class="text-center"><?php echo $t->sisa_stok;?></td>
+                            <td class="text-center"><?php echo $t->sisa_kb;?></td>
+                            <td class="text-center"><?php echo $t->keterangan;?></td>
+                            <td class="td-actions text-center">
+                                <button type="button" onclick="ganti(<?php echo $t->id_ti;?>)" rel="tooltip"
+                                    class="btn btn-success btn-round" data-original-title="" title="">
+                                    <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                                </button>
+                            </td>
+                            <!-- </div> -->
+                        </tr>
+                        <?php $no++; } 
                     }else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $t) { ?>
