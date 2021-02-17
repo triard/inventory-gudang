@@ -47,7 +47,7 @@ class Items extends CI_Controller {
 	{
 		$q = $this->session->userdata('status');
 		if($q != "login") {
-			redirect('login','refresh');
+			redirect('login','refresh'); 
 		}
 		$this->session->unset_userdata('startSession');
 		$this->session->unset_userdata('endSession');

@@ -9,8 +9,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-3">
-                <?php if($id!=null){ ?>    
-                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>" method="post">
+                    <?php if($id!=null){ ?>
+                    <form class="navbar-form navbar-left" role="search"
+                        action="<?php echo site_url('items/detail/'.$id->id_item);?>" method="post">
                         <?php } ?>
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
@@ -27,7 +28,12 @@
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
-                    <a href="<?php echo site_url('items/v_detail/'.$id->id_item);?>" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i> Reset</a>
+                    <?php if($id!=null){ ?>
+                    <a href="<?php echo site_url('items/v_detail/'.$id->id_item);?>" class="btn btn-success btn-sm"><i
+                            class="fas fa-sync-alt"></i> Reset</a>
+                    <?php }else{
+                        echo '<a href="#" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i> Reset</a>';
+                    } ?>
                 </div>
 
             </div>
@@ -54,7 +60,8 @@
                             <th colspan="2" class="text-center">Masuk</th>
                             <th colspan="2" class="text-center">Keluar</th>
                             <th colspan="2" class="text-center">Sisa Stok</th>
-                            <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan</th>
+                            <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan
+                            </th>
                             <th class="disabled-sorting text-center" rowspan="2" style="vertical-align: middle;">Actions
                             </th>
                         </tr>
@@ -83,7 +90,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                    <?php if($filter == null && $this->input->post('start') != null){
+                        <?php if($filter == null && $this->input->post('start') != null){
                      }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $t) { ?>

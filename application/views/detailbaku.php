@@ -28,8 +28,12 @@
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
+                    <?php if($id!=null){ ?>
                     <a href="<?php echo site_url('baku/v_detail/'.$id->id_baku);?>" class="btn btn-success btn-sm"><i
                             class="fas fa-sync-alt"></i> Reset</a>
+                    <?php }else{
+                        echo '<a href="#" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i> Reset</a>';
+                    } ?>
                 </div>
             </div>
             <div class="table-responsive">
