@@ -75,7 +75,12 @@ class Baku extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
-		$this->ModBaku->addNoStok();
+		$cek1 = $this->ModBaku->cekBaku();
+		if ($cek1 == "TRUE") {
+			$this->ModBaku->addNoStok();
+		} else {
+			$this->session->set_flashdata('cek', 'Barang sudah terdaftar!');
+		}
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {

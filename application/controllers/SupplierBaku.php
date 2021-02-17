@@ -52,7 +52,12 @@ class SupplierBaku extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
-		$this->ModSuppliersBaku->add();
+		$cek2 = $this->ModSuppliersBaku->cekSupplier();
+		if ($cek2 == "TRUE") {
+			$this->ModSuppliersBaku->add();
+		} else {
+			$this->session->set_flashdata('cek', 'Supplier sudah terdaftar!');
+		}
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {

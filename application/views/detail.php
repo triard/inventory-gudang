@@ -10,8 +10,7 @@
             <div class="row">
                 <div class="col-3">
                 <?php if($id!=null){ ?>    
-                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>"  
-                        method="post">
+                    <form class="navbar-form navbar-left" role="search" action="<?php echo site_url('items/detail/'.$id->id_item);?>" method="post">
                         <?php } ?>
                         <div class="form-group">
                             <input class="form-control" type="date" name="start"
@@ -28,8 +27,7 @@
                     <button type="submit" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-search"></i>
                         <i class="fas fa-filter"></i> Filter</button>
                     </form>
-                    <a href="<?php echo site_url('items/v_detail/'.$id->id_item);?>" class="btn btn-success btn-sm"><i
-                                    class="fas fa-sync-alt"></i> Reset</a>
+                    <a href="<?php echo site_url('items/v_detail/'.$id->id_item);?>" class="btn btn-success btn-sm"><i class="fas fa-sync-alt"></i> Reset</a>
                 </div>
 
             </div>

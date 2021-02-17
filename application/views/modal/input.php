@@ -7,7 +7,7 @@
                 <!-- <option value="0">Item Baru</option> -->
                 <option disabled selected>Pilih Item</option>
                 <?php foreach ($item as $i): ?>
-                <option value="<?php echo  $i->id_item?>"><?php echo $i->nama_item;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
+                <option value="<?php echo  $i->id_item?>"><?php echo $i->jenis;?> - <?php echo $i->nama_item;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
                 <?php endforeach; ?>
             </select>
         </div>

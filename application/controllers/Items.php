@@ -75,7 +75,12 @@ class Items extends CI_Controller {
 		if($q != "login") {
 			exit();
 		}
-		$this->ModItems->addNoStok();
+		$cek1 = $this->ModItems->cekItem();
+		if ($cek1 == "TRUE") {
+			$this->ModItems->addNoStok();
+		} else {
+			$this->session->set_flashdata('cek', 'Barang sudah terdaftar!');
+		}
 		echo json_encode(array("status" => TRUE));
 	}
 	public function edit($id) {
