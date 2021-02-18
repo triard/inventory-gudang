@@ -84,6 +84,9 @@
                 </div>
             </li>
             <?php } ?>
+            <?php if($this->session->userdata('level') == 'superadmin'){ ?>
+            <li><a href="<?php echo base_url('BackupDatabase/backup');?>"> <i class="fas fa-tachometer-alt"></i> Backup Database</a></li>
+            <?php } ?>
         </ul>
     </div>
 </aside>
