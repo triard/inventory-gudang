@@ -85,8 +85,26 @@
             </li>
             <?php } ?>
             <?php if($this->session->userdata('level') == 'superadmin'){ ?>
-            <li><a href="<?php echo base_url('BackupDatabase/backup');?>"> <i class="fas fa-tachometer-alt"></i> Backup Database</a></li>
+            <li onclick="backup()"><a href="#"> <i class="fas fa-tachometer-alt"></i> Backup Database</a></li>
             <?php } ?>
         </ul>
     </div>
 </aside>
+<script>
+    function backup() {
+    Swal.fire({
+        title: 'Backup Data?',
+        text: "",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya',
+        cancelButtonText: "Batal"
+    }).then((result) => {
+        if (result.value == true) {
+            window.location.href = "<?php echo base_url('BackupDatabase/backup');?>";
+        }
+    })
+};
+</script>

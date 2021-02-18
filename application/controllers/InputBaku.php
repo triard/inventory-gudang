@@ -393,6 +393,51 @@ class InputBaku extends CI_Controller {
 			$this->ModBaku->updateStok($total);
 			$this->ModBaku->updateKb($totalKb);
 
+			// cek status
+			$setStatus = $this->ModInputBaku->selectAll();
+	        foreach ($setStatus as $row){
+			    $id_input = $row->id_input;
+			    $id_baku = $row->id_baku;
+			    $expired = $row->expired;
+			    $status = $row->status;
+			    $tgl_input = $row->tgl_input;
+			    $qty_input = $row->qty_input;
+			    $kb_input = $row->kb_input;
+			    $fifo = $row->fifo;
+			    $today = date('Y-m-d');
+			    $today_time = strtotime($today);
+				$expired_time = strtotime($expired);
+				$stok = $this->ModBaku->getStok($id_baku);
+				$kb = $this->ModBaku->getKb($id_baku);
+
+			    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+			    	$this->ModInputBaku->updateStatusExpired($id_input);
+			    	$total = $stok - $qty_input;
+					$totalKb = $kb - $kb_input;
+					$this->ModBaku->updateStokWithId($total, $id_baku);
+					$this->ModBaku->updateKbWithId($totalKb, $id_baku);
+					$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+					// transaksi
+					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+					$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tgl_input);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+					$sisa_kbTi = $this->ModTransaksiBaku->getKbSisa($id_baku, $tgl_input);
+					$totalStokTi = $stokTi - $qty_input;
+					$totalKbTi = $kbTi - $kb_input;
+					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->updateKbMasuk($totalKbTi, $id_baku, $tgl_input);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			    }
+				else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+					if ($fifo <= 0) {
+						$this->ModInputBaku->updateStatusOut($id_input);
+					} else {
+						$this->ModInputBaku->updateStatusHampir($id_input);
+					}
+			    }
+			}
+
 			if ($tanggalLama == $tanggalBaru) {
 				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggalBaru);
 				$kbTi = $this->ModTransaksiBaku->getKbMasuk($id_baku, $tanggalBaru);
@@ -456,9 +501,6 @@ class InputBaku extends CI_Controller {
 					echo json_encode(array("status" => TRUE));
 				}
 			}
-		
-			$this->ModInputBaku->update();
-			echo json_encode(array("status" => TRUE));
 		}
 	}
 	public function set_supplier($id) {

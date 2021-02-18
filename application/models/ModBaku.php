@@ -129,6 +129,7 @@ class ModBaku extends CI_model {
 		$this->db->select('*');
 		$this->db->from('baku');
 		$this->db->where('stok <= stok_limit');
+		$this->db->where('stok_limit != 0');
         return $this->db->get()->result();
 	}
 

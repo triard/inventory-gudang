@@ -143,8 +143,9 @@ class ModInputBaku extends CI_model {
 		$batch = $this->input->post('batch');
 		$keterangan = $this->input->post('keterangan');
 		$expired = $this->input->post('expired');
+		$status = "tersedia";
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input,'tgl_input' => $tgl_input, 'id_user' => $id_user, 'batch' => $batch, 'keterangan' => $keterangan, 'expired' => $expired);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input,'tgl_input' => $tgl_input, 'id_user' => $id_user, 'batch' => $batch, 'keterangan' => $keterangan, 'expired' => $expired, 'status' => $status);
 			$this->db->where('id_input', $id_input);
 			$this->db->update('input_baku', $data);
 	}
