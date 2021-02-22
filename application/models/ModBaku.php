@@ -8,18 +8,19 @@ class ModBaku extends CI_model {
 		$nama_baku = $this->input->post('nama_baku');
 		$produsen = $this->input->post('produsen');
 		$stok = $this->input->post('qty_input');
-		$kb = $this->input->post('kb_input');
+		$satuan = $this->input->post('satuan');
 		// $stok_limit = $this->input->post('stok_limit');
 		
-		$data = array('nama_baku' => $nama_baku, 'produsen' => $produsen, 'stok' => $stok, 'kb' => $kb);
+		$data = array('nama_baku' => $nama_baku, 'satuan' => $satuan, 'produsen' => $produsen, 'stok' => $stok);
 		$this->db->insert('baku', $data);
 	}
 	public function addNoStok() {
 		$nama_baku = $this->input->post('nama_baku');
 		$produsen = $this->input->post('produsen');
+		$satuan = $this->input->post('satuan');
 		$stok_limit = $this->input->post('stok_limit');
 		
-		$data = array('nama_baku' => $nama_baku, 'produsen' => $produsen, 'stok_limit' => $stok_limit);
+		$data = array('nama_baku' => $nama_baku, 'satuan' => $satuan, 'produsen' => $produsen, 'stok_limit' => $stok_limit);
 		$this->db->insert('baku', $data);
 	}
 	public function delete($id){
@@ -57,31 +58,14 @@ class ModBaku extends CI_model {
 		$this->db->update('baku', $data);
 	}
 
-	public function updateKb($kb){
-		$id = $this->input->post('id_baku');
-		$kb = $kb;
-
-		$data = array('kb' => $kb);
-		$this->db->where('id_baku', $id);
-		$this->db->update('baku', $data);
-	}
-
-	public function updateKbWithId($kb, $id){
-		$id = $id;
-		$kb = $kb;
-
-		$data = array('kb' => $kb);
-		$this->db->where('id_baku', $id);
-		$this->db->update('baku', $data);
-	}
-
 	public function updateStokLimit(){
 		$id = $this->input->post('id_baku');
 		$nama_baku = $this->input->post('nama_baku');
 		$produsen = $this->input->post('produsen');
+		$satuan = $this->input->post('satuan');
 		$stok_limit = $this->input->post('stok_limit');
 
-		$data = array('nama_baku' => $nama_baku,'produsen' => $produsen,'stok_limit' => $stok_limit);
+		$data = array('nama_baku' => $nama_baku,'satuan' => $satuan,'produsen' => $produsen, 'stok_limit' => $stok_limit);
 		$this->db->where('id_baku', $id);
 		$this->db->update('baku', $data);
 	} 
@@ -110,12 +94,6 @@ class ModBaku extends CI_model {
         $query = $this->db->query("SELECT stok from baku where id_baku= '$id_baku'");
         $hasil = $query->row();
         return $hasil->stok;
-	}
-
-	public function getKb($id_baku){
-        $query = $this->db->query("SELECT kb from baku where id_baku= '$id_baku'");
-        $hasil = $query->row();
-        return $hasil->kb;
 	}
 
 	public function getAllById($id_baku){

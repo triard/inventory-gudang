@@ -53,9 +53,9 @@
                         <tr class="bg-primary text-white">
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">No</th>
                             <th rowspan="2" class="text-center" style="vertical-align: middle;">Tanggal</th>
-                            <th colspan="2" class="text-center">Masuk</th>
-                            <th colspan="2" class="text-center">Keluar</th>
-                            <th colspan="2" class="text-center">Sisa Stok</th>
+                            <th class="text-center">Masuk</th>
+                            <th class="text-center">Keluar</th>
+                            <th class="text-center">Sisa Stok</th>
                             <th rowspan="2" class="text-center" style="vertical-align: middle; width: 10px;">Keterangan
                             </th>
                             <th class="disabled-sorting text-center" rowspan="2" style="vertical-align: middle;">Actions
@@ -63,24 +63,18 @@
                         </tr>
                         <tr class="bg-primary text-white">
                             <!-- <th>No</th> -->
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
+                            <th class="text-center">Jumlah</th>
+                            <th class="text-center">Jumlah</th>
+                            <th class="text-center">Jumlah</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="bg-primary text-white">
                             <th class="text-center">No</th>
                             <th class="text-center">Tanggal</th>
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">Pack</th>
+                            <th class="text-center">Masuk</th>
+                            <th class="text-center">Keluar</th>
+                            <th class="text-center">Sisa Stok</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -97,11 +91,8 @@
                                  echo $d->format("d/m/Y");?>
                                 </td>
                                 <td class="text-center"><?php echo $t->stok_masuk;?></td>
-                                <td class="text-center"><?php echo $t->kb_masuk;?></td>
                                 <td class="text-center"><?php echo $t->stok_keluar;?></td>
-                                <td class="text-center"><?php echo $t->kb_keluar;?></td>
                                 <td class="text-center"><?php echo $t->sisa_stok;?></td>
-                                <td class="text-center"><?php echo $t->sisa_kb;?></td>
                                 <td class="text-center"><?php echo $t->keterangan;?></td>
                                 <td class="td-actions text-center">
                                     <button type="button" onclick="ganti(<?php echo $t->id_tb;?>)" rel="tooltip"
@@ -122,11 +113,8 @@
 							 echo $d->format("d/m/Y");?>
                             </td>
                             <td class="text-center"><?php echo $t->stok_masuk;?></td>
-                            <td class="text-center"><?php echo $t->kb_masuk;?></td>
                             <td class="text-center"><?php echo $t->stok_keluar;?></td>
-                            <td class="text-center"><?php echo $t->kb_keluar;?></td>
                             <td class="text-center"><?php echo $t->sisa_stok;?></td>
-                            <td class="text-center"><?php echo $t->sisa_kb;?></td>
                             <td class="text-center"><?php echo $t->keterangan;?></td>
                             <td class="td-actions text-center">
                                 <button type="button" onclick="ganti(<?php echo $t->id_tb;?>)" rel="tooltip"
@@ -145,11 +133,8 @@
                             <td class="text-center"><?php echo $no;?></td>
                             <td class="text-center"><?php echo $t->tanggal;?></td>
                             <td class="text-center"><?php echo $t->stok_masuk;?></td>
-                            <td class="text-center"><?php echo $t->kb_masuk;?></td>
                             <td class="text-center"><?php echo $t->stok_keluar;?></td>
-                            <td class="text-center"><?php echo $t->kb_keluar;?></td>
                             <td class="text-center"><?php echo $t->sisa_stok;?></td>
-                            <td class="text-center"><?php echo $t->sisa_kb;?></td>
                             <td class="text-center"><?php echo $t->keterangan;?></td>
                             <td class="td-actions text-center">
                                 <button type="button" onclick="ganti(<?php echo $t->id_tb;?>)" rel="tooltip"

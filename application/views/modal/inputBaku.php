@@ -17,8 +17,12 @@
                 <input class="form-control" name="nama_baku" type="text" placeholder="Nama baku" readonly>
             </div>
             <div class="form-group">
+                <label>Satuan Bahan Baku</label><br>
+                <input class="form-control" name="satuan" type="text" placeholder="Satuan" readonly>
+            </div>
+            <div class="form-group">
                 <label>Produsen</label><br>
-                <input class="form-control" name="produsen" type="text" placeholder="Merk" readonly>
+                <input class="form-control" name="produsen" type="text" placeholder="Produsen" readonly>
             </div>
         </div>
         <div class="form-group">
@@ -28,10 +32,6 @@
         <div class="form-group">
             <label>Expired</label><br>
             <input class="form-control" name="expired" type="date" placeholder="00-00-0000" required>
-        </div>
-        <div class="form-group">
-            <label>Keterangan</label><br>
-            <textarea class="form-control" name="keterangan" cols="30" rows="2"></textarea>
         </div>
     </div>
     <div class="col-sm-6">
@@ -57,15 +57,15 @@
         </div>
         <div class="form-group">
             <label>Quantity</label><br>
-            <input class="form-control" name="qty_input" type="number" placeholder="000" required>
-        </div>
-        <div class="form-group">
-            <label>Pack</label><br>
-            <input class="form-control" name="kb_input" type="number" placeholder="000" required>
+            <input class="form-control" name="qty_input" type="number" placeholder="000" step="0.00001" required>
         </div>
         <div class="form-group">
             <label>No. Batch</label><br>
             <input class="form-control" name="batch" type="text" placeholder="No. Batch" required>
+        </div>
+        <div class="form-group">
+            <label>Keterangan</label><br>
+            <textarea class="form-control" name="keterangan" cols="30" rows="2"></textarea>
         </div>
         <!-- <input name="id_user" value="1" type="hidden"> -->
     </div>
@@ -117,11 +117,7 @@
         </div>
         <div class="form-group">
             <label>Quantity</label><br>
-            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" readonly>
-        </div>
-        <div class="form-group">
-            <label>Pack</label><br>
-            <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" readonly>
+            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" step="0.00001" placeholder="000" readonly>
         </div>
         <div class="form-group">
             <label>Tanggal</label><br>
@@ -160,11 +156,7 @@
         </div>
         <div class="form-group">
             <label>Quantity</label><br>
-            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" placeholder="000" required>
-        </div>
-        <div class="form-group">
-            <label>Koli / Box</label><br>
-            <input class="form-control" name="kb_input" type="number" value="<?php echo  $inputEdit->kb_input?>" placeholder="000" required>
+            <input class="form-control" name="qty_input" type="number" value="<?php echo  $inputEdit->qty_input?>" step="0.00001" placeholder="000" required>
         </div>
         <div class="form-group">
             <label>Tanggal</label><br>

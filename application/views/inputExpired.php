@@ -54,7 +54,6 @@
                             <th>Bahan Baku</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Pack</th>
                             <th>Tanggal Masuk</th>
                             <th>No. Batch</th>
                             <th>Expired</th>
@@ -69,7 +68,6 @@
                             <th>Bahan Baku</th>
                             <th>Supplier</th>
                             <th>Quantity</th>
-                            <th>Pack</th>
                             <th>Tanggal Masuk</th>
                             <th>No. Batch</th>
                             <th>Expired</th>
@@ -88,7 +86,6 @@
                                 <td><?php echo $k->nama_baku;?></td>
                                 <td><?php echo $k->nama_supplier;?></td>
                                 <td><?php echo $k->qty_input;?></td>
-                                <td><?php echo $k->kb_input;?></td>
                                 <td>
                                     <?php $d = new DateTime($k->tgl_input);
                                  echo $d->format("d/m/Y");?>
@@ -121,7 +118,6 @@
                             <td><?php echo $k->nama_baku;?></td>
                             <td><?php echo $k->nama_supplier;?></td>
                             <td><?php echo $k->qty_input;?></td>
-                            <td><?php echo $k->kb_input;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_input);
 							 echo $d->format("d/m/Y");?>
@@ -154,7 +150,6 @@
                             <td><?php echo $k->nama_baku;?></td>
                             <td><?php echo $k->nama_supplier;?></td>
                             <td><?php echo $k->qty_input;?></td>
-                            <td><?php echo $k->kb_input;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_input);
 							     echo $d->format("d/m/Y");?>

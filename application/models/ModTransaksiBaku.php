@@ -116,34 +116,17 @@ class ModTransaksiBaku extends CI_model {
         return $hasil->stok_masuk;
 	}
 
-	public function getKbMasuk($id_baku, $tanggal){
-        $query = $this->db->query("SELECT kb_masuk from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
-        $hasil = $query->row();
-        return $hasil->kb_masuk;
-	}
-
 	public function getStokKeluar($id_baku, $tanggal){
         $query = $this->db->query("SELECT stok_keluar from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
         $hasil = $query->row();
         return $hasil->stok_keluar;
 	}
 
-	public function getKbKeluar($id_baku, $tanggal){
-        $query = $this->db->query("SELECT kb_keluar from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
-        $hasil = $query->row();
-        return $hasil->kb_keluar;
-	}
 
 	public function getStokSisa($id_baku, $tanggal){
         $query = $this->db->query("SELECT sisa_stok from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
         $hasil = $query->row();
         return $hasil->sisa_stok;
-	}
-
-	public function getKbSisa($id_baku, $tanggal){
-        $query = $this->db->query("SELECT sisa_kb from transaksi_baku where id_baku= '$id_baku' AND tanggal= '$tanggal'");
-        $hasil = $query->row();
-        return $hasil->sisa_kb;
 	}
 
 	// public function getIdTanggal($id_baku){
@@ -165,14 +148,6 @@ class ModTransaksiBaku extends CI_model {
 	        $hasil2 = $query2->row();
 	        $ask = $hasil2->stok_keluar;
 
-	        $query3 = $this->db->query("SELECT SUM(kb_masuk) AS kb_masuk FROM transaksi_baku WHERE id_baku= '$id_baku' AND tanggal <= '$tanggal'");
-	        $hasil3 = $query3->row();
-	        $akm = $hasil3->kb_masuk;
-
-	        $query4 = $this->db->query("SELECT SUM(kb_keluar) AS kb_keluar FROM transaksi_baku WHERE id_baku= '$id_baku' AND tanggal <= '$tanggal'");
-	        $hasil4 = $query4->row();
-	        $akk = $hasil4->kb_keluar;
-
 	        $ss = $asm - $ask;
 	        $sk = $akm - $akk;
 
@@ -180,11 +155,6 @@ class ModTransaksiBaku extends CI_model {
 			$this->db->where('id_baku', $id_baku);
 			$this->db->where('tanggal', $tanggal);
 			$this->db->update('transaksi_baku', $dataStok);
-
-			$dataKb = array('sisa_kb' => $sk);
-			$this->db->where('id_baku', $id_baku);
-			$this->db->where('tanggal', $tanggal);
-			$this->db->update('transaksi_baku', $dataKb);
 		}
 	}
 
@@ -221,32 +191,11 @@ class ModTransaksiBaku extends CI_model {
         $hasil = $query->row();
         return $hasil->stok_keluar;
 	}
-
-	public function getAllKbMasuk($id_baku, $tanggal){
-        $query = $this->db->query("SELECT SUM(kb_masuk) AS kb_masuk FROM transaksi_baku WHERE id_baku= '$id_baku' AND tanggal <= '$tanggal'");
-        $hasil = $query->row();
-        return $hasil->kb_masuk;
-	}
-
-	public function getAllKbKeluar($id_baku, $tanggal){
-        $query = $this->db->query("SELECT SUM(kb_keluar) AS kb_keluar FROM transaksi_baku WHERE id_baku= '$id_baku' AND tanggal <= '$tanggal'");
-        $hasil = $query->row();
-        return $hasil->kb_keluar;
-	}
  
 	public function updateStokMasuk($stok, $id_baku, $tanggal){
 		$stok_masuk = $stok;
 
 		$data = array('stok_masuk' => $stok_masuk);
-		$this->db->where('id_baku', $id_baku);
-		$this->db->where('tanggal', $tanggal);
-		$this->db->update('transaksi_baku', $data);
-	}
-
-	public function updateKbMasuk($kb, $id_baku, $tanggal){
-		$kb_masuk = $kb;
-
-		$data = array('kb_masuk' => $kb_masuk);
 		$this->db->where('id_baku', $id_baku);
 		$this->db->where('tanggal', $tanggal);
 		$this->db->update('transaksi_baku', $data);
@@ -261,28 +210,10 @@ class ModTransaksiBaku extends CI_model {
 		$this->db->update('transaksi_baku', $data);
 	}
 
-	public function updateKbKeluar($kb, $id_baku, $tanggal){
-		$kb_keluar = $kb;
-
-		$data = array('kb_keluar' => $kb_keluar);
-		$this->db->where('id_baku', $id_baku);
-		$this->db->where('tanggal', $tanggal);
-		$this->db->update('transaksi_baku', $data);
-	}
-
 	public function updateStokSisa($stok, $id_baku, $tanggal){
 		$sisa_stok = $stok;
 
 		$data = array('sisa_stok' => $sisa_stok);
-		$this->db->where('id_baku', $id_baku);
-		$this->db->where('tanggal', $tanggal);
-		$this->db->update('transaksi_baku', $data);
-	}
-
-	public function updateKbSisa($kb, $id_baku, $tanggal){
-		$sisa_kb = $kb;
-
-		$data = array('sisa_kb' => $sisa_kb);
 		$this->db->where('id_baku', $id_baku);
 		$this->db->where('tanggal', $tanggal);
 		$this->db->update('transaksi_baku', $data);

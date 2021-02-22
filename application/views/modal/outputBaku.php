@@ -13,6 +13,10 @@
 <div class="set-baku">
     <input class="form-control" name="nama_baku" type="hidden">
     <div class="form-group">
+        <label>Satuan Bahan Baku</label><br>
+        <input class="form-control" name="satuan" type="text" placeholder="Produsen" readonly>
+    </div>
+    <div class="form-group">
         <label>Produsen</label><br>
         <input class="form-control" name="produsen" type="text" placeholder="Produsen" readonly>
     </div>
@@ -21,11 +25,7 @@
     <div class="col-sm-6">
 <div class="form-group">
     <label>Quantity</label><br>
-    <input class="form-control" name="qty_output" type="number" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Pack</label><br>
-    <input class="form-control" name="kb_output" type="number" placeholder="000" required>
+    <input class="form-control" name="qty_output" type="number" placeholder="000" step="0.00001" required>
 </div>
 <div class="form-group">
     <label>Tanggal</label><br>
@@ -47,11 +47,7 @@
 </div>
 <div class="form-group">
     <label>Quantity</label><br>
-    <input class="form-control" name="qty_output" type="number" value="<?php echo $outputEdit->qty_output?>" placeholder="000" required>
-</div>
-<div class="form-group">
-    <label>Pack</label><br>
-    <input class="form-control" name="kb_output" type="number" value="<?php echo $outputEdit->kb_output?>" placeholder="000" required>
+    <input class="form-control" name="qty_output" type="number" value="<?php echo $outputEdit->qty_output?>" step="0.00001" placeholder="000" required>
 </div>
 <div class="form-group">
     <label>Tanggal</label><br>

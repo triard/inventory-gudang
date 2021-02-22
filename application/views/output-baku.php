@@ -68,7 +68,6 @@
                             <th>No</th>
                             <th>Bahan Baku</th>
                             <th>Quantity</th>
-                            <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
                             <th>Keterangan</th>
                             <?php 
@@ -82,7 +81,6 @@
                             <th>No</th>
                             <th>Bahan Baku</th>
                             <th>Quantity</th>
-                            <th>Koli / Box</th>
                             <th>Tanggal Keluar</th>
                             <th>Keterangan</th>
                             <?php 
@@ -100,7 +98,6 @@
                                 <td><?php echo $no;?></td>
                                 <td><?php echo $k->nama_baku;?></td>
                                 <td><?php echo $k->qty_output;?></td>
-                                <td><?php echo $k->kb_output;?></td>
                                 <td>
                                     <?php $d = new DateTime($k->tgl_output);
                                  echo $d->format("d/m/Y");?>
@@ -128,7 +125,6 @@
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
                             <td><?php echo $k->qty_output;?></td>
-                            <td><?php echo $k->kb_output;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>
@@ -156,7 +152,6 @@
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
                             <td><?php echo $k->qty_output;?></td>
-                            <td><?php echo $k->kb_output;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
 							 echo $d->format("d/m/Y");?>

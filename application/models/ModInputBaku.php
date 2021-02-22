@@ -41,7 +41,6 @@ class ModInputBaku extends CI_model {
 		$id_baku = $this->input->post('id_baku');
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
-		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $stok;
 		$nama_baku = $this->input->post('nama_baku');
@@ -53,14 +52,13 @@ class ModInputBaku extends CI_model {
 		$status = 'tersedia';
 		$fifo = $this->input->post('qty_input');
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
 		$this->db->insert('input_baku', $data);
 	}
 	public function addTbaku($id_baku) {
 		$id_baku = $id_baku;
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
-		$kb_input = $this->input->post('kb_input');
 		$h_stokInput = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$nama_baku = $this->input->post('nama_baku');
@@ -72,14 +70,13 @@ class ModInputBaku extends CI_model {
 		$status = 'tersedia';
 		$fifo = $this->input->post('qty_input');
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
 		$this->db->insert('input_baku', $data);
 	}
 	public function addTsupplier($id_supplier, $stok) {
 		$id_baku = $this->input->post('id_baku');
 		$id_supplier = $id_supplier;
-		$qty_input = $this->input->post('qty_input'); 
-		$kb_input = $this->input->post('kb_input');
+		$qty_input = $this->input->post('qty_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $stok;
 		$nama_baku = $this->input->post('nama_baku');
@@ -91,14 +88,13 @@ class ModInputBaku extends CI_model {
 		$status = 'tersedia';
 		$fifo = $this->input->post('qty_input');
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
 		$this->db->insert('input_baku', $data);
 	}
 	public function addTT($id_baku, $id_supplier) {
 		$id_baku = $id_baku;
 		$id_supplier = $id_supplier;
 		$qty_input = $this->input->post('qty_input');
-		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$h_stokInput = $this->input->post('qty_input');
 		$nama_baku = $this->input->post('nama_baku');
@@ -110,7 +106,7 @@ class ModInputBaku extends CI_model {
 		$status = 'tersedia';
 		$fifo = $this->input->post('qty_input');
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'h_stokInput' => $h_stokInput, 'nama_baku' => $nama_baku, 'keterangan' => $keterangan, 'produsen' => $produsen, 'id_user' => $id_user, 'batch' => $batch, 'expired' => $expired, 'status' => $status, 'fifo' => $fifo);
 		$this->db->insert('input_baku', $data);
 	}
 	public function delete($id){
@@ -137,7 +133,6 @@ class ModInputBaku extends CI_model {
 		$id_baku = $this->input->post('id_baku');
 		$id_supplier = $this->input->post('id_supplier');
 		$qty_input = $this->input->post('qty_input');
-		$kb_input = $this->input->post('kb_input');
 		$tgl_input = $this->input->post('tgl_input');
 		$id_user = $this->session->userdata('id_user');
 		$batch = $this->input->post('batch');
@@ -145,7 +140,7 @@ class ModInputBaku extends CI_model {
 		$expired = $this->input->post('expired');
 		$status = "tersedia";
 		
-		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'kb_input' => $kb_input,'tgl_input' => $tgl_input, 'id_user' => $id_user, 'batch' => $batch, 'keterangan' => $keterangan, 'expired' => $expired, 'status' => $status);
+		$data = array('id_baku' => $id_baku,'id_supplier' => $id_supplier, 'qty_input' => $qty_input, 'tgl_input' => $tgl_input, 'id_user' => $id_user, 'batch' => $batch, 'keterangan' => $keterangan, 'expired' => $expired, 'status' => $status);
 			$this->db->where('id_input', $id_input);
 			$this->db->update('input_baku', $data);
 	}
@@ -315,17 +310,6 @@ class ModInputBaku extends CI_model {
         $query = $this->db->query("SELECT stok from input_baku INNER JOIN baku ON input_baku.id_baku=baku.id_baku where id_input= '$id_input'");
         $hasil = $query->row();
         return $hasil->stok;
-    }
-
-    public function getKb($id_input){
-        $query = $this->db->query("SELECT kb_input from input_baku where id_input= '$id_input'");
-        $hasil = $query->row();
-        return $hasil->kb_input;
-    }
-    public function getKbByInput($id_input){
-        $query = $this->db->query("SELECT kb from input_baku INNER JOIN baku ON input_baku.id_baku=baku.id_baku where id_input= '$id_input'");
-        $hasil = $query->row();
-        return $hasil->kb;
     }
 
     public function getIdBaku($id_input){

@@ -42,7 +42,6 @@ class ModOutputBaku extends CI_model {
 	public function add($stok) {
 		$id_baku = $this->input->post('id_baku');
 		$qty_output = $this->input->post('qty_output');
-		$kb_output = $this->input->post('kb_output');
 		$h_stokOutput = $stok;
 		$nama_baku = $this->input->post('nama_baku');
 		$produsen = $this->input->post('produsen');
@@ -50,7 +49,7 @@ class ModOutputBaku extends CI_model {
 		$id_user = $this->session->userdata('id_user');
 		$keterangan = $this->input->post('keterangan');
 		
-		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'nama_baku' => $nama_baku, 'produsen' => $produsen, 'id_user' => $id_user, 'keterangan' => $keterangan);
+		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'nama_baku' => $nama_baku, 'produsen' => $produsen, 'id_user' => $id_user, 'keterangan' => $keterangan);
 		$this->db->insert('output_baku', $data);
 	}
 
@@ -76,13 +75,11 @@ class ModOutputBaku extends CI_model {
 		$id_output = $this->input->post('id_output');
 		$id_baku = $this->input->post('id_baku');
 		$qty_output = $this->input->post('qty_output');
-		$kb_output = $this->input->post('kb_output');
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
 		$keterangan = $this->input->post('keterangan');
 		
-		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'kb_output' => $kb_output, 
-		'tgl_output' => $tgl_output, 'id_user' => $id_user, 'keterangan' => $keterangan);
+		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'id_user' => $id_user, 'keterangan' => $keterangan);
 			$this->db->where('id_output', $id_output);
 			$this->db->update('output_baku', $data);
 	}
@@ -114,17 +111,6 @@ class ModOutputBaku extends CI_model {
         $query = $this->db->query("SELECT stok from output_baku INNER JOIN baku ON output_baku.id_baku=baku.id_baku where id_output= '$id_output'");
         $hasil = $query->row();
         return $hasil->stok;
-    }
-
-    public function getKb($id_output){
-        $query = $this->db->query("SELECT kb_output from output_baku where id_output= '$id_output'");
-        $hasil = $query->row();
-        return $hasil->kb_output;
-    }
-    public function getKbByOutput($id_output){
-        $query = $this->db->query("SELECT kb from output_baku INNER JOIN baku ON output_baku.id_baku=baku.id_baku where id_output= '$id_output'");
-        $hasil = $query->row();
-        return $hasil->kb;
     }
 
     public function getIdBaku($id_output){
