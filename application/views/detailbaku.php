@@ -63,9 +63,9 @@
                         </tr>
                         <tr class="bg-primary text-white">
                             <!-- <th>No</th> -->
-                            <th class="text-center">Jumlah</th>
-                            <th class="text-center">Jumlah</th>
-                            <th class="text-center">Jumlah</th>
+                            <th class="text-center">Jumlah (<?php echo $data->satuan; ?>)</th>
+                            <th class="text-center">Jumlah (<?php echo $data->satuan; ?>)</th>
+                            <th class="text-center">Jumlah (<?php echo $data->satuan; ?>)</th>
                         </tr>
                     </thead>
                     <tfoot>

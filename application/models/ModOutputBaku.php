@@ -44,12 +44,13 @@ class ModOutputBaku extends CI_model {
 		$qty_output = $this->input->post('qty_output');
 		$h_stokOutput = $stok;
 		$nama_baku = $this->input->post('nama_baku');
+		$satuan = $this->input->post('satuan');
 		$produsen = $this->input->post('produsen');
 		$tgl_output = $this->input->post('tgl_output');
 		$id_user = $this->session->userdata('id_user');
 		$keterangan = $this->input->post('keterangan');
 		
-		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'nama_baku' => $nama_baku, 'produsen' => $produsen, 'id_user' => $id_user, 'keterangan' => $keterangan);
+		$data = array('id_baku' => $id_baku, 'qty_output' => $qty_output, 'tgl_output' => $tgl_output, 'h_stokOutput' => $h_stokOutput, 'nama_baku' => $nama_baku, 'satuan' => $satuan, 'produsen' => $produsen, 'id_user' => $id_user, 'keterangan' => $keterangan);
 		$this->db->insert('output_baku', $data);
 	}
 
@@ -87,9 +88,10 @@ class ModOutputBaku extends CI_model {
 	public function updateBaku(){
 		$id_baku = $this->input->post('id_baku');
 		$nama_baku = $this->input->post('nama_baku');
+		$satuan = $this->input->post('satuan');
 		$produsen = $this->input->post('produsen');
 		
-		$data = array('nama_baku' => $nama_baku, 'produsen' => $produsen);
+		$data = array('nama_baku' => $nama_baku,'satuan' => $satuan, 'produsen' => $produsen);
 		$this->db->where('id_baku', $id_baku);
 		$this->db->update('output_baku', $data);
 	}

@@ -14,7 +14,7 @@
     <input class="form-control" name="nama_baku" type="hidden">
     <div class="form-group">
         <label>Satuan Bahan Baku</label><br>
-        <input class="form-control" name="satuan" type="text" placeholder="Produsen" readonly>
+        <input class="form-control" name="satuan" type="text" placeholder="Satuan" readonly>
     </div>
     <div class="form-group">
         <label>Produsen</label><br>

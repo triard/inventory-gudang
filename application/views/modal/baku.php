@@ -6,7 +6,7 @@
 </div>
 <div class="form-group">
     <label>Satuan Bahan Baku</label><br>
-    <input class="form-control" name="satuan" type="text" placeholder="satuan">
+    <input class="form-control" name="satuan" type="text" placeholder="Satuan">
 </div>
 <div class="form-group">
     <label>Produsen</label><br>
@@ -34,6 +34,8 @@
 </div>
 <?php } else { ?>
     <input class="form-control" value="<?php echo $baku->nama_baku;?>" name="nama_baku" type="hidden" placeholder="Nama"
+        required>
+    <input class="form-control" value="<?php echo $baku->satuan;?>" name="satuan" type="hidden" placeholder="Satuan"
         required>
     <input class="form-control" value="<?php echo $baku->produsen;?>" name="produsen" type="hidden" placeholder="Produsen">
 <?php } ?>
