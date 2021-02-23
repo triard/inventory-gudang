@@ -26,9 +26,9 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Satuan</th>
                             <th>Produsen</th>
                             <th>Stok</th>
+                            <th>Satuan</th>
                             <th>Stok Limit</th>
                             <th class="disabled-sorting text-center">Actions</th>
                         </tr>
@@ -37,9 +37,9 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Satuan</th>
                             <th>Produsen</th>
                             <th>Stok</th>
+                            <th>Satuan</th>
                             <th>Stok Limit</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -50,9 +50,9 @@
                         <tr>
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_baku;?></td>
-                            <td><?php echo $k->satuan;?></td>
                             <td><?php echo $k->produsen;?></td>
                             <td><?php echo $k->stok;?></td>
+                            <td><?php echo $k->satuan;?></td>
                             <td><?php echo $k->stok_limit;?></td>
                             <td class="td-actions text-center">
                                 <a href="<?= base_url().'baku/detail/'.$k->id_baku; ?>">
