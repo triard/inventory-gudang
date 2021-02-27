@@ -19,7 +19,7 @@
         <br>
         <?php $no=1;
             foreach ($notif as $notif) { 
-            echo "- ","&nbsp;",$notif->nama_baku," sebanyak ",$notif->fifo," items";
+            echo "- ","&nbsp;",$notif->nama_baku," sebanyak ",$notif->fifo," ",$notif->satuan;
             echo "<br>";
             }
         ?>

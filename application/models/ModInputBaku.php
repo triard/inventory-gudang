@@ -350,7 +350,7 @@ class ModInputBaku extends CI_model {
 	}
 
     public function getHampirExpired(){
-    	$query = $this->db->query("SELECT nama_baku, SUM(fifo) AS fifo FROM input_baku WHERE status != 'expired' AND status = 'hampir expired' GROUP BY id_baku");
+    	$query = $this->db->query("SELECT nama_baku, satuan, SUM(fifo) AS fifo FROM input_baku WHERE status != 'expired' AND status = 'hampir expired' GROUP BY id_baku");
         return $query->result();
     }
 

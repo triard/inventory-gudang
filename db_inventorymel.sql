@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23 Feb 2021 pada 10.05
+-- Generation Time: 27 Feb 2021 pada 05.57
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -56,7 +56,7 @@ CREATE TABLE `input_baku` (
   `expired` date NOT NULL,
   `status` varchar(50) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
-  `fifo` int(11) NOT NULL
+  `fifo` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -304,7 +304,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `baku`
 --
 ALTER TABLE `baku`
-  MODIFY `id_baku` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_baku` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `input_baku`
 --
@@ -344,7 +344,7 @@ ALTER TABLE `suppliers_baku`
 -- AUTO_INCREMENT for table `transaksi_baku`
 --
 ALTER TABLE `transaksi_baku`
-  MODIFY `id_tb` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tb` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `transaksi_items`
 --
