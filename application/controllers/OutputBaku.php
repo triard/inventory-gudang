@@ -67,6 +67,23 @@ class OutputBaku extends CI_Controller {
 			$this->ModBaku->updateStok($total);
 			$this->ModOutputBaku->add($total);
 
+			// transaksi baku
+			$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);
+			if ($cekTanggal == 1) {
+				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
+				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
+				$totalStokTi = $stokTi + $qty;
+				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggal);
+				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			} else {
+				$this->ModTransaksiBaku->addTanggalOutput($id_baku);
+				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
+				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
+				$totalStokTi = $stokTi + $qty;
+				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggal);
+				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			}
+
 			// fifo logic
 			$quantity = $qty;
 			$getInput = $this->ModInputBaku->getByStatusAsc($id_baku);
@@ -123,25 +140,6 @@ class OutputBaku extends CI_Controller {
 					}
 			    }
 			}
-
-
-			// transaksi baku
-			$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);
-			if ($cekTanggal == 1) {
-				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
-				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
-				$totalStokTi = $stokTi + $qty;
-				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggal);
-				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
-			} else {
-				$this->ModTransaksiBaku->addTanggalOutput($id_baku);
-				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
-				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
-				$totalStokTi = $stokTi + $qty;
-				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggal);
-				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);   
-			}
-
 			echo json_encode(array("status" => TRUE));
 		}
 	}
@@ -267,6 +265,48 @@ class OutputBaku extends CI_Controller {
 			$this->ModOutputBaku->update_H_Stok($total);
 			$this->ModBaku->updateStok($total);
 
+			// transaksi items
+			if ($tanggalLama == $tanggalBaru) {
+				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
+				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
+				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
+				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
+				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+			} else {
+				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggalBaru);
+				if ($cekTanggal == 1) {
+					$stokTi1 = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalLama);
+					$sisa_stokTi1 = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalLama);
+					$totalStokTi1 = $stokTi1 - $qtyLama;
+					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalLama);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+
+					$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
+					$totalStokTi = $stokTi + $qtyBaru;
+					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+
+					// cek hapus tanggal
+					$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
+				} else {
+					$this->ModTransaksiBaku->addTanggalOutput($id_baku);
+					$stokTi1 = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalLama);
+					$sisa_stokTi1 = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalLama);
+					$totalStokTi1 = $stokTi1 - $qtyLama;
+					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalLama);
+
+					$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
+					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
+					$totalStokTi = $stokTi + $qtyBaru;
+					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+					
+					// cek hapus tanggal
+					$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
+				}
+			}
+
 			// fifo logic Dell
 			$quantity = $qtyLama;
 			$getInput = $this->ModInputBaku->getByStatusDesc($id_baku);
@@ -381,50 +421,6 @@ class OutputBaku extends CI_Controller {
 						$this->ModInputBaku->updateStatusHampir($id_input);
 					}
 			    }
-			}
-
-			// transaksi items
-			if ($tanggalLama == $tanggalBaru) {
-				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
-				$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
-				$totalStokTi = $stokTi - ($qtyLama-$qtyBaru);
-				$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
-				$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
-			} else {
-				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggalBaru);
-				if ($cekTanggal == 1) {
-					$stokTi1 = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalLama);
-					$sisa_stokTi1 = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalLama);
-					$totalStokTi1 = $stokTi1 - $qtyLama;
-					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalLama);
-					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
-
-					$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
-					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
-					$totalStokTi = $stokTi + $qtyBaru;
-					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
-					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
-
-					// cek hapus tanggal
-					$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
-					echo json_encode(array("status" => TRUE));  
-				} else {
-					$this->ModTransaksiBaku->addTanggalOutput($id_baku);
-					$stokTi1 = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalLama);
-					$sisa_stokTi1 = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalLama);
-					$totalStokTi1 = $stokTi1 - $qtyLama;
-					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalLama);
-
-					$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggalBaru);
-					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggalBaru);
-					$totalStokTi = $stokTi + $qtyBaru;
-					$this->ModTransaksiBaku->updateStokKeluar($totalStokTi, $id_baku, $tanggalBaru);
-					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
-					
-					// cek hapus tanggal
-					$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
-					echo json_encode(array("status" => TRUE));
-				}
 			}
 		}
 		echo json_encode(array("status" => TRUE));
