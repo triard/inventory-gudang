@@ -8,6 +8,13 @@ class ModInputBaku extends CI_model {
 		$this->db->order_by('tgl_input', "asc");
         return $this->db->get()->result();
 	}
+	public function selectAllStatus($id_baku) {
+		$this->db->select('*');
+		$this->db->from('input_baku');
+		$this->db->where('id_baku', $id_baku);
+		$this->db->order_by('tgl_input', "asc");
+        return $this->db->get()->result();
+	}
 	public function listAll() {
         $query = $this->db->query("SELECT * FROM input_baku ORDER BY id_input ASC");
         return $query->result();
@@ -352,6 +359,17 @@ class ModInputBaku extends CI_model {
     public function getHampirExpired(){
     	$query = $this->db->query("SELECT nama_baku, satuan, SUM(fifo) AS fifo FROM input_baku WHERE status != 'expired' AND status = 'hampir expired' GROUP BY id_baku");
         return $query->result();
+    }
+
+    public function getSinkronisasiStok($id_baku){
+    	$query = $this->db->query("SELECT tgl_input, SUM(qty_input) AS stok_masuk FROM input_baku WHERE id_baku='$id_baku' AND status != 'expired' GROUP BY tgl_input");
+        $cek = $query->num_rows();
+		if ($cek > 0) {
+			$hasil = $query->result();
+		} else {
+			$hasil = 0;
+		}
+        return $hasil;	
     }
 
 }

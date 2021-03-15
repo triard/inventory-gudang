@@ -44,6 +44,10 @@ class ModTransaksiItems extends CI_model {
 			return 1;
 		}
 	}
+	public function addTanggal($id_item, $tanggal) {
+		$data = array('tanggal' => $tanggal,'id_item' => $id_item);
+		$this->db->insert('transaksi_items', $data);
+	}
 	public function addTanggalInput($id_item) {
 		$id_item = $id_item;
 		$tanggal = $this->input->post('tgl_input');
@@ -264,13 +268,21 @@ class ModTransaksiItems extends CI_model {
 		$this->db->update('transaksi_items', $data);
 	}
 
-	// public function getId(){
-	// 	$nama_item = $this->input->post('nama_item');
-	// 	$jenis = $this->input->post('jenis');
-	// 	$netto = $this->input->post('netto');
-	// 	$merk = $this->input->post('merk');
- //        $query = $this->db->query("SELECT id_item from items where nama_item='$nama_item' AND jenis='$jenis' AND netto='$netto' AND merk='$merk'");
- //        $hasil = $query->row();
- //        return $hasil->id_item;
- //    }
+	public function updateSinkronisasiAwal($id_item){
+		$data = array('stok_masuk' => 0, 'stok_keluar' => 0, 'sisa_stok' => 0);
+		$this->db->where('id_item', $id_item);
+		$this->db->update('transaksi_items', $data);
+	}
+
+	public function getSinkronisasiSisaStok($id_item){
+		$query = $this->db->query("SELECT sisa_stok FROM transaksi_items WHERE id_item = '$id_item' ORDER BY tanggal DESC LIMIT 1");
+		$cek = $query->num_rows();
+		if ($cek > 0) {
+			$cekHasil = $query->row();
+			$hasil = $cekHasil->sisa_stok;
+		} else {
+			$hasil = 0;
+		}
+        return $hasil;	
+    }
 }

@@ -47,11 +47,22 @@
                                 <div style="text-transform: capitalize; margin-left: 10px;">
                                     Produsen <span style="margin-left: 13px"> : &nbsp; <?php echo $data->produsen; ?>
                                     </span>
-<!--                                     <br>
                                     <br>
-                                    <a href="<?php echo site_url('DetailBaku/sinkronisasi/'.$id->id_baku);?>" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Synchronization </a>
                                     <br>
-                                    <br> -->
+                                    <a href="<?php echo site_url('DetailBaku/sinkronisasi/'.$data->id_baku);?>" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Synchronization </a>
+                                    <?php
+                                        if (!empty($this->session->flashdata('sinkronisasi'))) {
+                                    ?>
+                                    <div style="color: red;"><i class="fas fa-window-close"></i> &nbsp;<?php echo $this->session->flashdata('sinkronisasi'); ?></div>
+                                    <?php 
+                                        }
+                                        else {
+                                    ?>
+                                    <div style="color: green;"><i class="fas fa-check-square"></i> &nbsp; Detail transaksi telah valid</div>
+                                    <?php
+                                        } 
+                                    ?>
+                                    <br>
                                 </div>
                             </th>
                         </tr>

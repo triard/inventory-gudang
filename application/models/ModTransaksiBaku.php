@@ -44,6 +44,10 @@ class ModTransaksiBaku extends CI_model {
 			return 1;
 		}
 	}
+	public function addTanggal($id_baku, $tanggal) {
+		$data = array('tanggal' => $tanggal,'id_baku' => $id_baku);
+		$this->db->insert('transaksi_baku', $data);
+	}
 	public function addTanggalInput($id_baku) {
 		$id_baku = $id_baku;
 		$tanggal = $this->input->post('tgl_input');
@@ -149,7 +153,6 @@ class ModTransaksiBaku extends CI_model {
 	        $ask = $hasil2->stok_keluar;
 
 	        $ss = $asm - $ask;
-	        $sk = $akm - $akk;
 
 			$dataStok = array('sisa_stok' => $ss);
 			$this->db->where('id_baku', $id_baku);
@@ -219,13 +222,21 @@ class ModTransaksiBaku extends CI_model {
 		$this->db->update('transaksi_baku', $data);
 	}
 
-	// public function getId(){
-	// 	$nama_baku = $this->input->post('nama_baku');
-	// 	$jenis = $this->input->post('jenis');
-	// 	$netto = $this->input->post('netto');
-	// 	$merk = $this->input->post('merk');
- //        $query = $this->db->query("SELECT id_baku from baku where nama_baku='$nama_baku' AND jenis='$jenis' AND netto='$netto' AND merk='$merk'");
- //        $hasil = $query->row();
- //        return $hasil->id_baku;
- //    }
+	public function updateSinkronisasiAwal($id_baku){
+		$data = array('stok_masuk' => 0, 'stok_keluar' => 0, 'sisa_stok' => 0);
+		$this->db->where('id_baku', $id_baku);
+		$this->db->update('transaksi_baku', $data);
+	}
+
+	public function getSinkronisasiSisaStok($id_baku){
+		$query = $this->db->query("SELECT sisa_stok FROM transaksi_baku WHERE id_baku = '$id_baku' ORDER BY tanggal DESC LIMIT 1");
+		$cek = $query->num_rows();
+		if ($cek > 0) {
+			$cekHasil = $query->row();
+			$hasil = $cekHasil->sisa_stok;
+		} else {
+			$hasil = 0;
+		}
+        return $hasil;	
+    }
 }

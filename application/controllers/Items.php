@@ -31,6 +31,11 @@ class Items extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
+		$stok = $this->ModItems->getStok($id);
+		$sisa_stok = $this->ModTransaksiItems->getSinkronisasiSisaStok($id);
+		if ($stok != $sisa_stok) {
+		   $this->session->set_flashdata('sinkronisasi', 'Detail transaksi tidak valid, anda perlu melakukan sinkronisasi');
+		}
 		
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
 		$data['transaksi'] = $this->ModTransaksiItems->selectAllById($id); 
@@ -48,6 +53,11 @@ class Items extends CI_Controller {
 		$q = $this->session->userdata('status');
 		if($q != "login") {
 			redirect('login','refresh'); 
+		}
+		$stok = $this->ModItems->getStok($id);
+		$sisa_stok = $this->ModTransaksiItems->getSinkronisasiSisaStok($id);
+		if ($stok != $sisa_stok) {
+		   $this->session->set_flashdata('sinkronisasi', 'Detail transaksi tidak valid, anda perlu melakukan sinkronisasi');
 		}
 		$this->session->unset_userdata('startSession');
 		$this->session->unset_userdata('endSession');
@@ -122,12 +132,4 @@ class Items extends CI_Controller {
 		$this->ModItems->updateStok();
 		echo json_encode(array("status" => TRUE));
 	}
-	// public function updateLimitStok() {
-	// 	$q = $this->session->userdata('status');
-	// 	if($q != "login") {
-	// 		exit();
-	// 	}
-	// 	$this->ModItems->updateStokLimit();
-	// 	echo json_encode(array("status" => TRUE));
-	// }
 }

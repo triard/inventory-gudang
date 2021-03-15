@@ -49,6 +49,7 @@
                             <th>No</th>
                             <th>Items</th>
                             <th>Jenis</th>
+                            <th>Merk</th>
                             <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
@@ -65,6 +66,7 @@
                             <th>No</th>
                             <th>Items</th>
                             <th>Jenis</th>
+                            <th>Merk</th>
                             <th>Netto</th>
                             <th>Quantity</th>
                             <th>Koli / Box</th>
@@ -85,6 +87,7 @@
                                 <td><?php echo $no;?></td>
                                 <td><?php echo $k->nama_item;?></td>
                                 <td><?php echo $k->jenis;?></td>
+                                <td><?php echo $k->merk;?></td>
                                 <td><?php echo $k->netto;?></td>
                                 <td><?php echo $k->qty_output;?></td>
                                 <td><?php echo $k->kb_output;?></td>
@@ -116,6 +119,7 @@
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_item;?></td>
                             <td><?php echo $k->jenis;?></td>
+                            <td><?php echo $k->merk;?></td>
                             <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->qty_output;?></td>
                             <td><?php echo $k->kb_output;?></td>
@@ -147,6 +151,7 @@
                             <td><?php echo $no;?></td>
                             <td><?php echo $k->nama_item;?></td>
                             <td><?php echo $k->jenis;?></td>
+                            <td><?php echo $k->merk;?></td>
                             <td><?php echo $k->netto;?></td>
                             <td><?php echo $k->qty_output;?></td>
                             <td><?php echo $k->kb_output;?></td>

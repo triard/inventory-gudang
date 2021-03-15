@@ -6,7 +6,10 @@
     <select name="id_item" class="select2" id="item" required>
         <option disabled selected>Pilih Item</option>
         <?php foreach ($item as $i): ?>
-        <option value="<?php echo  $i->id_item?>"><?php echo $i->jenis;?> - <?php echo $i->nama_item;?> <?php echo $i->netto;?> - <?php echo $i->merk;?></option>
+        <option value="<?php echo  $i->id_item?>"><?php echo $i->jenis;?> - <?php echo $i->nama_item;?> <?php echo $i->netto;?> <?php if ($i->merk != "") { ?>
+                 - <?php echo $i->merk;?>
+            <?php } ?>
+        </option>
         <?php endforeach; ?>
     </select> 
 </div>

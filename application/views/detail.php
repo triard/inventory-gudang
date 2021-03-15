@@ -51,6 +51,22 @@
                                     Jenis <span style="margin-left: 11px"> : &nbsp; <?php echo $data->jenis; ?> </span>
                                     <br>
                                     Netto <span style="margin-left: 10px"> : &nbsp; <?php echo $data->netto; ?> </span>
+                                    <br>
+                                    <br>
+                                    <a href="<?php echo site_url('Detail/sinkronisasi/'.$data->id_item);?>" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Synchronization </a>
+                                    <?php
+                                        if (!empty($this->session->flashdata('sinkronisasi'))) {
+                                    ?>
+                                    <div style="color: red;"><i class="fas fa-window-close"></i> &nbsp;<?php echo $this->session->flashdata('sinkronisasi'); ?></div>
+                                    <?php 
+                                        }
+                                        else {
+                                    ?>
+                                    <div style="color: green;"><i class="fas fa-check-square"></i> &nbsp; Detail transaksi telah valid</div>
+                                    <?php
+                                        } 
+                                    ?>
+                                    <br>
                                 </div>
                             </th>
                         </tr>

@@ -31,7 +31,11 @@ class Baku extends CI_Controller {
 		if($q != "login") {
 			redirect('login','refresh');
 		}
-		
+		$stok = $this->ModBaku->getStok($id);
+		$sisa_stok = $this->ModTransaksiBaku->getSinkronisasiSisaStok($id);
+		if ($stok != $sisa_stok) {
+		   $this->session->set_flashdata('sinkronisasi', 'Detail transaksi tidak valid, anda perlu melakukan sinkronisasi');
+		}
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
 		$data['transaksi'] = $this->ModTransaksiBaku->selectAllById($id); 
 		$data['data'] = $this->ModBaku->getAllById($id);
@@ -51,6 +55,11 @@ class Baku extends CI_Controller {
 		}
 		$this->session->unset_userdata('startSession');
 		$this->session->unset_userdata('endSession');
+		$stok = $this->ModBaku->getStok($id);
+		$sisa_stok = $this->ModTransaksiBaku->getSinkronisasiSisaStok($id);
+		if ($stok != $sisa_stok) {
+		   $this->session->set_flashdata('sinkronisasi', 'Detail transaksi tidak valid, anda perlu melakukan sinkronisasi');
+		}
 		$menu['login'] = $this->ModUser->edit($this->session->userdata('id_user'));
 		$data['transaksi'] = $this->ModTransaksiBaku->selectAllById($id); 
 		$data['data'] = $this->ModBaku->getAllById($id);
