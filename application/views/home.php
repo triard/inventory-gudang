@@ -191,7 +191,7 @@
                             }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
                                 foreach ($inputFilterBaku as $mi){ 
     
-                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -199,7 +199,7 @@
                                 }
                             }else if($inputFilterBaku != null ){
                                 foreach ($inputFilterBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -207,7 +207,7 @@
                                 } } 
                             else{
                                     foreach ($mostInputBaku as $mi){ 
-                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen"];
+                                    $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -257,7 +257,7 @@
                             }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
                                 foreach ($outputFilterBaku as $mo){ 
     
-                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
@@ -267,7 +267,7 @@
                             }else if($outputFilterBaku != null ){
                                 foreach ($outputFilterBaku as $mo){ 
     
-                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;		
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
@@ -275,7 +275,7 @@
     
                                 } }else{
                                 foreach ($mostOutputBaku as $mo){ 
-                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen"];
+                                    $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
                                     $jml_qty_output_baku[] = (float) $mo->total_stok;	
                                 echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
@@ -708,7 +708,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 1000,
+                    max: 100000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -757,7 +757,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 1000,
+                    max: 100000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -806,7 +806,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 1000,
+                    max: 100000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -855,7 +855,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 1000,
+                    max: 100000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
