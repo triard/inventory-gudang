@@ -185,7 +185,7 @@ class ModOutputItems extends CI_model {
     }
 
     public function getSinkronisasiStok($id_item){
-    	$query = $this->db->query("SELECT tgl_output, SUM(qty_output) AS stok_keluar FROM output_items WHERE id_item='$id_item' GROUP BY tgl_output");
+    	$query = $this->db->query("SELECT tgl_output, SUM(qty_output) AS stok_keluar, SUM(kb_output) AS kb_keluar FROM output_items WHERE id_item='$id_item' GROUP BY tgl_output");
         $cek = $query->num_rows();
 		if ($cek > 0) {
 			$hasil = $query->result();

@@ -8,4 +8,4 @@
     <label>Produsen</label><br>
     <input class="form-control" name="produsen" type="text" placeholder="Produsen" value="<?php echo $baku->produsen;?>" readonly>
 </div>
-<?php }
+<?php } ?>

@@ -249,7 +249,7 @@ class ModInputItems extends CI_model {
     }
 
     public function getSinkronisasiStok($id_item){
-    	$query = $this->db->query("SELECT tgl_input, SUM(qty_input) AS stok_masuk FROM input_items WHERE id_item='$id_item' GROUP BY tgl_input");
+    	$query = $this->db->query("SELECT tgl_input, SUM(qty_input) AS stok_masuk, SUM(kb_input) AS kb_masuk FROM input_items WHERE id_item='$id_item' GROUP BY tgl_input");
         $cek = $query->num_rows();
 		if ($cek > 0) {
 			$hasil = $query->result();

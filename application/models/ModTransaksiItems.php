@@ -269,7 +269,7 @@ class ModTransaksiItems extends CI_model {
 	}
 
 	public function updateSinkronisasiAwal($id_item){
-		$data = array('stok_masuk' => 0, 'stok_keluar' => 0, 'sisa_stok' => 0);
+		$data = array('stok_masuk' => 0, 'stok_keluar' => 0, 'sisa_stok' => 0, 'kb_masuk' => 0, 'kb_keluar' => 0, 'sisa_kb' => 0);
 		$this->db->where('id_item', $id_item);
 		$this->db->update('transaksi_items', $data);
 	}

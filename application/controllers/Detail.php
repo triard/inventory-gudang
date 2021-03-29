@@ -85,14 +85,17 @@ class Detail extends CI_Controller {
 	        foreach ($getStokMasuk as $row){
 			    $tanggal = $row->tgl_input;
 			    $stok_m = $row->stok_masuk;
+			    $kb_masuk = $row->kb_masuk;
 			    $stok_masuk = round($stok_m, 5);
 
 			    $cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);
 				if ($cekTanggal == 1) {
-					$this->ModTransaksiItems->updateStokMasuk($stok_masuk, $id_item, $tanggal); 
+					$this->ModTransaksiItems->updateStokMasuk($stok_masuk, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($kb_masuk, $id_item, $tanggal); 
 				} else {
 					$this->ModTransaksiItems->addTanggal($id_item, $tanggal);
 					$this->ModTransaksiItems->updateStokMasuk($stok_masuk, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbMasuk($kb_masuk, $id_item, $tanggal);
 				}
 			}
 		}
@@ -101,14 +104,17 @@ class Detail extends CI_Controller {
 	        foreach ($getStokKeluar as $row){
 			    $tanggal = $row->tgl_output;
 			    $stok_k = $row->stok_keluar;
+			    $kb_keluar = $row->kb_keluar;
 	            $stok_keluar = round($stok_k, 5);
 	            
 			    $cekTanggal = $this->ModTransaksiItems->cekTanggal($id_item, $tanggal);
 				if ($cekTanggal == 1) {
-					$this->ModTransaksiItems->updateStokKeluar($stok_keluar, $id_item, $tanggal); 
+					$this->ModTransaksiItems->updateStokKeluar($stok_keluar, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbKeluar($kb_keluar, $id_item, $tanggal); 
 				} else {
 					$this->ModTransaksiItems->addTanggal($id_item, $tanggal);
 					$this->ModTransaksiItems->updateStokKeluar($stok_keluar, $id_item, $tanggal);
+					$this->ModTransaksiItems->updateKbKeluar($kb_keluar, $id_item, $tanggal);
 				}
 			}
 		}
