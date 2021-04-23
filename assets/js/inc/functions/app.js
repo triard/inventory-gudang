@@ -40,13 +40,12 @@ $(document).ready(function () {
     /*------------------------------------------------
         Sidebar toggle menu
     -------------------------------------------------*/
-    $('body').on('click', '.navigation__sub > a', function (e) {
+    $('body').on('click', '.navigation__sub > a', function (e) { 
+        e.stopPropagation();
         e.preventDefault();
-
         $(this).parent().toggleClass('navigation__sub--toggled');
-        $(this).next('ul').slideToggle(250);
+        $(this).next('ul').slideToggle(250); 
     });
-
 
     /*------------------------------------------------
         Form group blue line

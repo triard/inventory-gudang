@@ -181,15 +181,12 @@
                                     class="fas fa-sync-alt"></i></a>
                         </div>
                     </div>
-                    <!-- <div>
-                    <a href="<?php echo site_url('home/');?>" class="btn btn-success">Bulan</a>
-                    </div> -->
                     <table class="table table-sm table-striped">
                         <thead>
                             <?php
                             if($inputFilterBaku == null && $this->input->post('startBaku') != null){ 
                             }else if($this->session->userdata('startSession')!=null && $this->session->userdata('endSession') != null){
-                                foreach ($inputFilterBaku as $mi){ 
+                                foreach ($inputFilterBaku as $mi){  
     
                                     $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
                                     $jml_qty_input_baku[] = (float) $mi->total_stok;	
