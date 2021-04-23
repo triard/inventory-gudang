@@ -60,7 +60,9 @@
                             <th>Expired</th>
                             <th>Keterangan</th>
                             <th>Status</th>
+                            <?php if($this->session->userdata('level')=="superadmin"){ ?>
                             <th class="disabled-sorting text-right">Actions</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tfoot>
@@ -75,7 +77,9 @@
                             <th>Expired</th>
                             <th>Keterangan</th>
                             <th>Status</th>
-                            <th class="text-right">Actions</th>
+                            <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                            <th class="disabled-sorting text-right">Actions</th>
+                            <?php } ?>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -100,8 +104,8 @@
                                 </td>
                                 <td><?php echo $k->keterangan;?></td>
                                 <td><?php echo $k->status;?></td>
-                                <td class="td-actions text-right">
                                 <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                                <td class="td-actions text-right">
                                     <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                         class="btn btn-success btn-round" data-original-title="" title="">
                                         <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -111,11 +115,11 @@
                                         data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                         <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                     </button>
-                                <?php } ?>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <?php $no++; }
-						}else if($filter != null){ ?>
+                        }else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $k) { ?>
                         <tr>
@@ -126,7 +130,7 @@
                             <td><?php echo $k->satuan;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_input);
-							 echo $d->format("d/m/Y");?>
+                             echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->batch;?></td>
                             <td>
@@ -135,8 +139,8 @@
                             </td>
                             <td><?php echo $k->keterangan;?></td>
                             <td><?php echo $k->status;?></td>
-                            <td class="td-actions text-right">
                             <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                            <td class="td-actions text-right">
                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -146,11 +150,11 @@
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
-                            <?php } ?>
                             </td>
+                            <?php } ?>
                         </tr>
                         <?php $no++; }
-						}else{ ?>
+                        }else{ ?>
                         <?php $no=1;
                         foreach ($input as $k) { ?>
                         <tr>
@@ -161,7 +165,7 @@
                             <td><?php echo $k->satuan;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_input);
-							     echo $d->format("d/m/Y");?>
+                                 echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->batch;?></td>
                             <td>
@@ -170,8 +174,8 @@
                             </td>
                             <td><?php echo $k->keterangan;?></td>
                             <td><?php echo $k->status;?></td>
-                            <td class="td-actions text-right">
                             <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                            <td class="td-actions text-right">
                                 <button type="button" onclick="ganti(<?php echo $k->id_input;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -181,11 +185,11 @@
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_input;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
-                                <?php } ?>
                             </td>
+                            <?php } ?>
                         </tr>
                         <?php $no++; }
-						} ?>
+                        } ?>
 
                     </tbody>
                 </table>

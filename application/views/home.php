@@ -192,7 +192,7 @@
                                 foreach ($inputFilterBaku as $mi){ 
     
                                     $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
-                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;    
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
     
@@ -200,7 +200,7 @@
                             }else if($inputFilterBaku != null ){
                                 foreach ($inputFilterBaku as $mi){ 
                                     $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
-                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;    
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
     
@@ -208,7 +208,7 @@
                             else{
                                     foreach ($mostInputBaku as $mi){ 
                                     $input_baku[] = [$mi->nama_baku,"Produsen: $mi->produsen","Satuan: $mi->satuan"];
-                                    $jml_qty_input_baku[] = (float) $mi->total_stok;	                                
+                                    $jml_qty_input_baku[] = (float) $mi->total_stok;                                    
                                     echo "<canvas id='BarChartInputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
                                 } 
@@ -258,7 +258,7 @@
                                 foreach ($outputFilterBaku as $mo){ 
     
                                     $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
-                                    $jml_qty_output_baku[] = (float) $mo->total_stok;		
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;       
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -268,7 +268,7 @@
                                 foreach ($outputFilterBaku as $mo){ 
     
                                     $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
-                                    $jml_qty_output_baku[] = (float) $mo->total_stok;		
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;       
                                 
                                     echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -276,7 +276,7 @@
                                 } }else{
                                 foreach ($mostOutputBaku as $mo){ 
                                     $output_baku[] = [$mo->nama_baku,"Produsen: $mo->produsen","Satuan: $mo->satuan"];
-                                    $jml_qty_output_baku[] = (float) $mo->total_stok;	
+                                    $jml_qty_output_baku[] = (float) $mo->total_stok;   
                                 echo "<canvas id='BarChartOutputsBaku' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
                                 } 
@@ -411,7 +411,7 @@
                                 foreach ($inputFilter as $mi){ 
     
                                     $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
-                                    $jml_qty_input[] = (float) $mi->total_stok;	
+                                    $jml_qty_input[] = (float) $mi->total_stok; 
                                 
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -421,7 +421,7 @@
                                 foreach ($inputFilter as $mi){ 
     
                                     $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
-                                    $jml_qty_input[] = (float) $mi->total_stok;	
+                                    $jml_qty_input[] = (float) $mi->total_stok; 
                                 
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -430,7 +430,7 @@
                             else{
                                     foreach ($mostInput as $mi){ 
                                         $input_item[] = [$mi->nama_item,"Jenis: $mi->jenis","Merk: $mi->merk","Netto: $mi->netto"];
-                                    $jml_qty_input[] = (float) $mi->total_stok;	                                
+                                    $jml_qty_input[] = (float) $mi->total_stok;                                 
                                     echo "<canvas id='BarChartInputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
                                 } 
@@ -481,7 +481,7 @@
                                 foreach ($outputFilter as $mo){ 
     
                                     $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
-                                    $jml_qty_output[] = (float) $mo->total_stok;		
+                                    $jml_qty_output[] = (float) $mo->total_stok;        
                                 
                                     echo "<canvas id='BarChartOutputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -491,7 +491,7 @@
                                 foreach ($outputFilter as $mo){ 
     
                                     $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
-                                    $jml_qty_output[] = (float) $mo->total_stok;		
+                                    $jml_qty_output[] = (float) $mo->total_stok;        
                                 
                                     echo "<canvas id='BarChartOutputs' width='90' height='36' 
                                     style='margin-bottom: -25px;'></canvas>'";
@@ -499,7 +499,7 @@
                                 } }else{
                                 foreach ($mostOutput as $mo){ 
                                     $output_item[] = [$mo->nama_item,"Jenis: $mo->jenis","Merk: $mo->merk","Netto: $mo->netto"];
-                                    $jml_qty_output[] = (float) $mo->total_stok;	
+                                    $jml_qty_output[] = (float) $mo->total_stok;    
                                 echo "<canvas id='BarChartOutputs' width='90' height='36' 
                                  style='margin-bottom: -25px;'></canvas>'";
                                 } 
@@ -520,14 +520,14 @@
 <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminkemas') { ?>
 <?php if($limitKemas !=null){ ?>
 <div id="modalKemas" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Stok Bahan Kemas Hampir Habis</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 300px; overflow-y: auto;">
                 <div class="table-responsive">
                     <table class="table table-sm table-striped">
                         <thead>
@@ -569,14 +569,14 @@
 <?php if($this->session->userdata('level') == 'superadmin' || $this->session->userdata('level') == 'adminbaku') { ?>
 <?php if($limitBaku!=null){ ?>
 <div id="modalBaku" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Stok Bahan Baku Hampir Habis</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 300px; overflow-y: auto;">
                 <div class="table-responsive">
                     <table class="table table-sm table-striped">
                         <thead>
@@ -613,14 +613,14 @@
 <?php } ?>
 <?php if($expiredBaku!=null){ ?>
 <div id="modalExpired" class="modal fade" tabindex="-2" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #ff3f34;">
                 <h4 class="modal-title text-white mb-1">Status Expired Bahan Baku</h4>
                 <button type="button" class="close text-white mb-3" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 300px; overflow-y: auto;">
                 <div class="table-responsive">
                     <table class="table table-sm table-striped">
                         <thead>
@@ -630,6 +630,7 @@
                                 <td>Produsen</td>
                                 <td width="150">Expired</td>
                                 <td width="150">Status</td>
+                                <td>Stok (Hampir Expired)</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -642,6 +643,7 @@
                                 <td><?php echo $l->produsen ?></td>
                                 <td><?php echo $l->expired ?></td>
                                 <td><?php echo $l->status?></td>
+                                <td><?php echo $l->qty_input?></td>
                             </tr>
                             <?php $no++; } ?>
                         </tbody>
@@ -708,7 +710,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100000,
+                    max: 15000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -757,7 +759,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100000,
+                    max: 15000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -806,7 +808,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100000,
+                    max: 150000,
                     maxTicksLimit: 5
                 },
                 gridLines: {
@@ -855,7 +857,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100000,
+                    max: 150000,
                     maxTicksLimit: 5
                 },
                 gridLines: {

@@ -28,7 +28,9 @@
                                  <th>Nama</th>
 								 <th>Kontak</th>
 								 <th>Transaksi Terakhir</th>
-                                 <th class="disabled-sorting text-right">Actions</th>
+                                 <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                                 <th class="text-right">Actions</th>
+                                 <?php } ?>
                               </tr>
                            </thead>
                            <tfoot>
@@ -37,7 +39,9 @@
                                  <th>Nama</th>
 								 <th>Kontak</th>
 								 <th>Transaksi Terakhir</th>
+								 <?php if($this->session->userdata('level')=="superadmin"){ ?>
                                  <th class="text-right">Actions</th>
+                                 <?php } ?>
                               </tr>
                            </tfoot>
                            <tbody>
@@ -48,8 +52,8 @@
                                  <td><?php echo $k->nama_supplier;?></td>
 								 <td><?php echo $k->kontak;?></td>
 								 <td><?php echo $k->transaksi_terakhir;?></td>
-                                 <td class="td-actions text-right">
 								 <?php if($this->session->userdata('level')=="superadmin"){ ?>
+                                 <td class="td-actions text-right">
                                     <button type="button" onclick="ganti(<?php echo $k->id_supplier;?>)" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </button>
@@ -57,8 +61,8 @@
                                     <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="" onclick="hapus(<?php echo $k->id_supplier;?>)">
                                        <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                     </button>
-									<?php } ?>
 								 </td>
+								 <?php } ?>
                               </tr>
                               <?php $no++; } ?>
                            </tbody>

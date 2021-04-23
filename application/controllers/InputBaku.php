@@ -152,19 +152,95 @@ class InputBaku extends CI_Controller {
 
 				// transaksi baku
 				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggal);
+				// $this->session->set_flashdata('cek', $cekTanggal);
 				if ($cekTanggal == 1) {
 					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
 					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
 					$totalStokTi = $stokTi + $qty;
 					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tanggal);
 					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+
+					$setStatus = $this->ModInputBaku->selectAllStatus($id_baku);
+					foreach ($setStatus as $row){
+					    $id_input = $row->id_input;
+					    $id_baku = $row->id_baku;
+					    $expired = $row->expired;
+					    $status = $row->status;
+					    $tgl_input = $row->tgl_input;
+					    $qty_input = $row->qty_input;
+					    $fifo = $row->fifo;
+					    $today = date('Y-m-d');
+					    $today_time = strtotime($today);
+						$expired_time = strtotime($expired);
+						$stok = $this->ModBaku->getStok($id_baku);
+
+					    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+					    	$this->ModInputBaku->updateStatusExpired($id_input);
+					    	$total = $stok - $qty_input;
+							$this->ModBaku->updateStokWithId($total, $id_baku);
+							$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+							// transaksi
+							$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+							$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+							$totalStokTi = $stokTi - $qty_input;
+							$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+							$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+					    }
+						else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+							if ($fifo <= 0) {
+								$this->ModInputBaku->updateStatusOut($id_input);
+							} else {
+								$this->ModInputBaku->updateStatusHampir($id_input);
+							}
+					    }
+					}
+					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiBaku->addTanggalInput($id_baku);
 					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
 					$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
 					$totalStokTi = $stokTi + $qty;
 					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tanggal);
-					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);  
+					$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+
+					$setStatus = $this->ModInputBaku->selectAllStatus($id_baku);
+					foreach ($setStatus as $row){
+					    $id_input = $row->id_input;
+					    $id_baku = $row->id_baku;
+					    $expired = $row->expired;
+					    $status = $row->status;
+					    $tgl_input = $row->tgl_input;
+					    $qty_input = $row->qty_input;
+					    $fifo = $row->fifo;
+					    $today = date('Y-m-d');
+					    $today_time = strtotime($today);
+						$expired_time = strtotime($expired);
+						$stok = $this->ModBaku->getStok($id_baku);
+
+					    if ($expired_time <= $today_time && $status != "expired" && $status != "out") {
+					    	$this->ModInputBaku->updateStatusExpired($id_input);
+					    	$total = $stok - $qty_input;
+							$this->ModBaku->updateStokWithId($total, $id_baku);
+							$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tgl_input);
+
+							// transaksi
+							$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tgl_input);
+							$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tgl_input);
+							$totalStokTi = $stokTi - $qty_input;
+							$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id_baku, $tgl_input);
+							$this->ModTransaksiBaku->getSisaAllStokKb($id_baku);
+					    }
+						else if ($expired_time != $today_time && $status != "expired" && $status != "out") {
+							if ($fifo <= 0) {
+								$this->ModInputBaku->updateStatusOut($id_input);
+							} else {
+								$this->ModInputBaku->updateStatusHampir($id_input);
+							}
+					    }
+					}
+					
+					echo json_encode(array("status" => TRUE));
 				}
 
 				echo json_encode(array("status" => TRUE));
