@@ -121,7 +121,7 @@
                                 </td>
                             </tr>
                             <?php $no++; }
-						}else if($filter != null){ ?>
+                        }else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $k) { ?>
                         <tr>
@@ -131,7 +131,7 @@
                             <td><?php echo $k->satuan;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
-							 echo $d->format("d/m/Y");?>
+                             echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
                             <?php if($this->session->userdata('level') == 'superadmin'){ ?>
@@ -149,7 +149,7 @@
                             </td>
                         </tr>
                         <?php $no++; }
-						} else{ ?>
+                        } else{ ?>
                         <?php $no=1;
                         foreach ($output as $k) { ?>
                         <tr>
@@ -159,11 +159,11 @@
                             <td><?php echo $k->satuan;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
-							 echo $d->format("d/m/Y");?>
+                             echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
+                            <?php if($this->session->userdata('level') == 'superadmin'){ ?>
                             <td class="td-actions text-center">
-                                <?php if($this->session->userdata('level') == 'superadmin'){ ?>
                                 <button type="button" onclick="ganti(<?php echo $k->id_output;?>)" rel="tooltip"
                                     class="btn btn-success btn-round" data-original-title="" title="">
                                     <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
@@ -173,8 +173,8 @@
                                     data-original-title="" title="" onclick="hapus(<?php echo $k->id_output;?>)">
                                     <i class="zmdi zmdi-close zmdi-hc-fw"></i>
                                 </button>
-                                <?php } ?>
                             </td>
+                            <?php } ?>
                         </tr>
                         <?php $no++; } } ?>
                     </tbody>

@@ -112,7 +112,7 @@
                                 <?php } ?>
                             </tr>
                             <?php $no++; }
-						}else if($filter != null){ ?>
+                        }else if($filter != null){ ?>
                         <?php $no=1;
                         foreach ($filter as $k) { ?>
                         <tr>
@@ -125,7 +125,7 @@
                             <td><?php echo $k->kb_output;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
-							 echo $d->format("d/m/Y");?>
+                             echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
                             <?php 
@@ -144,7 +144,7 @@
                             <?php } ?>
                         </tr>
                         <?php $no++; }
-						} else{ ?>
+                        } else{ ?>
                         <?php $no=1;
                         foreach ($output as $k) { ?>
                         <tr>
@@ -157,7 +157,7 @@
                             <td><?php echo $k->kb_output;?></td>
                             <td>
                                 <?php $d = new DateTime($k->tgl_output);
-							 echo $d->format("d/m/Y");?>
+                             echo $d->format("d/m/Y");?>
                             </td>
                             <td><?php echo $k->keterangan ?></td>
                             <?php 
