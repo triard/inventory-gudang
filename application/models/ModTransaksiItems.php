@@ -155,8 +155,9 @@ class ModTransaksiItems extends CI_model {
 
 	        $ss = $asm - $ask;
 	        $sk = $akm - $akk;
+	        $sisa_stok = round($ss, 5);
 
-			$dataStok = array('sisa_stok' => $ss);
+			$dataStok = array('sisa_stok' => $sisa_stok);
 			$this->db->where('id_item', $id_item);
 			$this->db->where('tanggal', $tanggal);
 			$this->db->update('transaksi_items', $dataStok);

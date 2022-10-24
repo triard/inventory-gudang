@@ -64,7 +64,8 @@ class OutputBaku extends CI_Controller {
 			$this->session->set_flashdata('stok', 'Stok / Pack tidak mencukupi!');
 		} else {
 			$total = $stok - $qty;
-			$this->ModBaku->updateStok($total);
+			$totalStok = round($total, 5);
+			$this->ModBaku->updateStok($totalStok);
 			$this->ModOutputBaku->add($total);
 
 			// transaksi baku
@@ -132,7 +133,6 @@ class OutputBaku extends CI_Controller {
 						}
 				    }
 				}
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->ModTransaksiBaku->addTanggalOutput($id_baku);
 				$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
@@ -197,10 +197,9 @@ class OutputBaku extends CI_Controller {
 						}
 				    }
 				}
-				echo json_encode(array("status" => TRUE));
 			}
-			echo json_encode(array("status" => TRUE));
 		}
+		echo json_encode(array("status" => TRUE));
 	}
 
 	public function edit($id) {
@@ -227,7 +226,8 @@ class OutputBaku extends CI_Controller {
 		$stok = $this->ModOutputBaku->getStokByOutput($id);
 		$total = $stok + $qtyLama;
 
-		$this->ModBaku->updateStokWithId($total, $id_baku);
+		$totalStok = round($total, 5);
+		$this->ModBaku->updateStokWithId($totalStok, $id_baku);
 
 		$stokTi = $this->ModTransaksiBaku->getStokKeluar($id_baku, $tanggal);
 		$sisa_stokTi = $this->ModTransaksiBaku->getStokSisa($id_baku, $tanggal);
@@ -322,7 +322,8 @@ class OutputBaku extends CI_Controller {
 		} else {
 			$this->ModOutputBaku->update();
 			$this->ModOutputBaku->update_H_Stok($total);
-			$this->ModBaku->updateStok($total);
+			$totalStok = round($total, 5);
+			$this->ModBaku->updateStok($totalStok);
 
 			// transaksi items
 			if ($tanggalLama == $tanggalBaru) {
@@ -410,7 +411,6 @@ class OutputBaku extends CI_Controller {
 						}
 				    }
 				}
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$cekTanggal = $this->ModTransaksiBaku->cekTanggal($id_baku, $tanggalBaru);
 				if ($cekTanggal == 1) {
@@ -524,7 +524,6 @@ class OutputBaku extends CI_Controller {
 						}
 				    }
 				}
-				echo json_encode(array("status" => TRUE));
 			}
 		}
 		echo json_encode(array("status" => TRUE));

@@ -68,7 +68,6 @@ class InputBaku extends CI_Controller {
 				$id2 = $this->ModSuppliersBaku->getId();
 
 				$this->ModInputBaku->addTT($id1, $id2);
-				echo json_encode(array("status" => TRUE));
 
 				// Last transaksi
 				$this->ModSuppliersBaku->updateTerakhirTransaksi($id2);
@@ -91,7 +90,6 @@ class InputBaku extends CI_Controller {
 					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id1, $tanggal);
 					$this->ModTransaksiBaku->getSisaAllStokKb($id1); 
 				}
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang & Supplier sudah terdaftar!');
 			}
@@ -100,7 +98,6 @@ class InputBaku extends CI_Controller {
 			$cek1 = $this->ModBaku->cekbaku();
 			if ($cek1 == "TRUE") {
 				$this->ModBaku->add();
-				echo json_encode(array("status" => TRUE));
 
 				$id1 = $this->ModBaku->getId();
 
@@ -127,8 +124,6 @@ class InputBaku extends CI_Controller {
 					$this->ModTransaksiBaku->updateStokMasuk($totalStokTi, $id1, $tanggal);
 					$this->ModTransaksiBaku->getSisaAllStokKb($id1); 
 				}
-
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang sudah terdaftar!');
 			}
@@ -137,13 +132,13 @@ class InputBaku extends CI_Controller {
 			$cek2 = $this->ModSuppliersBaku->cekSupplier();
 			if ($cek2 == "TRUE") {
 				$this->ModSuppliersBaku->add();
-				echo json_encode(array("status" => TRUE));
 
 				$id2 = $this->ModSuppliersBaku->getId();
 
 				$stok = $this->ModBaku->getStok($id_baku);
 				$total = $stok + $qty;
-				$this->ModBaku->updateStok($total);
+				$totalStok = round($total, 5);
+				$this->ModBaku->updateStok($totalStok);
 
 				$this->ModInputBaku->addTsupplier($id2, $total);
 
@@ -195,7 +190,6 @@ class InputBaku extends CI_Controller {
 							}
 					    }
 					}
-					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiBaku->addTanggalInput($id_baku);
 					$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
@@ -239,11 +233,7 @@ class InputBaku extends CI_Controller {
 							}
 					    }
 					}
-					
-					echo json_encode(array("status" => TRUE));
 				}
-
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Supplier sudah terdaftar!');
 			}
@@ -251,7 +241,8 @@ class InputBaku extends CI_Controller {
 		else if ($id_baku!="0" && $id_supplier!="0") {
 			$stok = $this->ModBaku->getStok($id_baku);
 			$total = $stok + $qty;
-			$this->ModBaku->updateStok($total);
+			$totalStok = round($total, 5);
+			$this->ModBaku->updateStok($totalStok);
 
 			$this->ModInputBaku->add($total);
 
@@ -303,8 +294,6 @@ class InputBaku extends CI_Controller {
 						}
 				    }
 				}
-
-				echo json_encode(array("status" => TRUE));  
 			} else {
 				$this->ModTransaksiBaku->addTanggalInput($id_baku);
 				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
@@ -348,11 +337,9 @@ class InputBaku extends CI_Controller {
 						}
 				    }
 				}
-				
-				echo json_encode(array("status" => TRUE));
 			}
-			echo json_encode(array("status" => TRUE));
 		}
+		echo json_encode(array("status" => TRUE));
 	}
 
 	public function edit($id) {
@@ -383,8 +370,8 @@ class InputBaku extends CI_Controller {
 		if ($status != 'expired' && $status != 'out') {
 			if ($cekStokProduk >= 0) {
 				$total = $stok - $qtyLama;
-				
-				$this->ModBaku->updateStokWithId($total, $id_baku);
+				$totalStok = round($total, 5);
+				$this->ModBaku->updateStokWithId($totalStok, $id_baku);
 
 				// transaksi
 				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggal);
@@ -397,8 +384,7 @@ class InputBaku extends CI_Controller {
 				$this->ModInputBaku->delete($id);
 
 				// cek hapus tanggal
-				$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
-				echo json_encode(array("status" => TRUE));	
+				$this->ModTransaksiBaku->cekHapusTanggal($id_baku);	
 			}
 			else {
 				$this->session->set_flashdata('cek', 'Quantity Stock Is Used!');	
@@ -412,9 +398,8 @@ class InputBaku extends CI_Controller {
 			$this->ModInputBaku->delete($id);
 
 			$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tanggal);
-			
-			echo json_encode(array("status" => TRUE));
 		}
+		echo json_encode(array("status" => TRUE));
 	}
 	public function update() {
 		$q = $this->session->userdata('status');
@@ -439,8 +424,8 @@ class InputBaku extends CI_Controller {
 		} else {
 			$this->ModInputBaku->update();
 			$this->ModInputBaku->update_H_Stok($total);
-			$this->ModBaku->updateStok($total);
-
+			$totalStok = round($total, 5);
+			$this->ModBaku->updateStok($totalStok);
 
 			if ($tanggalLama == $tanggalBaru) {
 				$stokTi = $this->ModTransaksiBaku->getStokMasuk($id_baku, $tanggalBaru);

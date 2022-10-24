@@ -73,7 +73,6 @@ class InputExpired extends CI_Controller {
 
 				// cek hapus tanggal
 				$this->ModTransaksiBaku->cekHapusTanggal($id_baku);
-				echo json_encode(array("status" => TRUE));	
 			}
 			else {
 				$this->session->set_flashdata('cek', 'Quantity Stock Is Used!');	
@@ -87,9 +86,8 @@ class InputExpired extends CI_Controller {
 			$this->ModInputBaku->delete($id);
 
 			$this->ModTransaksiBaku->updateKeteranganNoId($id_baku, $tanggal);
-			
-			echo json_encode(array("status" => TRUE));
 		}
+		echo json_encode(array("status" => TRUE));
 	}
 	
 	public function set_supplierBaku($id) {

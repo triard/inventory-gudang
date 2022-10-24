@@ -70,7 +70,6 @@ class Input extends CI_Controller {
 				$id2 = $this->ModSuppliers->getId();
 
 				$this->ModInputItems->addTT($id1, $id2);
-				echo json_encode(array("status" => TRUE));
 
 				// Last transaksi
 				$this->ModSuppliers->updateTerakhirTransaksi($id2);
@@ -103,7 +102,6 @@ class Input extends CI_Controller {
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
 					$this->ModTransaksiItems->getSisaAllStokKb($id1); 
 				}
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang & Supplier sudah terdaftar!');
 			}
@@ -112,7 +110,6 @@ class Input extends CI_Controller {
 			$cek1 = $this->ModItems->cekItem();
 			if ($cek1 == "TRUE") {
 				$this->ModItems->add();
-				echo json_encode(array("status" => TRUE));
 
 				$id1 = $this->ModItems->getId();
 
@@ -149,8 +146,6 @@ class Input extends CI_Controller {
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id1, $tanggal);
 					$this->ModTransaksiItems->getSisaAllStokKb($id1); 
 				}
-
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Barang sudah terdaftar!');
 			}
@@ -159,13 +154,13 @@ class Input extends CI_Controller {
 			$cek2 = $this->ModSuppliers->cekSupplier();
 			if ($cek2 == "TRUE") {
 				$this->ModSuppliers->add();
-				echo json_encode(array("status" => TRUE));
 
 				$id2 = $this->ModSuppliers->getId();
 
 				$stok = $this->ModItems->getStok($id_item);
 				$total = $stok + $qty;
-				$this->ModItems->updateStok($total);
+				$totalStok = round($total, 5);
+				$this->ModItems->updateStok($totalStok);
 
 				$kb = $this->ModItems->getKb($id_item);
 				$totalKb = $kb + $kb_input;
@@ -200,8 +195,6 @@ class Input extends CI_Controller {
 					$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
 					$this->ModTransaksiItems->getSisaAllStokKb($id_item);  
 				}
-
-				echo json_encode(array("status" => TRUE));
 			} else {
 				$this->session->set_flashdata('cek', 'Supplier sudah terdaftar!');
 			}
@@ -209,7 +202,8 @@ class Input extends CI_Controller {
 		else if ($id_item!="0" && $id_supplier!="0") {
 			$stok = $this->ModItems->getStok($id_item);
 			$total = $stok + $qty;
-			$this->ModItems->updateStok($total);
+			$totalStok = round($total, 5);
+			$this->ModItems->updateStok($totalStok);
 
 			$kb = $this->ModItems->getKb($id_item);
 			$totalKb = $kb + $kb_input;
@@ -232,7 +226,6 @@ class Input extends CI_Controller {
 				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
-				echo json_encode(array("status" => TRUE));  
 			} else {
 				$this->ModTransaksiItems->addTanggalInput($id_item);
 				$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
@@ -244,11 +237,9 @@ class Input extends CI_Controller {
 				$this->ModTransaksiItems->updateStokMasuk($totalStokTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->updateKbMasuk($totalKbTi, $id_item, $tanggal);
 				$this->ModTransaksiItems->getSisaAllStokKb($id_item);
-				echo json_encode(array("status" => TRUE));
 			}
-			echo json_encode(array("status" => TRUE));
 		}
-
+		echo json_encode(array("status" => TRUE));
 	}
 
 	public function edit($id) {
@@ -279,8 +270,8 @@ class Input extends CI_Controller {
 		if ($cekStokProduk >= 0) {
 			$total = $stok - $qtyLama;
 			$totalKb = $kb - $kbLama;
-			
-			$this->ModItems->updateStokWithId($total, $id_item);
+			$totalStok = round($total, 5);
+			$this->ModItems->updateStokWithId($totalStok, $id_item);
 			$this->ModItems->updateKbWithId($totalKb, $id_item);
 
 			$stokTi = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggal);
@@ -298,12 +289,11 @@ class Input extends CI_Controller {
 
 			// cek hapus tanggal
 			$this->ModTransaksiItems->cekHapusTanggal($id_item);
-			echo json_encode(array("status" => TRUE));	
 		}
 		else {
 			$this->session->set_flashdata('cek', 'Quantity Stock Is Used!');	
 		}
-		
+		echo json_encode(array("status" => TRUE));	
 	}
 	public function update() {
 		$q = $this->session->userdata('status');
@@ -333,7 +323,8 @@ class Input extends CI_Controller {
 		} else {
 			$this->ModInputItems->update();
 			$this->ModInputItems->update_H_Stok($total);
-			$this->ModItems->updateStok($total);
+			$totalStok = round($total, 5);
+			$this->ModItems->updateStok($totalStok);	
 			$this->ModItems->updateKb($totalKb);
 
 			if ($tanggalLama == $tanggalBaru) {
@@ -371,7 +362,6 @@ class Input extends CI_Controller {
 
 					// cek hapus tanggal
 					$this->ModTransaksiItems->cekHapusTanggal($id_item);
-					echo json_encode(array("status" => TRUE));  
 				} else {
 					$this->ModTransaksiItems->addTanggalInput($id_item);
 					$stokTi1 = $this->ModTransaksiItems->getStokMasuk($id_item, $tanggalLama);
@@ -396,13 +386,11 @@ class Input extends CI_Controller {
 
 					// cek hapus tanggal
 					$this->ModTransaksiItems->cekHapusTanggal($id_item);
-					echo json_encode(array("status" => TRUE));
 				}
 			}
-		
 			$this->ModInputItems->update();
-			echo json_encode(array("status" => TRUE));
 		}
+		echo json_encode(array("status" => TRUE));
 	}
 	public function set_supplier($id) {
 		$q = $this->session->userdata('status');
